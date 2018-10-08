@@ -8,10 +8,10 @@ var aufgabe0;
 (function (aufgabe0) {
     function main() {
         var i = prompt("Wie heisst du?");
-        var node = document.getElementById("content");
-        node.innerHTML += "Hallo ";
-        node.innerHTML += i;
-        node.innerHTML += ", freut mich, dass du hier bist.";
+        var text = "Hallo ";
+        text += i;
+        text += ", freut mich, dass du hier bist.";
+        document.getElementById("content").innerHTML += text;
         console.log("Hallo ", i, ", freut mich, dass du hier bist.");
     }
     document.addEventListener('DOMContentLoaded', main);
