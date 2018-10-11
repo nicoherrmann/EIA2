@@ -1,11 +1,3 @@
-/* Aufgabe: Aufgabe 1
-Name: Nico Herrmann
-Matrikel: 259242
-Datum: 10.10.2018
-Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
-Er wurde nicht kopiert und auch nicht diktiert.
-*/
-
 namespace Boxes {
     let n: number = 5;
     let c: string;
