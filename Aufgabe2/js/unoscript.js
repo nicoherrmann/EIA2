@@ -118,6 +118,9 @@ var uno;
         if (_color == "#000000") {
             s.color = "white";
         }
+        if (_color == "#0000ff") {
+            s.color = "white";
+        }
     }
     /*   FUNKTIONEN ENDE  */
     let z;
