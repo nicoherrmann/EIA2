@@ -197,5 +197,39 @@ var uno;
             }
         }
     }
+    function Stapel(n) {
+        let div = document.createElement("div");
+        document.body.appendChild(div);
+        //div.setAttribute("id", "a"+_x)
+        //document.getElementById("a" + _x).innerHTML += _n;
+        //console.log(_color,_n,_x);
+        let s = div.style;
+        s.border = "thin solid black";
+        s.position = "absolute";
+        s.backgroundColor = "#f0f0f0";
+        s.width = 50 + "px";
+        s.height = 130 + "px";
+        s.left = (n + 0.5) * 20 + "px";
+        s.top = (n + 0.5) * 10 + "px";
+    }
+    function Ablage() {
+        let div = document.createElement("div");
+        document.body.appendChild(div);
+        div.setAttribute("id", "Ablage");
+        document.getElementById("Ablage").innerHTML += "Ablage";
+        //console.log(_color,_n,_x);
+        let s = div.style;
+        s.border = "thin solid black";
+        s.position = "absolute";
+        s.backgroundColor = "white";
+        s.width = 70 + "px";
+        s.height = 150 + "px";
+        s.right = 50 + "px";
+        s.top = 20 + "px";
+    }
+    for (let i = 0; i < 3; i++) {
+        Stapel(i);
+    }
+    Ablage();
 })(uno || (uno = {}));
 //# sourceMappingURL=unoscript.js.map
