@@ -129,116 +129,119 @@ var uno;
         }
     }
     /*   FUNKTIONEN ENDE  */
-    let z;
-    let i = prompt("Wie viele Karten pro Spieler?");
-    z = Number(i);
-    for (let d = 0; d < z; d++) {
-        let l = random(15);
-        if (l == 13 && s1 > 0) {
-            c = "#000000";
-            s1--;
-            placeDiv(c, "+4", d);
-            continue;
-        }
-        else if (l == 13 && s1 <= 0) {
-            d--;
-            continue;
-        }
-        else {
-            if (l == 14 && s2 > 0) {
+    function main() {
+        let z;
+        let i = prompt("Wie viele Karten pro Spieler?");
+        z = Number(i);
+        for (let d = 0; d < z; d++) {
+            let l = random(15);
+            if (l == 13 && s1 > 0) {
                 c = "#000000";
-                s2--;
-                placeDiv(c, "F", d);
+                s1--;
+                placeDiv(c, "+4", d);
                 continue;
             }
-            else if (l == 14 && s2 <= 0) {
+            else if (l == 13 && s1 <= 0) {
                 d--;
                 continue;
             }
             else {
-                let r = random(4);
-                switch (r) {
-                    case 0:
-                        c = "#ff0000"; //rot
-                        if (AlleKarten[l].rot > 0) {
-                            placeDiv(c, AlleKarten[l].name, d);
-                            AlleKarten[l].rot--;
-                            continue;
-                        }
-                        else {
-                            d--;
-                            continue;
-                        }
-                    case 1:
-                        c = "#00ff00"; //gr�n
-                        if (AlleKarten[l].gruen > 0) {
-                            placeDiv(c, AlleKarten[l].name, d);
-                            AlleKarten[l].gruen--;
-                            continue;
-                        }
-                        else {
-                            d--;
-                            continue;
-                        }
-                    case 2:
-                        c = "#0000ff"; //blau
-                        if (AlleKarten[l].blau > 0) {
-                            placeDiv(c, AlleKarten[l].name, d);
-                            AlleKarten[l].blau--;
-                            continue;
-                        }
-                        else {
-                            d--;
-                            continue;
-                        }
-                    case 3:
-                        c = "#ffff00"; //gelb
-                        if (AlleKarten[l].gelb > 0) {
-                            placeDiv(c, AlleKarten[l].name, d);
-                            AlleKarten[l].gelb--;
-                            continue;
-                        }
-                        else {
-                            d--;
-                            continue;
-                        }
+                if (l == 14 && s2 > 0) {
+                    c = "#000000";
+                    s2--;
+                    placeDiv(c, "F", d);
+                    continue;
+                }
+                else if (l == 14 && s2 <= 0) {
+                    d--;
+                    continue;
+                }
+                else {
+                    let r = random(4);
+                    switch (r) {
+                        case 0:
+                            c = "#ff0000"; //rot
+                            if (AlleKarten[l].rot > 0) {
+                                placeDiv(c, AlleKarten[l].name, d);
+                                AlleKarten[l].rot--;
+                                continue;
+                            }
+                            else {
+                                d--;
+                                continue;
+                            }
+                        case 1:
+                            c = "#00ff00"; //gr�n
+                            if (AlleKarten[l].gruen > 0) {
+                                placeDiv(c, AlleKarten[l].name, d);
+                                AlleKarten[l].gruen--;
+                                continue;
+                            }
+                            else {
+                                d--;
+                                continue;
+                            }
+                        case 2:
+                            c = "#0000ff"; //blau
+                            if (AlleKarten[l].blau > 0) {
+                                placeDiv(c, AlleKarten[l].name, d);
+                                AlleKarten[l].blau--;
+                                continue;
+                            }
+                            else {
+                                d--;
+                                continue;
+                            }
+                        case 3:
+                            c = "#ffff00"; //gelb
+                            if (AlleKarten[l].gelb > 0) {
+                                placeDiv(c, AlleKarten[l].name, d);
+                                AlleKarten[l].gelb--;
+                                continue;
+                            }
+                            else {
+                                d--;
+                                continue;
+                            }
+                    }
                 }
             }
         }
+        function Stapel(n) {
+            let div = document.createElement("div");
+            document.body.appendChild(div);
+            //div.setAttribute("id", "a"+_    
+            //document.getElementById("a" + _x).innerHTML += _n;
+            //console.log(_color,_n,_x);
+            let s = div.style;
+            s.border = "thin solid black";
+            s.position = "absolute";
+            s.backgroundColor = "#f0f0f0";
+            s.width = 50 + "px";
+            s.height = 130 + "px";
+            s.left = (n + 0.5) * 20 + "px";
+            s.top = (n + 0.5) * 10 + "px";
+        }
+        function Ablage() {
+            let div = document.createElement("div");
+            document.body.appendChild(div);
+            div.setAttribute("id", "Ablage");
+            document.getElementById("Ablage").innerHTML += "Ablage";
+            //console.log(_color,_n,_x);
+            let s = div.style;
+            s.border = "thin solid black";
+            s.position = "absolute";
+            s.backgroundColor = "white";
+            s.width = 70 + "px";
+            s.height = 150 + "px";
+            s.right = 50 + "px";
+            s.top = 20 + "px";
+        }
+        for (let i = 0; i < 3; i++) {
+            Stapel(i);
+        }
+        Ablage();
     }
-    function Stapel(n) {
-        let div = document.createElement("div");
-        document.body.appendChild(div);
-        //div.setAttribute("id", "a"+_x)
-        //document.getElementById("a" + _x).innerHTML += _n;
-        //console.log(_color,_n,_x);
-        let s = div.style;
-        s.border = "thin solid black";
-        s.position = "absolute";
-        s.backgroundColor = "#f0f0f0";
-        s.width = 50 + "px";
-        s.height = 130 + "px";
-        s.left = (n + 0.5) * 20 + "px";
-        s.top = (n + 0.5) * 10 + "px";
-    }
-    function Ablage() {
-        let div = document.createElement("div");
-        document.body.appendChild(div);
-        div.setAttribute("id", "Ablage");
-        document.getElementById("Ablage").innerHTML += "Ablage";
-        //console.log(_color,_n,_x);
-        let s = div.style;
-        s.border = "thin solid black";
-        s.position = "absolute";
-        s.backgroundColor = "white";
-        s.width = 70 + "px";
-        s.height = 150 + "px";
-        s.right = 50 + "px";
-        s.top = 20 + "px";
-    }
-    for (let i = 0; i < 3; i++) {
-        Stapel(i);
-    }
-    Ablage();
+    document.addEventListener('DOMContentLoaded', main);
 })(uno || (uno = {}));
 //# sourceMappingURL=unoscript.js.map
