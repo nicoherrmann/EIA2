@@ -1,7 +1,7 @@
 /* Aufgabe: Aufgabe 2
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 18.10.2018
+Datum: 19.10.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
 Er wurde nicht kopiert und auch nicht diktiert. */
 var uno;
@@ -97,24 +97,25 @@ var uno;
         gruen: 2,
         blau: 2,
     };
-    let s1 = 4;
-    let s2 = 4;
-    let c = "";
-    let AlleKarten = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12];
+    let s1 = 4; //Schwarze +4
+    let s2 = 4; //Schwarze Farbwahl
+    let c = ""; //Farbcode
+    let AlleKarten = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12]; //Array
     /*   FUNKTIONEN           */
-    function random(n) {
-        return Math.floor(Math.random() * Math.floor(n));
+    function random(_n) {
+        return Math.floor(Math.random() * Math.floor(_n));
     }
     function placeDiv(_color, _n, _x) {
         //let text: string = "div id=a";
         //text += _x;
         let div = document.createElement("div");
         document.body.appendChild(div);
-        div.setAttribute("id", "a" + _x);
-        document.getElementById("a" + _x).innerHTML += _n;
-        console.log(_color, _n, _x);
+        div.setAttribute("id", "a" + _x); //div ID in Abh�ngigkeit von _x (aktuelle Karte die gegeben wird)
+        document.getElementById("a" + _x).innerHTML += _n; //Bezeichnung der Karte als HTML in div
+        //console.log(_color, _n, _x);
         let s = div.style;
         s.border = "thin solid black";
+        s.textAlign = "center";
         s.position = "absolute";
         s.backgroundColor = _color;
         s.width = 50 + "px";
@@ -134,7 +135,7 @@ var uno;
         let i = prompt("Wie viele Karten pro Spieler?");
         z = Number(i);
         for (let d = 0; d < z; d++) {
-            let l = random(15);
+            let l = random(15); //l = Zufallswert von 0-14 (alle Karten)
             if (l == 13 && s1 > 0) {
                 c = "#000000";
                 s1--;
@@ -157,7 +158,7 @@ var uno;
                     continue;
                 }
                 else {
-                    let r = random(4);
+                    let r = random(4); //random Zahl von 0-3 jeweils eine Farbe
                     switch (r) {
                         case 0:
                             c = "#ff0000"; //rot
@@ -207,7 +208,7 @@ var uno;
                 }
             }
         }
-        function Stapel(n) {
+        function Stapel(_n) {
             let div = document.createElement("div");
             document.body.appendChild(div);
             //div.setAttribute("id", "a"+_    
@@ -219,8 +220,8 @@ var uno;
             s.backgroundColor = "#f0f0f0";
             s.width = 50 + "px";
             s.height = 130 + "px";
-            s.left = (n + 0.5) * 20 + "px";
-            s.top = (n + 0.5) * 10 + "px";
+            s.left = (_n + 0.5) * 20 + "px";
+            s.top = (_n + 0.5) * 10 + "px";
         }
         function Ablage() {
             let div = document.createElement("div");

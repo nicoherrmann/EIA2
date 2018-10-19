@@ -1,11 +1,11 @@
 /* Aufgabe: Aufgabe 2
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 18.10.2018
+Datum: 19.10.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert. */
 
-namespace uno {
+namespace uno { //Interface f¸r Karten
     interface Karte {
         name: string;
         rot: number;
@@ -117,15 +117,15 @@ namespace uno {
         blau: 2,
     }
 
-    let s1: number = 4;
-    let s2: number = 4;
+    let s1: number = 4; //Schwarze +4
+    let s2: number = 4; //Schwarze Farbwahl
 
-    let c: string = "";
+    let c: string = ""; //Farbcode
 
-    let AlleKarten = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12]
+    let AlleKarten = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12] //Array
     /*   FUNKTIONEN           */
-    function random(n: number): number {
-        return Math.floor(Math.random() * Math.floor(n));
+    function random(_n: number): number { //Random wert von 0 bis _n
+        return Math.floor(Math.random() * Math.floor(_n));
     }
 
 
@@ -135,25 +135,27 @@ namespace uno {
         //text += _x;
         let div: HTMLDivElement = document.createElement("div");
         document.body.appendChild(div);
-        div.setAttribute("id", "a" + _x)
+        div.setAttribute("id", "a" + _x) //div ID in Abh‰ngigkeit von _x (aktuelle Karte die gegeben wird)
 
-        document.getElementById("a" + _x).innerHTML += _n;
-        console.log(_color, _n, _x);
+        document.getElementById("a" + _x).innerHTML += _n; //Bezeichnung der Karte als HTML in div
+        //console.log(_color, _n, _x);
         let s: CSSStyleDeclaration = div.style;
         s.border = "thin solid black";
+        s.textAlign = "center";
         s.position = "absolute";
         s.backgroundColor = _color;
         s.width = 50 + "px";
         s.height = 130 + "px";
         s.left = (_x + 0.5) * 100 + "px";
         s.bottom = 40 + "px";
+        
 
 
-        if (_color == "#000000") {
+        if (_color == "#000000") { //Wenn Hintergrund Schwarz -> Schrift weiﬂ
             s.color = "white";
         }
 
-        if (_color == "#0000ff") {
+        if (_color == "#0000ff") { //Wenn Hintergrund Blau -> Schrift weiﬂ
             s.color = "white";
         }
     }
@@ -164,74 +166,74 @@ namespace uno {
         let z: number;
         let i: string = prompt("Wie viele Karten pro Spieler?");
         z = Number(i);
-        for (let d: number = 0; d < z; d++) {
-            let l: number = random(15);
-            if (l == 13 && s1 > 0) {
+        for (let d: number = 0; d < z; d++) { //d = aktuelle Karte die gegeben wird
+            let l: number = random(15); //l = Zufallswert von 0-14 (alle Karten)
+            if (l == 13 && s1 > 0) { //Wenn l = 13 & s1 > 0 dann generiere schwarze +4
                 c = "#000000";
                 s1--;
                 placeDiv(c, "+4", d);
                 continue;
 
             }
-            else if (l == 13 && s1 <= 0) {
+            else if (l == 13 && s1 <= 0) { //Wenn l = 13 & s1 <= 0 dann continue (d--) da sonst Karte ¸bersprungen
                 d--;
                 continue;
             }
             else {
-                if (l == 14 && s2 > 0) {
+                if (l == 14 && s2 > 0) { //Wenn l = 14 & s2 > 0 dann generiere schwarze Farbwahl
                     c = "#000000";
                     s2--;
                     placeDiv(c, "F", d);
                     continue;
                 }
-                else if (l == 14 && s2 <= 0) {
+                else if (l == 14 && s2 <= 0) { //Wenn l = 14 & s2 <= 0 dann continue (d-- da sonst Karte ¸bersprungen)
                     d--;
                     continue;
                 }
-                else {
-                    let r: number = random(4);
+                else { //Wenn l =/= 13 || 14 dann vergebe Farbe an Kartenwert
+                    let r: number = random(4); //random Zahl von 0-3 jeweils eine Farbe
                     switch (r) {
-                        case 0:
+                        case 0: //Wenn r = 0 dann rote Farbe
                             c = "#ff0000"; //rot
                             if (AlleKarten[l].rot > 0) {
                                 placeDiv(c, AlleKarten[l].name, d);
                                 AlleKarten[l].rot--;
                                 continue;
                             }
-                            else {
+                            else { //Wenn Kombination aus Wert und Farbe <= 0 dann continue (d-- da sonst Karte ¸bersprungen)
                                 d--;
                                 continue;
                             }
-                        case 1:
+                        case 1: //Wenn r = 1 dann gr¸ne Farbe
                             c = "#00ff00"; //gr¸n
                             if (AlleKarten[l].gruen > 0) {
                                 placeDiv(c, AlleKarten[l].name, d);
                                 AlleKarten[l].gruen--;
                                 continue;
                             }
-                            else {
+                            else { //Wenn Kombination aus Wert und Farbe <= 0 dann continue (d-- da sonst Karte ¸bersprungen)
                                 d--;
                                 continue;
                             }
-                        case 2:
+                        case 2: //Wenn r = 2 dann blaue Farbe
                             c = "#0000ff"; //blau
                             if (AlleKarten[l].blau > 0) {
                                 placeDiv(c, AlleKarten[l].name, d);
                                 AlleKarten[l].blau--;
                                 continue;
                             }
-                            else {
+                            else { //Wenn Kombination aus Wert und Farbe <= 0 dann continue (d-- da sonst Karte ¸bersprungen)
                                 d--;
                                 continue;
                             }
-                        case 3:
+                        case 3: //Wenn r = 3 dann gelbe Farbe
                             c = "#ffff00"; //gelb
                             if (AlleKarten[l].gelb > 0) {
                                 placeDiv(c, AlleKarten[l].name, d);
                                 AlleKarten[l].gelb--;
                                 continue;
                             }
-                            else {
+                            else { //Wenn Kombination aus Wert und Farbe <= 0 dann continue (d-- da sonst Karte ¸bersprungen)
                                 d--;
                                 continue;
                             }
@@ -243,7 +245,7 @@ namespace uno {
 
         }
 
-        function Stapel(n: number): void {
+        function Stapel(_n: number): void {
             let div: HTMLDivElement = document.createElement("div");
             document.body.appendChild(div);
             //div.setAttribute("id", "a"+_    
@@ -255,8 +257,8 @@ namespace uno {
             s.backgroundColor = "#f0f0f0";
             s.width = 50 + "px";
             s.height = 130 + "px";
-            s.left = (n + 0.5) * 20 + "px";
-            s.top = (n + 0.5) * 10 + "px";
+            s.left = (_n + 0.5) * 20 + "px";
+            s.top = (_n + 0.5) * 10 + "px";
         }
 
         function Ablage(): void {
