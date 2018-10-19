@@ -270,6 +270,7 @@ namespace uno { //Interface für Karten
             //console.log(_color,_n,_x);
             let s: CSSStyleDeclaration = div.style;
             s.border = "thin solid black";
+            s.textAlign = "center";
             s.position = "absolute";
             s.backgroundColor = "white";
             s.width = 70 + "px";

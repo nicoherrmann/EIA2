@@ -231,6 +231,7 @@ var uno;
             //console.log(_color,_n,_x);
             let s = div.style;
             s.border = "thin solid black";
+            s.textAlign = "center";
             s.position = "absolute";
             s.backgroundColor = "white";
             s.width = 70 + "px";
