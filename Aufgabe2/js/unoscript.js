@@ -106,8 +106,6 @@ var uno;
         return Math.floor(Math.random() * Math.floor(_n));
     }
     function placeDiv(_color, _n, _x) {
-        //let text: string = "div id=a";
-        //text += _x;
         let div = document.createElement("div");
         document.body.appendChild(div);
         div.setAttribute("id", "a" + _x); //div ID in Abh�ngigkeit von _x (aktuelle Karte die gegeben wird)
@@ -212,9 +210,6 @@ var uno;
         function Stapel(_n) {
             let div = document.createElement("div");
             document.body.appendChild(div);
-            //div.setAttribute("id", "a"+_    
-            //document.getElementById("a" + _x).innerHTML += _n;
-            //console.log(_color,_n,_x);
             let s = div.style;
             s.border = "thin solid black";
             s.position = "absolute";
@@ -230,7 +225,6 @@ var uno;
             document.body.appendChild(div);
             div.setAttribute("id", "Ablage");
             document.getElementById("Ablage").innerHTML += "Ablage";
-            //console.log(_color,_n,_x);
             let s = div.style;
             s.border = "thin solid black";
             s.textAlign = "center";

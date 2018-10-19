@@ -131,8 +131,6 @@ namespace uno { //Interface für Karten
 
 
     function placeDiv(_color: string, _n: string, _x: number): void {
-        //let text: string = "div id=a";
-        //text += _x;
         let div: HTMLDivElement = document.createElement("div");
         document.body.appendChild(div);
         div.setAttribute("id", "a" + _x) //div ID in Abhängigkeit von _x (aktuelle Karte die gegeben wird)
@@ -249,9 +247,7 @@ namespace uno { //Interface für Karten
         function Stapel(_n: number): void {
             let div: HTMLDivElement = document.createElement("div");
             document.body.appendChild(div);
-            //div.setAttribute("id", "a"+_    
-            //document.getElementById("a" + _x).innerHTML += _n;
-            //console.log(_color,_n,_x);
+
             let s: CSSStyleDeclaration = div.style;
             s.border = "thin solid black";
             s.position = "absolute";
@@ -269,7 +265,7 @@ namespace uno { //Interface für Karten
             div.setAttribute("id", "Ablage")
 
             document.getElementById("Ablage").innerHTML += "Ablage";
-            //console.log(_color,_n,_x);
+
             let s: CSSStyleDeclaration = div.style;
             s.border = "thin solid black";
             s.textAlign = "center";
