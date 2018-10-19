@@ -223,6 +223,7 @@ var uno;
             s.height = 130 + "px";
             s.left = (_n + 0.5) * 20 + "px";
             s.top = (_n + 0.5) * 10 + "px";
+            s.borderRadius = 5 + "px";
         }
         function Ablage() {
             let div = document.createElement("div");
