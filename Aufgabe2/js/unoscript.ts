@@ -148,6 +148,7 @@ namespace uno { //Interface für Karten
         s.height = 130 + "px";
         s.left = (_x + 0.5) * 100 + "px";
         s.bottom = 40 + "px";
+        s.borderRadius = 5 + "px";
         
 
 
