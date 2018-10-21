@@ -1,4 +1,4 @@
-/* Aufgabe: Aufgabe 2
+/* Aufgabe: Aufgabe 2 - DynHTML-Uno
 Name: Nico Herrmann
 Matrikel: 259242
 Datum: 19.10.2018
