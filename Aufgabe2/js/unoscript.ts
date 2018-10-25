@@ -122,7 +122,7 @@ namespace uno { //Interface für Karten
 
     let c: string = ""; //Farbcode
 
-    let AlleKarten = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12] //Array
+    let AlleKarten : Karte[] = [k0, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11, k12]; //Array
     /*   FUNKTIONEN           */
     function random(_n: number): number { //Random wert von 0 bis _n
         return Math.floor(Math.random() * Math.floor(_n));
