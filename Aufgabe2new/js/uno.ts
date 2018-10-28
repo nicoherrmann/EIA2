@@ -1,7 +1,7 @@
 /* Aufgabe: Aufgabe 2 - DynHTML-Uno
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 25.10.2018
+Datum: 26.10.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert. */
 
@@ -12,12 +12,11 @@ namespace unonew {
         let numCards: number = parseInt(prompt("Wie viele Karten pro Spieler?"));
         if (numCards > 10 || numCards < 5) {
             numCards = 6;
-            }
-        
+        }
+
         for (let i: number = 0; i < numCards; i++) {
-            
+
             let randomCardnum: number = random(allcards.length);
-            
             placeCard(allcards[randomCardnum], i);
             allcards.splice(randomCardnum, 1);
         }
@@ -28,7 +27,7 @@ namespace unonew {
     function placeCard(_karte: string, _forint: number): void {
         let color: string = _karte.substr(0, 1);
         let colordiv: string;
-        
+
         switch (color) {
             case "r":
                 colordiv = "#ff0000";
@@ -46,14 +45,14 @@ namespace unonew {
                 colordiv = "#000000";
                 break;
         }
-        
+
         let name: string = _karte.substr(1);
         let div: HTMLDivElement = document.createElement("div");
-        
+
         document.getElementById("main").appendChild(div);
         div.setAttribute("id", "a" + _forint);
         document.getElementById("a" + _forint).innerHTML += name;
-        
+
         let s: CSSStyleDeclaration = div.style;
         s.backgroundColor = colordiv;
         if (colordiv == "#0000ff" || colordiv == "#000000") {

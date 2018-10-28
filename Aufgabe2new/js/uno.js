@@ -1,7 +1,7 @@
 /* Aufgabe: Aufgabe 2 - DynHTML-Uno
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 25.10.2018
+Datum: 26.10.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
 Er wurde nicht kopiert und auch nicht diktiert. */
 var unonew;
