@@ -1,0 +1,81 @@
+div {
+	border: thin solid black;
+	width: 180px;
+	height: 250px;
+	border-Radius: 5px;
+	text-align: center;
+	font-size: 3em;
+	float: left;
+	margin: 0px 5px;
+}
+
+#sort {
+	font-size: 1.5em;
+	width: 90px;
+	height: 30px;
+	position: absolute;
+	bottom: 100px;
+	right: 20px;
+}
+
+#showcard {
+	position: absolute;
+	top: 20px;
+	left: 15px;
+}
+
+#ablage {
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	border: thin dotted black;
+	border-Radius: 0px;
+	width: 220px;
+	height: 300px;
+}
+
+#ablage>div {
+	border: thin solid black;
+	width: 180px;
+	height: 250px;
+	border-Radius: 5px;
+	text-align: center;
+	font-size: 3em;
+	position: absolute;
+	margin: 0px 5px;
+}
+
+#nachzieh {
+	position: absolute;
+	top: 25px;
+	left: 25px;
+	border-Radius: 5px;
+	background-color: grey;
+}
+
+#hand {
+	position: absolute;
+	bottom: 50px;
+	width: 80%;
+	border: none;
+}
+
+#hand>div {
+	width: 15%;
+	float: left;
+}
+
+@media screen and (max-width: 700px) {
+	#ablage {
+		width: 60px;
+		height: 100px;
+	}
+	#nachzieh {
+		width: 80px;
+		height: 140px;
+	}
+	#main>div {
+		height: 100px;
+		font-size: 2em;
+	}
+}
