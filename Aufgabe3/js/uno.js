@@ -55,7 +55,6 @@ var unonew;
         placeCard(hand);
     }
     function spielen(_event) {
-        _event.preventDefault();
         let handcard = document.getElementById("hand");
         let domCard = _event.target;
         if (domCard != handcard) {

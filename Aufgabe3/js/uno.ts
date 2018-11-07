@@ -70,8 +70,6 @@ namespace unonew {
 
     function spielen(_event: MouseEvent): void {
 
-
-        _event.preventDefault();
         let handcard: HTMLElement = document.getElementById("hand");
         let domCard: HTMLElement = <HTMLElement>_event.target;
         if (domCard != handcard) {
