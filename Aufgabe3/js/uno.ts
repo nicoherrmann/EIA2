@@ -1,4 +1,4 @@
-/* Aufgabe: Aufgabe 3
+/* Aufgabe: Aufgabe 3: Events-Uno
 Name: Nico Herrmann
 Matrikel: 259242
 Datum: 07.11.2018
@@ -37,12 +37,13 @@ namespace unonew {
     }
 
     function drawCard(_cards: number): void {
-        for (let i: number = 0; i < _cards; i++) {
+        if (allcards.length > 0) {
+            for (let i: number = 0; i < _cards; i++) {
 
-            let randomCardnum: number = random(allcards.length);
-            let card: string = allcards.splice(randomCardnum, 1)[0];
-            hand.push(card);
-
+                let randomCardnum: number = random(allcards.length);
+                let card: string = allcards.splice(randomCardnum, 1)[0];
+                hand.push(card);
+            }
         }
     }
 
