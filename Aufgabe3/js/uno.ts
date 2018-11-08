@@ -1,7 +1,7 @@
 /* Aufgabe: Aufgabe 3: Events-Uno
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 07.11.2018
+Datum: 08.11.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert. */
 
@@ -10,8 +10,65 @@ namespace unonew {
     let hand: string[] = [];
     let ablage: string[] = [];
 
+    document.addEventListener("DOMContentLoaded", main);
+    
+    function main(): void {
+        document.getElementById("nachzieh").addEventListener("click", drawCardEvent);
+        document.getElementById("sort").addEventListener("click", sort);
+        document.addEventListener("keydown", drawCardSpace);
 
 
+        let numCards: number = parseInt(prompt("Wie viele Karten pro Spieler?"));
+
+        if (numCards <= 0) {
+            numCards = 5;
+        }
+        else if (numCards > 108) {
+            numCards = 108;
+        }
+
+        setup();
+        drawCard(numCards);
+        placeCard(hand);
+    }
+    
+    function placeCard(_array: string[]): void {
+        document.getElementById("hand").addEventListener("click", spielen);
+        for (let iPlace: number = 0; iPlace < _array.length; iPlace++) {
+            let color: string = _array[iPlace].substr(0, 1);
+            let colordiv: string;
+
+            if (color == "r") {
+                colordiv = "#ff0000";
+            }
+            else if (color == "g") {
+                colordiv = "#00ff00";
+            }
+            else if (color == "b") {
+                colordiv = "#0000ff";
+            }
+            else if (color == "y") {
+                colordiv = "#ffff00";
+            }
+            else if (color == "k") {
+                colordiv = "#000000";
+            }
+
+
+            let name: string = _array[iPlace].substr(1);
+            let div: HTMLDivElement = document.createElement("div");
+            // document.createElement("div");
+            document.getElementById("hand").appendChild(div);
+            div.setAttribute("id", "a" + iPlace);
+            document.getElementById("a" + iPlace).innerHTML += name;
+
+            let s: CSSStyleDeclaration = div.style;
+            s.backgroundColor = colordiv;
+            if (colordiv == "#0000ff" || colordiv == "#000000") {
+                s.color = "#ffffff";
+            }
+        }
+    }
 
 
     function setup(): void {
@@ -82,71 +139,17 @@ namespace unonew {
             setup();
             placeCard(hand);
             setupAblage();
-            playCard2(ablage);
+            playCard(ablage);
         }
     }
 
-    function main(): void {
-        document.getElementById("nachzieh").addEventListener("click", drawCardEvent);
-        document.getElementById("sort").addEventListener("click", sort);
-        document.addEventListener("keydown", drawCardSpace);
-
-
-        let numCards: number = parseInt(prompt("Wie viele Karten pro Spieler?"));
-
-        if (numCards <= 0) {
-            numCards = 5;
-        }
-        else if (numCards > 108) {
-            numCards = 108;
-        }
-
-        setup();
-        drawCard(numCards);
-        placeCard(hand);
-    }
+    
     function random(_maxnum: number): number {
         return Math.floor(Math.random() * Math.floor(_maxnum));
     }
-    function placeCard(_array: string[]): void {
-        document.getElementById("hand").addEventListener("click", spielen);
-        for (let iPlace: number = 0; iPlace < _array.length; iPlace++) {
-            let color: string = _array[iPlace].substr(0, 1);
-            let colordiv: string;
+    
 
-            if (color == "r") {
-                colordiv = "#ff0000";
-            }
-            else if (color == "g") {
-                colordiv = "#00ff00";
-            }
-            else if (color == "b") {
-                colordiv = "#0000ff";
-            }
-            else if (color == "y") {
-                colordiv = "#ffff00";
-            }
-            else if (color == "k") {
-                colordiv = "#000000";
-            }
-
-
-            let name: string = _array[iPlace].substr(1);
-            let div: HTMLDivElement = document.createElement("div");
-            // document.createElement("div");
-            document.getElementById("hand").appendChild(div);
-            div.setAttribute("id", "a" + iPlace);
-            document.getElementById("a" + iPlace).innerHTML += name;
-
-            let s: CSSStyleDeclaration = div.style;
-            s.backgroundColor = colordiv;
-            if (colordiv == "#0000ff" || colordiv == "#000000") {
-                s.color = "#ffffff";
-            }
-        }
-    }
-
-    function playCard2(_array: string[]): void {
+    function playCard(_array: string[]): void {
 
         let _card2: string = _array[_array.length - 1];
         //console.log(_card2);
@@ -184,5 +187,5 @@ namespace unonew {
         }
     }
 
-    document.addEventListener("DOMContentLoaded", main);
+    
 }
