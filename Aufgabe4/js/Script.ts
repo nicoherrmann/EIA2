@@ -10,6 +10,10 @@ namespace WBKonfig {
     let holderPrice: number;
     let shipmentPrice: number;
 
+    let cmbID: number;
+    let lamID: number;
+    let cndlID: number;
+
 
     function init(): void {
         fillFieldset();
@@ -31,10 +35,12 @@ namespace WBKonfig {
         }
         HTML += "</select>";
         HTML += "<h3>Anzahl:</h3>";
-        HTML += "<select id=CMBAnzahl name=CMBNumber>";
+        HTML += "<select id=CMBAnzahl name=anzahl>";
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < 35; i += 5) {
             HTML += "<option value=CMBnum";
+            HTML += i;
+            HTML += " id=CBMnum";
             HTML += i;
             HTML += ">";
             HTML += i;
@@ -54,10 +60,12 @@ namespace WBKonfig {
         }
         HTML += "</select>";
         HTML += "<h3>Anzahl:</h3>";
-        HTML += "<select id=lamettaAnzahl name=LamettaNumber>";
+        HTML += "<select id=lamettaAnzahl name=anzahl>";
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < 60; i += 10) {
             HTML += "<option value=lamettanum";
+            HTML += i;
+            HTML += " id=lamettanum";
             HTML += i;
             HTML += ">";
             HTML += i;
@@ -77,10 +85,12 @@ namespace WBKonfig {
         }
         HTML += "</select>";
         HTML += "<h3>Anzahl:</h3>";
-        HTML += "<select id=candleAnzahl name=CandleNumber>";
+        HTML += "<select id=candleAnzahl name=anzahl>";
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < 22; i += 2) {
             HTML += "<option value=candlenum";
+            HTML += i;
+            HTML += " id=candlenum";
             HTML += i;
             HTML += ">";
             HTML += i;
@@ -142,26 +152,35 @@ namespace WBKonfig {
     }
 
     function calcPrice(): void {
-        let cmbID: number = Number(document.getElementById("GKnum"));
-        let lamID: number = Number(document.getElementById("Lnum"));
-        let cndlID: number = Number(document.getElementById("CNDLnum"));
-        
-        console.log(treePrice);
-        
+        console.log(cmbID);
         cmbPrice *= cmbID;
         lamPrice *= lamID;
         cndlPrice *= cndlID;
 
         gesPrice = 0;
-        gesPrice += cmbPrice;
-        gesPrice += lamPrice;
-        gesPrice += cndlPrice;
-        gesPrice += treePrice;
-        gesPrice += holderPrice;
-        gesPrice += shipmentPrice;
+        if (cmbPrice > 0) {
+            gesPrice += cmbPrice;
+        }
+        if (lamPrice > 0) {
+            gesPrice += lamPrice;
+        }
+        if (cndlPrice > 0) {
+            gesPrice += cndlPrice;
+        }
+        if (treePrice > 0) {
+            gesPrice += treePrice;
+        }
+        if (holderPrice > 0) {
+            gesPrice += holderPrice;
+        }
+        if (shipmentPrice > 0) {
+            gesPrice += shipmentPrice;
+        }
 
         let HTML: string = "";
         HTML += gesPrice;
+        
+        
         document.getElementById("price").innerHTML = HTML;
     }
 
@@ -174,16 +193,23 @@ namespace WBKonfig {
         if (target.id == "christmasBall") {
             let convertedString: string = target.value.substr(3);
             let index: number = Number(convertedString);
-            let HTML: string = christmasBall[index].name;
+            let HTML: string = "<p id=GKcolor>";
+            HTML += christmasBall[index].name;
+            HTML += "</p>";
             cmbPrice = christmasBall[index].price;
-            let node: HTMLElement = document.getElementById("GKcolor");
+            let node: HTMLElement = document.getElementById("co1");
             node.innerHTML = HTML;
         }
 
         if (target.id == "CMBAnzahl") {
+            cmbID = Number(target.value.substr(6));
             let HTML: string = "";
-            HTML = target.value.substr(6);
-            let node: HTMLElement = document.getElementById("GKnum");
+            HTML = "<p id=GKnum value=";
+            HTML += target.value.substr(6);
+            HTML += ">";
+            HTML += target.value.substr(6);
+            HTML += "</p>";
+            let node: HTMLElement = document.getElementById("co2");
             node.innerHTML = HTML;
         }
 
@@ -197,6 +223,7 @@ namespace WBKonfig {
         }
 
         if (target.id == "lamettaAnzahl") {
+            lamID = Number(target.value.substr(10));
             let HTML: string = "";
             HTML = target.value.substr(10);
             let node: HTMLElement = document.getElementById("Lnum");
@@ -213,6 +240,7 @@ namespace WBKonfig {
         }
 
         if (target.id == "candleAnzahl") {
+            cndlID = Number(target.value.substr(9));
             let HTML: string = "";
             HTML = target.value.substr(9);
             let node: HTMLElement = document.getElementById("CNDLnum");
