@@ -1,3 +1,9 @@
+/* Aufgabe: Aufgabe 4: Weihnachtsbaumkonfigurator
+Name: Nico Herrmann
+Matrikel: 259242
+Datum: 16.11.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
+Er wurde nicht kopiert und auch nicht diktiert. */
 var WBKonfig;
 (function (WBKonfig) {
     window.addEventListener("load", init);
@@ -8,9 +14,9 @@ var WBKonfig;
     let treePrice;
     let holderPrice;
     let shipmentPrice;
-    let cmbID;
-    let lamID;
-    let cndlID;
+    let cbNum;
+    let lamettaNum;
+    let candleNum;
     function init() {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
@@ -139,19 +145,28 @@ var WBKonfig;
         node.innerHTML += HTML;
     }
     function calcPrice() {
-        console.log(cmbID);
-        cmbPrice *= cmbID;
-        lamPrice *= lamID;
-        cndlPrice *= cndlID;
+        let cBallsCalc = 0;
+        let lamettaCalc = 0;
+        let candleCalc = 0;
+        if (cmbPrice > 0 || cbNum > 0) {
+            cBallsCalc = cmbPrice * cbNum;
+        }
+        if (lamPrice > 0 || lamettaNum > 0) {
+            lamettaCalc = lamPrice * lamettaNum;
+        }
+        if (cndlPrice > 0 || candleNum > 0) {
+            candleCalc = cndlPrice * candleNum;
+        }
+        console.log(cBallsCalc);
         gesPrice = 0;
-        if (cmbPrice > 0) {
-            gesPrice += cmbPrice;
+        if (cBallsCalc > 0) {
+            gesPrice += cBallsCalc;
         }
-        if (lamPrice > 0) {
-            gesPrice += lamPrice;
+        if (lamettaCalc > 0) {
+            gesPrice += lamettaCalc;
         }
-        if (cndlPrice > 0) {
-            gesPrice += cndlPrice;
+        if (candleCalc > 0) {
+            gesPrice += candleCalc;
         }
         if (treePrice > 0) {
             gesPrice += treePrice;
@@ -181,7 +196,7 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "CMBAnzahl") {
-            cmbID = Number(target.value.substr(6));
+            cbNum = Number(target.value.substr(6));
             let HTML = "";
             HTML = "<p id=GKnum value=";
             HTML += target.value.substr(6);
@@ -200,7 +215,7 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "lamettaAnzahl") {
-            lamID = Number(target.value.substr(10));
+            lamettaNum = Number(target.value.substr(10));
             let HTML = "";
             HTML = target.value.substr(10);
             let node = document.getElementById("Lnum");
@@ -215,7 +230,7 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "candleAnzahl") {
-            cndlID = Number(target.value.substr(9));
+            candleNum = Number(target.value.substr(9));
             let HTML = "";
             HTML = target.value.substr(9);
             let node = document.getElementById("CNDLnum");

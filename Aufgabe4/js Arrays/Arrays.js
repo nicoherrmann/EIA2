@@ -1,3 +1,9 @@
+/* Aufgabe: Aufgabe 4: Weihnachtsbaumkonfigurator
+Name: Nico Herrmann
+Matrikel: 259242
+Datum: 16.11.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
+Er wurde nicht kopiert und auch nicht diktiert. */
 var WBKonfig;
 (function (WBKonfig) {
     WBKonfig.christmasBall = [{ name: "Rot [15Euro]", price: 15 }, { name: "Gold [22Euro]", price: 22 }, { name: "Silber [18Euro]", price: 18 }];

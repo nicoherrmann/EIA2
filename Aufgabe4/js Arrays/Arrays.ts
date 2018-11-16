@@ -1,3 +1,10 @@
+/* Aufgabe: Aufgabe 4: Weihnachtsbaumkonfigurator
+Name: Nico Herrmann
+Matrikel: 259242
+Datum: 16.11.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert. */
+
 namespace WBKonfig {
        export interface Product {
             name: string;
