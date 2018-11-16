@@ -2,6 +2,15 @@ namespace WBKonfig {
 
     window.addEventListener("load", init);
 
+    let gesPrice: number = 0;
+    let cmbPrice: number;
+    let lamPrice: number;
+    let cndlPrice: number;
+    let treePrice: number;
+    let holderPrice: number;
+    let shipmentPrice: number;
+
+
     function init(): void {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
@@ -12,10 +21,10 @@ namespace WBKonfig {
         let HTML: string = "";
         HTML += "<h2>Weihnachtskugeln:</h2>";
         HTML += "<select id=christmasBall name=ChristmasBalls>";
-        HTML += "<option value=clear selected></option>";
+        HTML += "<option value=0 selected></option>";
         for (let i: number = 0; i < christmasBall.length; i++) {
             HTML += "<option value=";
-            HTML += christmasBall[i].name;
+            HTML += "CMB" + i;
             HTML += ">";
             HTML += christmasBall[i].name;
             HTML += "</option>";
@@ -38,7 +47,7 @@ namespace WBKonfig {
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < lametta.length; i++) {
             HTML += "<option value=";
-            HTML += lametta[i].name;
+            HTML += "lam" + i;
             HTML += ">";
             HTML += lametta[i].name;
             HTML += "</option>";
@@ -61,7 +70,7 @@ namespace WBKonfig {
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < candle.length; i++) {
             HTML += "<option value=";
-            HTML += candle[i].name;
+            HTML += "cndl" + i;
             HTML += ">";
             HTML += candle[i].name;
             HTML += "</option>";
@@ -84,7 +93,7 @@ namespace WBKonfig {
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < tree.length; i++) {
             HTML += "<option value=";
-            HTML += tree[i].name;
+            HTML += "tree" + i;
             HTML += ">";
             HTML += tree[i].name;
             HTML += "</option>";
@@ -100,8 +109,8 @@ namespace WBKonfig {
         HTML += "<select id=holder name=Holder>";
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < holder.length; i++) {
-            HTML += "<option value=";
-            HTML += holder[i].name;
+            HTML += "<option value=hld";
+            HTML += i;
             HTML += ">";
             HTML += holder[i].name;
             HTML += "</option>";
@@ -119,7 +128,7 @@ namespace WBKonfig {
         HTML += "<option value=clear selected></option>";
         for (let i: number = 0; i < shipment.length; i++) {
             HTML += "<option value=";
-            HTML += shipment[i].name;
+            HTML += "shipment" + i;
             HTML += ">";
             HTML += shipment[i].name;
             HTML += "</option>";
@@ -131,13 +140,31 @@ namespace WBKonfig {
         node.innerHTML += HTML;
 
     }
-    
+
     function calcPrice(): void {
+        let cmbID: number = Number(document.getElementById("GKnum"));
+        let lamID: number = Number(document.getElementById("Lnum"));
+        let cndlID: number = Number(document.getElementById("CNDLnum"));
         
+        console.log(treePrice);
         
-        
-        }
-    
+        cmbPrice *= cmbID;
+        lamPrice *= lamID;
+        cndlPrice *= cndlID;
+
+        gesPrice = 0;
+        gesPrice += cmbPrice;
+        gesPrice += lamPrice;
+        gesPrice += cndlPrice;
+        gesPrice += treePrice;
+        gesPrice += holderPrice;
+        gesPrice += shipmentPrice;
+
+        let HTML: string = "";
+        HTML += gesPrice;
+        document.getElementById("price").innerHTML = HTML;
+    }
+
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
         console.log("Changed " + target.name + " to " + target.value);
@@ -145,102 +172,112 @@ namespace WBKonfig {
 
 
         if (target.id == "christmasBall") {
-            let HTML: string = "";
-            HTML += target.value;
-            let num: number;
-            num = Number(HTML);
-            console.log(num);
+            let convertedString: string = target.value.substr(3);
+            let index: number = Number(convertedString);
+            let HTML: string = christmasBall[index].name;
+            cmbPrice = christmasBall[index].price;
             let node: HTMLElement = document.getElementById("GKcolor");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "CMBAnzahl") {
             let HTML: string = "";
             HTML = target.value.substr(6);
             let node: HTMLElement = document.getElementById("GKnum");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "lametta") {
-            let HTML: string = "";
-            HTML = target.value;
+            let convertedString: string = target.value.substr(3);
+            let index: number = Number(convertedString);
+            let HTML: string = lametta[index].name;
+            lamPrice = lametta[index].price;
             let node: HTMLElement = document.getElementById("Lcolor");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "lamettaAnzahl") {
             let HTML: string = "";
             HTML = target.value.substr(10);
             let node: HTMLElement = document.getElementById("Lnum");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "candle") {
-            let HTML: string = "";
-            HTML += target.value;
+            let convertedString: string = target.value.substr(4);
+            let index: number = Number(convertedString);
+            let HTML: string = candle[index].name;
+            cndlPrice = candle[index].price;
             let node: HTMLElement = document.getElementById("CNDLcolor");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "candleAnzahl") {
             let HTML: string = "";
             HTML = target.value.substr(9);
             let node: HTMLElement = document.getElementById("CNDLnum");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "tree") {
-            let HTML: string = "";
-            HTML += target.value;
+            let convertedString: string = target.value.substr(4);
+            let index: number = Number(convertedString);
+            let HTML: string = tree[index].name;
+            treePrice = tree[index].price;
             let node: HTMLElement = document.getElementById("christtree");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "ja") {
             let HTML: string = "Ja";
             let node: HTMLElement = document.getElementById("HolderYN");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "nein") {
             let HTML: string = "Nein";
             let node: HTMLElement = document.getElementById("HolderYN");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "holder") {
-            let HTML: string = "";
-            HTML += target.value;
-            let node: HTMLElement = document.getElementById("Holder");
+            let convertedString: string = target.value.substr(3);
+            let index: number = Number(convertedString);
+            let HTML: string = holder[index].name;
+            holderPrice = holder[index].price;
+            let node: HTMLElement = document.getElementById("HolderCheckout");
             node.innerHTML = HTML;
-        }  
-        
+        }
+
         if (target.id == "ja1") {
             let HTML: string = "Ja";
             let node: HTMLElement = document.getElementById("express");
             node.innerHTML = HTML;
         }
-        
+
         if (target.id == "nein1") {
             let HTML: string = "Nein";
             let node: HTMLElement = document.getElementById("express");
             node.innerHTML = HTML;
         }
-        
-        if (target.id == "holder") {
-            let HTML: string = "";
-            HTML += target.value;
-            let node: HTMLElement = document.getElementById("shipment");
+
+        if (target.id == "shipment") {
+            let convertedString: string = target.value.substr(8);
+            console.log(convertedString);
+            let index: number = Number(convertedString);
+            let HTML: string = shipment[index].name;
+            shipmentPrice = shipment[index].price;
+            let node: HTMLElement = document.getElementById("shipmentCheckout");
             node.innerHTML = HTML;
-        }  
-        
+        }
+
         if (target.id == "adressID") {
             let HTML: string = "";
             HTML += target.value;
             let node: HTMLElement = document.getElementById("adress");
             node.innerHTML = HTML;
-        }   
-        
+        }
+
         calcPrice();
     }
 }

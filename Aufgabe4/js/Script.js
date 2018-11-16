@@ -1,6 +1,13 @@
 var WBKonfig;
 (function (WBKonfig) {
     window.addEventListener("load", init);
+    let gesPrice = 0;
+    let cmbPrice;
+    let lamPrice;
+    let cndlPrice;
+    let treePrice;
+    let holderPrice;
+    let shipmentPrice;
     function init() {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
@@ -10,10 +17,10 @@ var WBKonfig;
         let HTML = "";
         HTML += "<h2>Weihnachtskugeln:</h2>";
         HTML += "<select id=christmasBall name=ChristmasBalls>";
-        HTML += "<option value=clear selected></option>";
+        HTML += "<option value=0 selected></option>";
         for (let i = 0; i < WBKonfig.christmasBall.length; i++) {
             HTML += "<option value=";
-            HTML += WBKonfig.christmasBall[i].name;
+            HTML += "CMB" + i;
             HTML += ">";
             HTML += WBKonfig.christmasBall[i].name;
             HTML += "</option>";
@@ -35,7 +42,7 @@ var WBKonfig;
         HTML += "<option value=clear selected></option>";
         for (let i = 0; i < WBKonfig.lametta.length; i++) {
             HTML += "<option value=";
-            HTML += WBKonfig.lametta[i].name;
+            HTML += "lam" + i;
             HTML += ">";
             HTML += WBKonfig.lametta[i].name;
             HTML += "</option>";
@@ -57,7 +64,7 @@ var WBKonfig;
         HTML += "<option value=clear selected></option>";
         for (let i = 0; i < WBKonfig.candle.length; i++) {
             HTML += "<option value=";
-            HTML += WBKonfig.candle[i].name;
+            HTML += "cndl" + i;
             HTML += ">";
             HTML += WBKonfig.candle[i].name;
             HTML += "</option>";
@@ -79,7 +86,7 @@ var WBKonfig;
         HTML += "<option value=clear selected></option>";
         for (let i = 0; i < WBKonfig.tree.length; i++) {
             HTML += "<option value=";
-            HTML += WBKonfig.tree[i].name;
+            HTML += "tree" + i;
             HTML += ">";
             HTML += WBKonfig.tree[i].name;
             HTML += "</option>";
@@ -94,8 +101,8 @@ var WBKonfig;
         HTML += "<select id=holder name=Holder>";
         HTML += "<option value=clear selected></option>";
         for (let i = 0; i < WBKonfig.holder.length; i++) {
-            HTML += "<option value=";
-            HTML += WBKonfig.holder[i].name;
+            HTML += "<option value=hld";
+            HTML += i;
             HTML += ">";
             HTML += WBKonfig.holder[i].name;
             HTML += "</option>";
@@ -112,7 +119,7 @@ var WBKonfig;
         HTML += "<option value=clear selected></option>";
         for (let i = 0; i < WBKonfig.shipment.length; i++) {
             HTML += "<option value=";
-            HTML += WBKonfig.shipment[i].name;
+            HTML += "shipment" + i;
             HTML += ">";
             HTML += WBKonfig.shipment[i].name;
             HTML += "</option>";
@@ -123,17 +130,33 @@ var WBKonfig;
         node.innerHTML += HTML;
     }
     function calcPrice() {
+        let cmbID = Number(document.getElementById("GKnum"));
+        let lamID = Number(document.getElementById("Lnum"));
+        let cndlID = Number(document.getElementById("CNDLnum"));
+        console.log(treePrice);
+        cmbPrice *= cmbID;
+        lamPrice *= lamID;
+        cndlPrice *= cndlID;
+        gesPrice = 0;
+        gesPrice += cmbPrice;
+        gesPrice += lamPrice;
+        gesPrice += cndlPrice;
+        gesPrice += treePrice;
+        gesPrice += holderPrice;
+        gesPrice += shipmentPrice;
+        let HTML = "";
+        HTML += gesPrice;
+        document.getElementById("price").innerHTML = HTML;
     }
     function handleChange(_event) {
         let target = _event.target;
         console.log("Changed " + target.name + " to " + target.value);
         console.log(target.id);
         if (target.id == "christmasBall") {
-            let HTML = "";
-            HTML += target.value;
-            let num;
-            num = Number(HTML);
-            console.log(num);
+            let convertedString = target.value.substr(3);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.christmasBall[index].name;
+            cmbPrice = WBKonfig.christmasBall[index].price;
             let node = document.getElementById("GKcolor");
             node.innerHTML = HTML;
         }
@@ -144,8 +167,10 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "lametta") {
-            let HTML = "";
-            HTML = target.value;
+            let convertedString = target.value.substr(3);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.lametta[index].name;
+            lamPrice = WBKonfig.lametta[index].price;
             let node = document.getElementById("Lcolor");
             node.innerHTML = HTML;
         }
@@ -156,8 +181,10 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "candle") {
-            let HTML = "";
-            HTML += target.value;
+            let convertedString = target.value.substr(4);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.candle[index].name;
+            cndlPrice = WBKonfig.candle[index].price;
             let node = document.getElementById("CNDLcolor");
             node.innerHTML = HTML;
         }
@@ -168,8 +195,10 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "tree") {
-            let HTML = "";
-            HTML += target.value;
+            let convertedString = target.value.substr(4);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.tree[index].name;
+            treePrice = WBKonfig.tree[index].price;
             let node = document.getElementById("christtree");
             node.innerHTML = HTML;
         }
@@ -184,9 +213,11 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "holder") {
-            let HTML = "";
-            HTML += target.value;
-            let node = document.getElementById("Holder");
+            let convertedString = target.value.substr(3);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.holder[index].name;
+            holderPrice = WBKonfig.holder[index].price;
+            let node = document.getElementById("HolderCheckout");
             node.innerHTML = HTML;
         }
         if (target.id == "ja1") {
@@ -199,10 +230,13 @@ var WBKonfig;
             let node = document.getElementById("express");
             node.innerHTML = HTML;
         }
-        if (target.id == "holder") {
-            let HTML = "";
-            HTML += target.value;
-            let node = document.getElementById("shipment");
+        if (target.id == "shipment") {
+            let convertedString = target.value.substr(8);
+            console.log(convertedString);
+            let index = Number(convertedString);
+            let HTML = WBKonfig.shipment[index].name;
+            shipmentPrice = WBKonfig.shipment[index].price;
+            let node = document.getElementById("shipmentCheckout");
             node.innerHTML = HTML;
         }
         if (target.id == "adressID") {
