@@ -8,6 +8,7 @@ Er wurde nicht kopiert und auch nicht diktiert. */
 namespace WBKonfig {
 
     window.addEventListener("load", init);
+    
 
     let gesPrice: number = 0;
     let cmbPrice: number;
@@ -16,8 +17,9 @@ namespace WBKonfig {
     let treePrice: number;
     let holderPrice: number;
     let shipmentPrice: number;
-    
+
     let holderboolean: boolean = false;
+    let shipmentboolean: boolean;
 
     let cbNum: number;
     let lamettaNum: number;
@@ -27,6 +29,7 @@ namespace WBKonfig {
     function init(): void {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
+        document.getElementById("check").addEventListener("click", check);
     }
 
     function fillFieldset(): void {
@@ -161,26 +164,26 @@ namespace WBKonfig {
     }
 
     function calcPrice(): void {
-        
+
         let cBallsCalc: number = 0;
         let lamettaCalc: number = 0;
         let candleCalc: number = 0;
-        
+
         if (cmbPrice > 0 && cbNum > 0) {
-        cBallsCalc = cmbPrice * cbNum;
-            }
-        
+            cBallsCalc = cmbPrice * cbNum;
+        }
+
         if (lamPrice > 0 && lamettaNum > 0) {
-        lamettaCalc = lamPrice * lamettaNum;
-            }
-        
+            lamettaCalc = lamPrice * lamettaNum;
+        }
+
         if (cndlPrice > 0 && candleNum > 0) {
-        candleCalc = cndlPrice * candleNum;
-            }
-        
+            candleCalc = cndlPrice * candleNum;
+        }
+
         console.log(cBallsCalc);
-        
-        
+
+
 
         gesPrice = 0;
         if (cBallsCalc > 0) {
@@ -204,8 +207,8 @@ namespace WBKonfig {
 
         let HTML: string = "";
         HTML += gesPrice;
-        
-        
+
+
         document.getElementById("price").innerHTML = HTML;
     }
 
@@ -306,12 +309,14 @@ namespace WBKonfig {
 
         if (target.id == "ja1") {
             let HTML: string = "Ja";
+            shipmentboolean = true;
             let node: HTMLElement = document.getElementById("express");
             node.innerHTML = HTML;
         }
 
         if (target.id == "nein1") {
             let HTML: string = "Nein";
+            shipmentboolean = false;
             let node: HTMLElement = document.getElementById("express");
             node.innerHTML = HTML;
         }
@@ -334,5 +339,16 @@ namespace WBKonfig {
         }
 
         calcPrice();
+    }
+
+    function check(): void {
+        console.log("test");
+        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null) {
+            document.getElementById("missing").innerHTML = "selections missing";
+        }
+
+        else {
+            document.getElementById("missing").innerHTML = "";
+        }
     }
 }

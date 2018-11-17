@@ -35,3 +35,19 @@ p {
 	padding: -5px;
 	margin: -5px;
 }
+
+#check {
+	position: absolute;
+	border: thin solid black;
+	bottom: 0px;
+	right: 0px;
+}
+
+#missing {
+	border: thin solid black;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: orange;
+	color: white;
+}

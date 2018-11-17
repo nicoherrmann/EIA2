@@ -15,12 +15,14 @@ var WBKonfig;
     let holderPrice;
     let shipmentPrice;
     let holderboolean = false;
+    let shipmentboolean;
     let cbNum;
     let lamettaNum;
     let candleNum;
     function init() {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
+        document.getElementById("check").addEventListener("click", check);
     }
     function fillFieldset() {
         let node = document.getElementsByTagName("fieldset")[0];
@@ -267,11 +269,13 @@ var WBKonfig;
         }
         if (target.id == "ja1") {
             let HTML = "Ja";
+            shipmentboolean = true;
             let node = document.getElementById("express");
             node.innerHTML = HTML;
         }
         if (target.id == "nein1") {
             let HTML = "Nein";
+            shipmentboolean = false;
             let node = document.getElementById("express");
             node.innerHTML = HTML;
         }
@@ -291,6 +295,15 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         calcPrice();
+    }
+    function check() {
+        console.log("test");
+        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null) {
+            document.getElementById("missing").innerHTML = "selections missing";
+        }
+        else {
+            document.getElementById("missing").innerHTML = "";
+        }
     }
 })(WBKonfig || (WBKonfig = {}));
 //# sourceMappingURL=Script.js.map
