@@ -25,7 +25,7 @@ namespace WBKonfig {
     let lamettaNum: number;
     let candleNum: number;
     
-    let adress: string;
+    let adress: string = "";
 
 
     function init(): void {
@@ -346,7 +346,7 @@ namespace WBKonfig {
 
     function check(): void {
         console.log("test");
-        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null || adress == null) {
+        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null || adress.length < 1) {
             document.getElementById("missing").innerHTML = "selections missing";
         }
 
