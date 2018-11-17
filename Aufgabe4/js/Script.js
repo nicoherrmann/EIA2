@@ -19,6 +19,7 @@ var WBKonfig;
     let cbNum;
     let lamettaNum;
     let candleNum;
+    let adress;
     function init() {
         fillFieldset();
         document.getElementsByTagName("fieldset")[0].addEventListener("change", handleChange);
@@ -291,6 +292,7 @@ var WBKonfig;
         if (target.id == "adressID") {
             let HTML = "";
             HTML += target.value;
+            adress = target.value;
             let node = document.getElementById("adress");
             node.innerHTML = HTML;
         }
@@ -298,7 +300,7 @@ var WBKonfig;
     }
     function check() {
         console.log("test");
-        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null) {
+        if (cmbPrice == null || lamPrice == null || cndlPrice == null || treePrice == null || holderPrice == null || shipmentPrice == null || cbNum == null || lamettaNum == null || candleNum == null || adress == null) {
             document.getElementById("missing").innerHTML = "selections missing";
         }
         else {
