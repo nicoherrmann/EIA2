@@ -1,7 +1,7 @@
 /* Aufgabe: Aufgabe 4: Weihnachtsbaumkonfigurator
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 16.11.2018
+Datum: 17.11.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
 Er wurde nicht kopiert und auch nicht diktiert. */
 var WBKonfig;
@@ -14,6 +14,7 @@ var WBKonfig;
     let treePrice;
     let holderPrice;
     let shipmentPrice;
+    let holderboolean = false;
     let cbNum;
     let lamettaNum;
     let candleNum;
@@ -148,13 +149,13 @@ var WBKonfig;
         let cBallsCalc = 0;
         let lamettaCalc = 0;
         let candleCalc = 0;
-        if (cmbPrice > 0 || cbNum > 0) {
+        if (cmbPrice > 0 && cbNum > 0) {
             cBallsCalc = cmbPrice * cbNum;
         }
-        if (lamPrice > 0 || lamettaNum > 0) {
+        if (lamPrice > 0 && lamettaNum > 0) {
             lamettaCalc = lamPrice * lamettaNum;
         }
-        if (cndlPrice > 0 || candleNum > 0) {
+        if (cndlPrice > 0 && candleNum > 0) {
             candleCalc = cndlPrice * candleNum;
         }
         console.log(cBallsCalc);
@@ -171,7 +172,7 @@ var WBKonfig;
         if (treePrice > 0) {
             gesPrice += treePrice;
         }
-        if (holderPrice > 0) {
+        if (holderPrice > 0 && holderboolean == true) {
             gesPrice += holderPrice;
         }
         if (shipmentPrice > 0) {
@@ -245,11 +246,13 @@ var WBKonfig;
             node.innerHTML = HTML;
         }
         if (target.id == "ja") {
+            holderboolean = true;
             let HTML = "Ja";
             let node = document.getElementById("HolderYN");
             node.innerHTML = HTML;
         }
         if (target.id == "nein") {
+            holderboolean = false;
             let HTML = "Nein";
             let node = document.getElementById("HolderYN");
             node.innerHTML = HTML;
