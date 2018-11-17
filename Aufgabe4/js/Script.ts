@@ -127,7 +127,7 @@ namespace WBKonfig {
         HTML += "<h2>Halter:</h2>";
         HTML += "<input id=ja type=radio name=Radiogroup value=ja>";
         HTML += "<label for=ja>Ja</label>";
-        HTML += "<input id=nein type=radio name=Radiogroup value=nein>";
+        HTML += "<input id=nein type=radio name=Radiogroup value=nein checked>";
         HTML += "<label for=nein>Nein</label>";
         HTML += "<br>";
         HTML += "<select id=holder name=Holder>";
@@ -145,7 +145,7 @@ namespace WBKonfig {
         HTML += "<p>Express-Lieferung</p>";
         HTML += "<input id=ja1 type=radio name=Radiogroup1 value=ja1>";
         HTML += "<label for=ja1>Ja</label>";
-        HTML += "<input id=nein1 type=radio name=Radiogroup1 value=nein1>";
+        HTML += "<input id=nein1 type=radio name=Radiogroup1 value=nein1 checked>";
         HTML += "<label for=nein1>Nein</label>";
         HTML += "<br>";
         HTML += "<select id=shipment name=Shipment>";
