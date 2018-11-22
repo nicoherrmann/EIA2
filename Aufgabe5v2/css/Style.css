@@ -1,0 +1,68 @@
+/* Die Schriftart "IBM Plex Sans" wird aus google importiert */
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+html {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
+fieldset {
+	width: 60%;
+}
+
+fieldset > p {
+	padding: 0.5em;
+}
+
+#checkout {
+	border-left: thin dotted black;
+	width: 300px;
+	height: 100%;
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	padding: 0.5em;
+}
+
+
+h2 {
+	border-left: 3px solid darkred;
+	padding-left: 2px;
+	padding-top: 5px;
+	border-top: 2px dotted darkgrey;
+	width: 60%;
+}
+
+#priceMain {
+	position: fixed;
+	background-color: orange;
+	padding: 0.5em;
+	border: 2px solid black;
+	right: 20px;
+	bottom: 50px;
+}
+
+h3 {
+	padding-left: 2px;
+	border-left: 3px solid orange;
+}
+
+p {
+	padding: -5px;
+	margin: -5px;
+}
+
+#check {
+	position: absolute;
+	border: thin solid black;
+	bottom: 0px;
+	right: 0px;
+}
+
+#missing {
+	border: thin solid black;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: orange;
+	color: white;
+}
