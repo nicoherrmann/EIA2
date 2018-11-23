@@ -1,10 +1,23 @@
+/*
+Aufgabe: Aufgabe 5: WBK - Reloaded
+Name: Nico Herrmann
+Matrikel: 259242
+Datum: 23.11.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert.
+*/
+
 namespace A5v2 {
     window.addEventListener("load", init);
+
+    let treeboolean: boolean = false;
+    let holderboolean: boolean = false;
+    let shipmentboolean: boolean = false;
 
     function init(): void {
         displayFieldsets(data);
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
-
+        document.getElementById("check").addEventListener("click", check);
     }
 
 
@@ -64,6 +77,7 @@ namespace A5v2 {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
 
         if (target.name == "radiotree") {
+            treeboolean = true;
             let del: HTMLElement = document.getElementById("treecheckout");
             if (del != null) {
                 let co: HTMLElement = document.getElementById("checkout");
@@ -88,6 +102,7 @@ namespace A5v2 {
         }
 
         if (target.name == "radioholder") {
+            holderboolean = true;
             let del: HTMLElement = document.getElementById("holdercheckout");
             if (del != null) {
                 let co: HTMLElement = document.getElementById("checkout");
@@ -112,6 +127,7 @@ namespace A5v2 {
         }
 
         if (target.name == "radioshipment") {
+            shipmentboolean = true;
             let del: HTMLElement = document.getElementById("shipmentcheckout");
             if (del != null) {
                 let co: HTMLElement = document.getElementById("checkout");
@@ -155,7 +171,7 @@ namespace A5v2 {
                     let delObj: HTMLElement = document.getElementsByTagName("p")[i];
                     if (target.name == delObj.getAttribute("name")) {
                         co.removeChild(delObj);
-                        }
+                    }
                 }
             }
 
@@ -172,6 +188,26 @@ namespace A5v2 {
             document.getElementById("price").innerText = gesPrice.toString();
         }
         console.log(gesPrice);
+    }
+
+    function check(): void {
+        let prompt: string = "Bitte noch auswaehlen:";
+        if (treeboolean == false || holderboolean == false || shipmentboolean == false) {
+            if (treeboolean == false) {
+                prompt += "Baum ";
+            }
+            if (holderboolean == false) {
+                prompt += "Halter ";
+            }
+            if (shipmentboolean == false) {
+                prompt += "Lieferung";
+            }
+            alert(prompt);
+        }
+        else {
+            alert("Alles in Ordnung!");
+            }
+
     }
 
 

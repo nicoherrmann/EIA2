@@ -52,10 +52,11 @@ p {
 }
 
 #check {
-	position: absolute;
+	position: fixed;
 	border: thin solid black;
-	bottom: 0px;
-	right: 0px;
+	bottom: 20px;
+	right: 20px;
+	padding: 0.25em;
 }
 
 #missing {

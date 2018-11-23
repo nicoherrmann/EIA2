@@ -1,9 +1,21 @@
+/*
+Aufgabe: Aufgabe 5: WBK - Reloaded
+Name: Nico Herrmann
+Matrikel: 259242
+Datum: 23.11.2018
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
+Er wurde nicht kopiert und auch nicht diktiert.
+*/
 var A5v2;
 (function (A5v2) {
     window.addEventListener("load", init);
+    let treeboolean = false;
+    let holderboolean = false;
+    let shipmentboolean = false;
     function init() {
         displayFieldsets(A5v2.data);
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
+        document.getElementById("check").addEventListener("click", check);
     }
     function displayFieldsets(_item) {
         for (let key in _item) {
@@ -51,6 +63,7 @@ var A5v2;
     function handleChange(_event) {
         let target = _event.target;
         if (target.name == "radiotree") {
+            treeboolean = true;
             let del = document.getElementById("treecheckout");
             if (del != null) {
                 let co = document.getElementById("checkout");
@@ -74,6 +87,7 @@ var A5v2;
             tree.innerText = name;
         }
         if (target.name == "radioholder") {
+            holderboolean = true;
             let del = document.getElementById("holdercheckout");
             if (del != null) {
                 let co = document.getElementById("checkout");
@@ -97,6 +111,7 @@ var A5v2;
             holder.innerText = name;
         }
         if (target.name == "radioshipment") {
+            shipmentboolean = true;
             let del = document.getElementById("shipmentcheckout");
             if (del != null) {
                 let co = document.getElementById("checkout");
@@ -154,6 +169,24 @@ var A5v2;
             document.getElementById("price").innerText = gesPrice.toString();
         }
         console.log(gesPrice);
+    }
+    function check() {
+        let prompt = "Bitte noch auswaehlen:";
+        if (treeboolean == false || holderboolean == false || shipmentboolean == false) {
+            if (treeboolean == false) {
+                prompt += "Baum ";
+            }
+            if (holderboolean == false) {
+                prompt += "Halter ";
+            }
+            if (shipmentboolean == false) {
+                prompt += "Lieferung";
+            }
+            alert(prompt);
+        }
+        else {
+            alert("Alles in Ordnung!");
+        }
     }
 })(A5v2 || (A5v2 = {}));
 //# sourceMappingURL=main.js.map
