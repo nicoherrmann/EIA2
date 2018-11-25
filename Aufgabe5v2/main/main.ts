@@ -2,7 +2,7 @@
 Aufgabe: Aufgabe 5: WBK - Reloaded
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 23.11.2018
+Datum: 25.11.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert.
 */
@@ -28,7 +28,7 @@ namespace A5v2 {
         for (let key in _item) {
             //console.log(key);
             let value: Product[] = _item[key];
-            let node: Element = document.getElementsByTagName("body")[0];
+            let node: HTMLElement = document.getElementsByTagName("body")[0];
             let h2: HTMLElement = document.createElement("h2");
             node.appendChild(h2);
             h2.innerText = key;
@@ -41,6 +41,15 @@ namespace A5v2 {
                 createInnerFieldset(value[i], fieldset, key);
             }
         }
+        let node: HTMLElement = document.getElementsByTagName("body")[0];
+        let h2: HTMLElement = document.createElement("h2");
+        node.appendChild(h2);
+        h2.innerHTML = "Anschrift";
+        let div: HTMLElement = document.createElement("div");
+        let HTML: string = "<input class=adress type=text name=Text placeholder=Strasse required />";
+        HTML += "<input class=adress type=text name=Pattern pattern=[0-9]{1,} placeholder=Hausnummer required />";
+        node.appendChild(div);
+        div.innerHTML = HTML;
     }
 
     function createInnerFieldset(_heteroPredef: Product, _fieldset: Element, _key: string): void {
@@ -108,6 +117,10 @@ namespace A5v2 {
             }
             target.setAttribute("value", "on");
         }
+        if (target.className == "adress" && target.value.length > 0) {
+            target.setAttribute("hiddenName", target.value);
+            target.setAttribute("value", "on");
+        }
 
         let articles: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
         let checkout: HTMLElement = document.getElementById("checkout");
@@ -128,12 +141,25 @@ namespace A5v2 {
                     articleValue = 1;
                 }
                 let price: number = articleValue * articlePrice;
+                if (article.className == "adress") {
+                    if (article.name == "Text") {
 
-                let createArticle: HTMLElement = document.createElement("p");
-                checkout.appendChild(createArticle);
-                createArticle.setAttribute("price", price.toString());
-                createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
+                        articleCategory = "Adresse:";
+                    }
+                    else {
+                        articleCategory = "Hausnummer:";
+                    }
+                    let createArticle: HTMLElement = document.createElement("p");
+                    checkout.appendChild(createArticle);
+                    createArticle.innerText = articleCategory + article.getAttribute("hiddenName");
+                }
 
+                else {
+                    let createArticle: HTMLElement = document.createElement("p");
+                    checkout.appendChild(createArticle);
+                    createArticle.setAttribute("price", price.toString());
+                    createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
+                }
             }
 
 

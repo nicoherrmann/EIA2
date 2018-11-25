@@ -2,7 +2,7 @@
 Aufgabe: Aufgabe 5: WBK - Reloaded
 Name: Nico Herrmann
 Matrikel: 259242
-Datum: 23.11.2018
+Datum: 25.11.2018
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
 Er wurde nicht kopiert und auch nicht diktiert.
 */
@@ -33,6 +33,15 @@ var A5v2;
                 createInnerFieldset(value[i], fieldset, key);
             }
         }
+        let node = document.getElementsByTagName("body")[0];
+        let h2 = document.createElement("h2");
+        node.appendChild(h2);
+        h2.innerHTML = "Anschrift";
+        let div = document.createElement("div");
+        let HTML = "<input class=adress type=text name=Text placeholder=Strasse required />";
+        HTML += "<input class=adress type=text name=Pattern pattern=[0-9]{1,} placeholder=Hausnummer required />";
+        node.appendChild(div);
+        div.innerHTML = HTML;
     }
     function createInnerFieldset(_heteroPredef, _fieldset, _key) {
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
@@ -91,6 +100,10 @@ var A5v2;
             }
             target.setAttribute("value", "on");
         }
+        if (target.className == "adress" && target.value.length > 0) {
+            target.setAttribute("hiddenName", target.value);
+            target.setAttribute("value", "on");
+        }
         let articles = document.getElementsByTagName("input");
         let checkout = document.getElementById("checkout");
         checkout.innerText = "";
@@ -108,10 +121,23 @@ var A5v2;
                     articleValue = 1;
                 }
                 let price = articleValue * articlePrice;
-                let createArticle = document.createElement("p");
-                checkout.appendChild(createArticle);
-                createArticle.setAttribute("price", price.toString());
-                createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
+                if (article.className == "adress") {
+                    if (article.name == "Text") {
+                        articleCategory = "Adresse:";
+                    }
+                    else {
+                        articleCategory = "Hausnummer:";
+                    }
+                    let createArticle = document.createElement("p");
+                    checkout.appendChild(createArticle);
+                    createArticle.innerText = articleCategory + article.getAttribute("hiddenName");
+                }
+                else {
+                    let createArticle = document.createElement("p");
+                    checkout.appendChild(createArticle);
+                    createArticle.setAttribute("price", price.toString());
+                    createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
+                }
             }
         }
         calcPrice();
