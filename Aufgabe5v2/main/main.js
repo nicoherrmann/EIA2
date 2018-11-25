@@ -19,7 +19,7 @@ var A5v2;
     }
     function displayFieldsets(_item) {
         for (let key in _item) {
-            console.log(key);
+            //console.log(key);
             let value = _item[key];
             let node = document.getElementsByTagName("body")[0];
             let h2 = document.createElement("h2");
@@ -28,25 +28,28 @@ var A5v2;
             let fieldset = document.createElement("fieldset");
             node.appendChild(fieldset);
             fieldset.setAttribute("name", key);
+            fieldset.setAttribute("id", key);
             for (let i = 0; i < value.length; i++) {
-                displayHeteroPredef(value[i], fieldset, key);
+                createInnerFieldset(value[i], fieldset, key);
             }
         }
     }
-    function displayHeteroPredef(_heteroPredef, _fieldset, _key) {
+    function createInnerFieldset(_heteroPredef, _fieldset, _key) {
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
-            console.log(_fieldset.childNodes.length);
+            //console.log(_fieldset.childNodes.length);
             let forID = _fieldset.childNodes.length;
-            let input = document.createElement("input");
-            _fieldset.appendChild(input);
-            input.setAttribute("price", _heteroPredef.price.toString());
-            input.setAttribute("type", "radio");
-            input.setAttribute("name", "radio" + _key);
-            input.setAttribute("id", _key + forID);
             let label = document.createElement("label");
             _fieldset.appendChild(label);
             label.setAttribute("for", _key + forID);
             label.innerText = _heteroPredef.name;
+            let input = document.createElement("input");
+            label.appendChild(input);
+            input.setAttribute("price", _heteroPredef.price.toString());
+            input.setAttribute("type", "radio");
+            input.setAttribute("name", "radio" + _key);
+            input.setAttribute("id", _key + forID);
+            input.setAttribute("hiddenName", _heteroPredef.name);
+            input.setAttribute("category", _key);
         }
         else {
             let p = document.createElement("p");
@@ -57,105 +60,58 @@ var A5v2;
             input.setAttribute("value", "0");
             input.setAttribute("pattern", "[0-9]{1,}");
             input.setAttribute("name", _heteroPredef.name);
+            input.setAttribute("category", _key);
             p.innerText = _heteroPredef.name;
         }
     }
     function handleChange(_event) {
         let target = _event.target;
+        target.setAttribute("value", target.value);
         if (target.name == "radiotree") {
             treeboolean = true;
-            let del = document.getElementById("treecheckout");
-            if (del != null) {
-                let co = document.getElementById("checkout");
-                co.removeChild(del);
+            for (let i = 0; i < A5v2.data["tree"].length; i++) {
+                let dom = document.getElementById("tree" + i);
+                dom.setAttribute("value", "off");
             }
-            let convString = Number(target.id.substr(4));
-            let id;
-            if (convString > 0) {
-                id = convString / 2;
-            }
-            else {
-                id = 0;
-            }
-            let node = document.getElementById("checkout");
-            let name = "Baum: " + A5v2.data["tree"][id].name;
-            let tree = document.createElement("p");
-            node.appendChild(tree);
-            let price = A5v2.data["tree"][id].price;
-            tree.setAttribute("price", price.toString());
-            tree.setAttribute("id", "treecheckout");
-            tree.innerText = name;
+            target.setAttribute("value", "on");
         }
         if (target.name == "radioholder") {
             holderboolean = true;
-            let del = document.getElementById("holdercheckout");
-            if (del != null) {
-                let co = document.getElementById("checkout");
-                co.removeChild(del);
+            for (let i = 0; i < A5v2.data["holder"].length; i++) {
+                let dom = document.getElementById("holder" + i);
+                dom.setAttribute("value", "off");
             }
-            let convString = Number(target.id.substr(6));
-            let id;
-            if (convString > 0) {
-                id = convString / 2;
-            }
-            else {
-                id = 0;
-            }
-            let node = document.getElementById("checkout");
-            let name = "Halter: " + A5v2.data["holder"][id].name;
-            let holder = document.createElement("p");
-            node.appendChild(holder);
-            let price = A5v2.data["holder"][id].price;
-            holder.setAttribute("price", price.toString());
-            holder.setAttribute("id", "holdercheckout");
-            holder.innerText = name;
+            target.setAttribute("value", "on");
         }
         if (target.name == "radioshipment") {
             shipmentboolean = true;
-            let del = document.getElementById("shipmentcheckout");
-            if (del != null) {
-                let co = document.getElementById("checkout");
-                co.removeChild(del);
+            for (let i = 0; i < A5v2.data["shipment"].length; i++) {
+                let dom = document.getElementById("shipment" + i);
+                dom.setAttribute("value", "off");
             }
-            let convString = Number(target.id.substr(8));
-            let id;
-            if (convString > 0) {
-                id = convString / 2;
-            }
-            else {
-                id = 0;
-            }
-            let node = document.getElementById("checkout");
-            let name = "Lieferung: " + A5v2.data["shipment"][id].name;
-            let shipment = document.createElement("p");
-            node.appendChild(shipment);
-            let price = A5v2.data["shipment"][id].price;
-            shipment.setAttribute("price", price.toString());
-            shipment.setAttribute("id", "shipmentcheckout");
-            shipment.innerText = name;
+            target.setAttribute("value", "on");
         }
-        else {
-            if (Number(target.value) > 0) {
-                let node = document.getElementById("checkout");
-                let multiply = Number(target.getAttribute("price"));
-                let parent = target.parentElement.getAttribute("name");
-                let itemNum = Number(target.value);
-                let name = parent + ": " + target.name + " x " + itemNum;
-                let price = itemNum *= multiply;
-                let category = document.createElement("p");
-                node.appendChild(category);
-                category.setAttribute("price", price.toString());
-                category.setAttribute("name", target.name);
-                category.innerText = name;
+        let articles = document.getElementsByTagName("input");
+        let checkout = document.getElementById("checkout");
+        checkout.innerText = "";
+        for (let i = 0; i < articles.length; i++) {
+            let article = articles[i];
+            let articleName = article.getAttribute("name");
+            if (articleName == "radiotree" || articleName == "radioholder" || articleName == "radioshipment") {
+                articleName = article.getAttribute("hiddenName");
             }
-            else {
-                let co = document.getElementById("checkout");
-                for (let i = 0; i < co.childNodes.length; i++) {
-                    let delObj = document.getElementsByTagName("p")[i];
-                    if (target.name == delObj.getAttribute("name")) {
-                        co.removeChild(delObj);
-                    }
+            let articleValue = Number(article.getAttribute("value"));
+            let articlePrice = Number(article.getAttribute("price"));
+            if (articleValue > 0 || article.getAttribute("value") == "on") {
+                let articleCategory = article.getAttribute("category");
+                if (articleCategory == "tree" || articleCategory == "holder" || articleCategory == "shipment") {
+                    articleValue = 1;
                 }
+                let price = articleValue * articlePrice;
+                let createArticle = document.createElement("p");
+                checkout.appendChild(createArticle);
+                createArticle.setAttribute("price", price.toString());
+                createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
             }
         }
         calcPrice();
