@@ -15,7 +15,7 @@ var A5v2;
     function init() {
         console.log("start");
         displayFieldsets(A5v2.data);
-        document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
+        document.getElementsByTagName("body")[0].addEventListener("input", handleChange);
         document.getElementById("check").addEventListener("click", check);
     }
     function displayFieldsets(_item) {

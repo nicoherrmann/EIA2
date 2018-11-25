@@ -17,7 +17,7 @@ namespace A5v2 {
     function init(): void {
         console.log("start");
         displayFieldsets(data);
-        document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
+        document.getElementsByTagName("body")[0].addEventListener("input", handleChange);
         document.getElementById("check").addEventListener("click", check);
     }
 
