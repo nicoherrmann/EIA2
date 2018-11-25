@@ -1,5 +1,5 @@
 /*
-Aufgabe: Aufgabe 5: WBK - Reloaded
+Aufgabe: Aufgabe 5: WBK - Reloaded 
 Name: Nico Herrmann
 Matrikel: 259242
 Datum: 25.11.2018
@@ -20,13 +20,11 @@ namespace A5v2 {
         document.getElementById("check").addEventListener("click", check);
     }
 
-
     function displayFieldsets(_item: Item): void {
 
 
 
         for (let key in _item) {
-            //console.log(key);
             let value: Product[] = _item[key];
             let node: HTMLElement = document.getElementsByTagName("body")[0];
             let h2: HTMLElement = document.createElement("h2");
@@ -55,7 +53,6 @@ namespace A5v2 {
     function createInnerFieldset(_heteroPredef: Product, _fieldset: Element, _key: string): void {
 
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
-            //console.log(_fieldset.childNodes.length);
             let forID: number = _fieldset.childNodes.length;
 
 

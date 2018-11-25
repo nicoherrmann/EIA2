@@ -19,7 +19,6 @@ var A5v2;
     }
     function displayFieldsets(_item) {
         for (let key in _item) {
-            //console.log(key);
             let value = _item[key];
             let node = document.getElementsByTagName("body")[0];
             let h2 = document.createElement("h2");
@@ -45,7 +44,6 @@ var A5v2;
     }
     function createInnerFieldset(_heteroPredef, _fieldset, _key) {
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
-            //console.log(_fieldset.childNodes.length);
             let forID = _fieldset.childNodes.length;
             let label = document.createElement("label");
             _fieldset.appendChild(label);
