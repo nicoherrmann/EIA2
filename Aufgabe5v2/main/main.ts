@@ -46,7 +46,7 @@ namespace A5v2 {
         h2.innerHTML = "Anschrift";
         let div: HTMLElement = document.createElement("div");
         let HTML: string = "<input class=adress type=text name=Text placeholder=Strasse required />";
-        HTML += "<input class=adress type=text name=Pattern pattern=[0-9]{1,} placeholder=Hausnummer required />";
+        HTML += "<input class=adress type=text name=Pattern pattern={1,} placeholder=Hausnummer required />";
         node.appendChild(div);
         div.innerHTML = HTML;
     }
