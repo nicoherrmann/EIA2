@@ -15,6 +15,7 @@ namespace A5v2 {
     let shipmentboolean: boolean = false;
 
     function init(): void {
+        console.log("start");
         displayFieldsets(data);
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
         document.getElementById("check").addEventListener("click", check);
@@ -54,7 +55,6 @@ namespace A5v2 {
 
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
             let forID: number = _fieldset.childNodes.length;
-
 
             let label: HTMLElement = document.createElement("label");
             _fieldset.appendChild(label);

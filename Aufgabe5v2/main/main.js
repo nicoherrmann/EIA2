@@ -13,6 +13,7 @@ var A5v2;
     let holderboolean = false;
     let shipmentboolean = false;
     function init() {
+        console.log("start");
         displayFieldsets(A5v2.data);
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
         document.getElementById("check").addEventListener("click", check);
