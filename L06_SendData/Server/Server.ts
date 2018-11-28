@@ -23,6 +23,6 @@ namespace A6 {
 
         _response.write(_request.url); 
         
-        _response.end(); //response wird beendet. Dieser Aufruf muss am immer bei einem response getätigt werden
+        _response.end(); //response wird beendet. Dieser Aufruf muss immer bei einem response getätigt werden
     }
 }
