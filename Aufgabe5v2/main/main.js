@@ -19,29 +19,31 @@ var A5v2;
         document.getElementById("check").addEventListener("click", check);
     }
     function displayFieldsets(_item) {
+        let form = document.createElement("form");
+        document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
+            console.log(key);
             let value = _item[key];
-            let node = document.getElementsByTagName("body")[0];
             let h2 = document.createElement("h2");
-            node.appendChild(h2);
+            form.appendChild(h2);
             h2.innerText = key;
             let fieldset = document.createElement("fieldset");
-            node.appendChild(fieldset);
+            form.appendChild(fieldset);
             fieldset.setAttribute("name", key);
             fieldset.setAttribute("id", key);
             for (let i = 0; i < value.length; i++) {
                 createInnerFieldset(value[i], fieldset, key);
             }
         }
-        let node = document.getElementsByTagName("body")[0];
         let h2 = document.createElement("h2");
-        node.appendChild(h2);
+        form.appendChild(h2);
         h2.innerHTML = "Anschrift";
         let div = document.createElement("div");
         let HTML = "<input class=adress type=text name=Text placeholder=Strasse required />";
         HTML += "<input class=adress type=text name=Pattern pattern={1,} placeholder=Hausnummer required />";
-        node.appendChild(div);
+        form.appendChild(div);
         div.innerHTML = HTML;
+        form.innerHTML += "<button type=submit>Submit</button>";
     }
     function createInnerFieldset(_heteroPredef, _fieldset, _key) {
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
@@ -67,7 +69,7 @@ var A5v2;
             input.setAttribute("price", _heteroPredef.price.toString());
             input.setAttribute("value", "0");
             input.setAttribute("pattern", "[0-9]{1,}");
-            input.setAttribute("name", _heteroPredef.name);
+            input.setAttribute("name", _key + _heteroPredef.name);
             input.setAttribute("category", _key);
             p.innerText = _heteroPredef.name;
         }
@@ -79,29 +81,29 @@ var A5v2;
             treeboolean = true;
             for (let i = 0; i < A5v2.data["tree"].length; i++) {
                 let dom = document.getElementById("tree" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
         if (target.name == "radioholder") {
             holderboolean = true;
             for (let i = 0; i < A5v2.data["holder"].length; i++) {
                 let dom = document.getElementById("holder" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
         if (target.name == "radioshipment") {
             shipmentboolean = true;
             for (let i = 0; i < A5v2.data["shipment"].length; i++) {
                 let dom = document.getElementById("shipment" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
         if (target.className == "adress" && target.value.length > 0) {
             target.setAttribute("hiddenName", target.value);
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
         let articles = document.getElementsByTagName("input");
         let checkout = document.getElementById("checkout");
@@ -114,7 +116,7 @@ var A5v2;
             }
             let articleValue = Number(article.getAttribute("value"));
             let articlePrice = Number(article.getAttribute("price"));
-            if (articleValue > 0 || article.getAttribute("value") == "on") {
+            if (articleValue > 0 || article.getAttribute("hiddenvalue") == "on") {
                 let articleCategory = article.getAttribute("category");
                 if (articleCategory == "tree" || articleCategory == "holder" || articleCategory == "shipment") {
                     articleValue = 1;

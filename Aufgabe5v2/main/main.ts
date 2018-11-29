@@ -24,15 +24,16 @@ namespace A5v2 {
     function displayFieldsets(_item: Item): void {
 
 
-
+        let form: HTMLElement = document.createElement("form");
+        document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
+            console.log(key);
             let value: Product[] = _item[key];
-            let node: HTMLElement = document.getElementsByTagName("body")[0];
             let h2: HTMLElement = document.createElement("h2");
-            node.appendChild(h2);
+            form.appendChild(h2);
             h2.innerText = key;
             let fieldset: HTMLFieldSetElement = document.createElement("fieldset");
-            node.appendChild(fieldset);
+            form.appendChild(fieldset);
             fieldset.setAttribute("name", key);
             fieldset.setAttribute("id", key);
 
@@ -40,15 +41,15 @@ namespace A5v2 {
                 createInnerFieldset(value[i], fieldset, key);
             }
         }
-        let node: HTMLElement = document.getElementsByTagName("body")[0];
         let h2: HTMLElement = document.createElement("h2");
-        node.appendChild(h2);
+        form.appendChild(h2);
         h2.innerHTML = "Anschrift";
         let div: HTMLElement = document.createElement("div");
         let HTML: string = "<input class=adress type=text name=Text placeholder=Strasse required />";
         HTML += "<input class=adress type=text name=Pattern pattern={1,} placeholder=Hausnummer required />";
-        node.appendChild(div);
+        form.appendChild(div);
         div.innerHTML = HTML;
+        form.innerHTML += "<button type=submit>Submit</button>";
     }
 
     function createInnerFieldset(_heteroPredef: Product, _fieldset: Element, _key: string): void {
@@ -79,7 +80,7 @@ namespace A5v2 {
             input.setAttribute("price", _heteroPredef.price.toString());
             input.setAttribute("value", "0");
             input.setAttribute("pattern", "[0-9]{1,}");
-            input.setAttribute("name", _heteroPredef.name);
+            input.setAttribute("name", _key + _heteroPredef.name);
             input.setAttribute("category", _key);
             p.innerText = _heteroPredef.name;
         }
@@ -92,31 +93,31 @@ namespace A5v2 {
             treeboolean = true;
             for (let i: number = 0; i < data["tree"].length; i++) {
                 let dom: HTMLElement = document.getElementById("tree" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
 
         if (target.name == "radioholder") {
             holderboolean = true;
             for (let i: number = 0; i < data["holder"].length; i++) {
                 let dom: HTMLElement = document.getElementById("holder" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
 
         if (target.name == "radioshipment") {
             shipmentboolean = true;
             for (let i: number = 0; i < data["shipment"].length; i++) {
                 let dom: HTMLElement = document.getElementById("shipment" + i);
-                dom.setAttribute("value", "off");
+                dom.setAttribute("hiddenvalue", "off");
             }
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
         if (target.className == "adress" && target.value.length > 0) {
             target.setAttribute("hiddenName", target.value);
-            target.setAttribute("value", "on");
+            target.setAttribute("hiddenvalue", "on");
         }
 
         let articles: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
@@ -132,7 +133,7 @@ namespace A5v2 {
 
             let articleValue: number = Number(article.getAttribute("value"));
             let articlePrice: number = Number(article.getAttribute("price"));
-            if (articleValue > 0 || article.getAttribute("value") == "on") {
+            if (articleValue > 0 || article.getAttribute("hiddenvalue") == "on") {
                 let articleCategory: string = article.getAttribute("category");
                 if (articleCategory == "tree" || articleCategory == "holder" || articleCategory == "shipment") {
                     articleValue = 1;
