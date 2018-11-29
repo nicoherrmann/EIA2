@@ -16,7 +16,7 @@ namespace A6 {
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //übergibt server IncomingMessage als _request und server ServerResponse als _response
-        console.log(_request.url); //Gib "I hear voices!" in der Console aus
+        console.log(_request.url.toString()); //Gib "I hear voices!" in der Console aus
 
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Verändert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Verändert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
