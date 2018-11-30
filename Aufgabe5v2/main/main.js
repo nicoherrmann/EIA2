@@ -20,6 +20,8 @@ var A5v2;
     }
     function displayFieldsets(_item) {
         let form = document.createElement("form");
+        form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
+        form.setAttribute("method", "get");
         document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
             console.log(key);
