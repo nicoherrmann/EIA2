@@ -8,7 +8,8 @@ namespace A6 {
         port = 8100;
     
     function parse ( urlStr: string, parseQueryString?: boolean): Url.Url{
-            return Url.parse(urlStr, parseQueryString);
+        console.log("parse");    
+        return Url.parse(urlStr, parseQueryString);
             }
     
     

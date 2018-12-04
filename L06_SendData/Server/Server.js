@@ -8,6 +8,7 @@ var A6;
     if (port == undefined)
         port = 8100;
     function parse(urlStr, parseQueryString) {
+        console.log("parse");
         return Url.parse(urlStr, parseQueryString);
     }
     let server = Http.createServer(); //Erlaubt den http Transfer - fungiert als Server
