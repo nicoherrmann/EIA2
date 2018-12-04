@@ -31,7 +31,7 @@ namespace A6 {
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Verändert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Verändert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
 
-        _response.write(convert.path); //Zeigt alles nach dem / ("/" unklusive) auf der Website an
+        _response.write(convert.query); //Zeigt alles nach dem / ("/" unklusive) auf der Website an
         
         _response.end(); //response wird beendet. Dieser Aufruf muss immer bei einem response getätigt werden
     } //Strg + C zum beenden
