@@ -7,8 +7,8 @@ namespace A6 {
     if (port == undefined)
         port = 8100;
     
-    function parse ( urlStr: string): string {
-            return Url.parse(urlStr).toString();
+    function parse ( urlStr: string, parseQueryString?: boolean): Url.Url{
+            return Url.parse(urlStr, parseQueryString);
             }
     
     
@@ -24,7 +24,7 @@ namespace A6 {
         console.log(_request.url); //Gib den eingegebenen Text in der Konsole aus
         let querystring : string = require("querystring");
         let urlString: string = _request.url;
-        let convert: string = parse(urlString);
+        let convert: any = parse(urlString, true);
         
         console.log("JSONstringify:" + convert);
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Verändert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"

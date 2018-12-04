@@ -7,8 +7,8 @@ var A6;
     let port = process.env.PORT; //process Bezieht sich auf NodeJS, falls nicht definiert nimmt er port = 8100. Dieser verweist auf https://eia2-nodetest.herokuapp.com
     if (port == undefined)
         port = 8100;
-    function parse(urlStr) {
-        return Url.parse(urlStr).toString();
+    function parse(urlStr, parseQueryString) {
+        return Url.parse(urlStr, parseQueryString);
     }
     let server = Http.createServer(); //Erlaubt den http Transfer - fungiert als Server
     server.addListener("request", handleRequest); //F�gt dem Server einen Listener zu. Wenn der Nutzer darauf zugreifen will wird handleRequest ausgef�hrt
@@ -21,7 +21,7 @@ var A6;
         console.log(_request.url); //Gib den eingegebenen Text in der Konsole aus
         let querystring = require("querystring");
         let urlString = _request.url;
-        let convert = parse(urlString);
+        let convert = parse(urlString, true);
         console.log("JSONstringify:" + convert);
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Ver�ndert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Ver�ndert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
