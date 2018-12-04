@@ -14,6 +14,7 @@ namespace A6 {
     function handleListen(): void {
         console.log("Listening"); //Gib "Listening" in der Console aus
     }
+    
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //übergibt server IncomingMessage als _request und server ServerResponse als _response
         console.log(_request.url); //Gib den eingegebenen Text in der Konsole aus
         let urlString: string = _request.url;
