@@ -21,26 +21,23 @@ namespace A6 {
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void { //übergibt server IncomingMessage als _request und server ServerResponse als _response
         console.log(_request.url); //Gib den eingegebenen Text in der Konsole aus
         console.log("request");
-
-
         //console.log("URLSearch:" + url);
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Verändert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Verändert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
         if (_request.url != "/favicon.ico") {
             let url: string = Url.parse(_request.url).search.substr(1);
-            let HTML: string = "";
+            let HTML: string = "<br>";
             for (let i: number = 0; i < url.length; i++) {
                 if (url[i] == "&") {
-                    
                     HTMLArray.push(HTML);
-                    HTML = "";
+                    HTML = "<br>";
                 }
                 else {
-                    if (HTML == "Text") {
-                        HTML = "Adresse"
+                    if (HTML == "<br>Text") {
+                        HTML = "<br>Adresse"
                         }
-                    if (HTML == "Pattern") {
-                        HTML = "Hausnummer"
+                    if (HTML == "<br>Pattern") {
+                        HTML = "<br>Hausnummer"
                         }
                     HTML += url[i];
                     console.log(HTML);

@@ -23,18 +23,18 @@ var A6;
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Ver�ndert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
         if (_request.url != "/favicon.ico") {
             let url = Url.parse(_request.url).search.substr(1);
-            let HTML = "";
+            let HTML = "<br>";
             for (let i = 0; i < url.length; i++) {
                 if (url[i] == "&") {
                     HTMLArray.push(HTML);
-                    HTML = "";
+                    HTML = "<br>";
                 }
                 else {
-                    if (HTML == "Text") {
-                        HTML = "Adresse";
+                    if (HTML == "<br>Text") {
+                        HTML = "<br>Adresse";
                     }
-                    if (HTML == "Pattern") {
-                        HTML = "Hausnummer";
+                    if (HTML == "<br>Pattern") {
+                        HTML = "<br>Hausnummer";
                     }
                     HTML += url[i];
                     console.log(HTML);
