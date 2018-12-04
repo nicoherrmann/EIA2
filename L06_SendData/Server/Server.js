@@ -17,7 +17,7 @@ var A6;
         console.log(_request.url); //Gib den eingegebenen Text in der Konsole aus
         let urlString = _request.url;
         let convert = JSON.stringify(urlString);
-        console.log("test:" + convert);
+        console.log("JSONstringify:" + convert);
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Ver�ndert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Ver�ndert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
         _response.write(_request.url); //Zeigt alles nach dem / ("/" unklusive) auf der Website an
