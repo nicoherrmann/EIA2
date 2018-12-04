@@ -30,6 +30,12 @@ var A6;
                     HTML = "";
                 }
                 else {
+                    if (HTML == "Text") {
+                        HTML = "Adresse";
+                    }
+                    if (HTML == "Pattern") {
+                        HTML = "Hausnummer";
+                    }
                     HTML += url[i];
                     console.log(HTML);
                 }

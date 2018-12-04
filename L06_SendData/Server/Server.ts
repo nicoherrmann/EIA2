@@ -31,10 +31,17 @@ namespace A6 {
             let HTML: string = "";
             for (let i: number = 0; i < url.length; i++) {
                 if (url[i] == "&") {
+                    
                     HTMLArray.push(HTML);
                     HTML = "";
                 }
                 else {
+                    if (HTML == "Text") {
+                        HTML = "Adresse"
+                        }
+                    if (HTML == "Pattern") {
+                        HTML = "Hausnummer"
+                        }
                     HTML += url[i];
                     console.log(HTML);
                 }
