@@ -46,7 +46,9 @@ namespace A6 {
                 
             }
             HTMLArray.push(HTML);
-            
+            HTMLArray.push("<br>");
+            HTMLArray.push("------------------");
+            HTMLArray.push("<br>");
             for (let i: number = 0 ; i < HTMLArray.length ; i++) {
                 _response.write(HTMLArray[i]);
                 }
