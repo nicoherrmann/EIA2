@@ -30,14 +30,14 @@ namespace A6 {
             for (let i: number = 0; i < url.length; i++) {
                 if (url[i] == "&") {
                     HTMLArray.push(HTML);
-                    HTML = "";
+                    HTML = "<br>";
                 }
                 else {
-                    if (HTML == "Text") {
-                        HTML = "Adresse"
+                    if (HTML == "<br>Text") {
+                        HTML = "<br>Adresse"
                         }
-                    if (HTML == "Pattern") {
-                        HTML = "Hausnummer"
+                    if (HTML == "<br>Pattern") {
+                        HTML = "<br>Hausnummer"
                         }
                     HTML += url[i];
                 }

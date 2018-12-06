@@ -58,7 +58,7 @@ var A5v2;
         for (let i = 0; i < co.childNodes.length; i++) {
             let value = document.getElementsByTagName("p")[i].getAttribute("value");
             let name = document.getElementsByTagName("p")[i].getAttribute("name");
-            checkout += name + ":" + value + "<br/>&";
+            checkout += name + ":" + value + "&";
         }
         alert(checkout);
         console.log(checkout);

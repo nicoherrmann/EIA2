@@ -67,7 +67,7 @@ namespace A5v2 {
         for (let i: number = 0; i < co.childNodes.length; i++) {
             let value: string = document.getElementsByTagName("p")[i].getAttribute("value");
             let name: string = document.getElementsByTagName("p")[i].getAttribute("name");
-            checkout += name + ":" + value +"<br/>&" ;
+            checkout += name + ":" + value + "&" ;
         }
         alert(checkout);
         console.log(checkout);
