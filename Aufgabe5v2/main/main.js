@@ -21,8 +21,8 @@ var A5v2;
     }
     function displayFieldsets(_item) {
         let form = document.createElement("form");
-        //form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
-        //form.setAttribute("method", "get");
+        form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
+        form.setAttribute("method", "get");
         document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
             console.log(key);
@@ -58,7 +58,7 @@ var A5v2;
         for (let i = 0; i < co.childNodes.length; i++) {
             let value = document.getElementsByTagName("p")[i].getAttribute("value");
             let name = document.getElementsByTagName("p")[i].getAttribute("name");
-            checkout += name + ":" + value + "<br/>";
+            checkout += name + ":" + value + "<br/>&";
         }
         alert(checkout);
         console.log(checkout);
