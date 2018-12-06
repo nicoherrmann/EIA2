@@ -28,8 +28,8 @@ namespace A5v2 {
 
 
         let form: HTMLElement = document.createElement("form");
-        form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
-        form.setAttribute("method", "get");
+        //form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
+        //form.setAttribute("method", "get");
         document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
             console.log(key);
@@ -55,7 +55,7 @@ namespace A5v2 {
         form.appendChild(div);
         div.innerHTML = HTML;
         //form.innerHTML += "<button type=submit>Submit</button>";
-        form.innerHTML += "<button id=async>Async</button>";
+        form.innerHTML += "<button type=button id=async>Async</button>";
         document.getElementById("async").addEventListener("click", sendRequestWithCustomData);
     }
 
