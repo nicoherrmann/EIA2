@@ -6,7 +6,7 @@ html {
 }
 
 fieldset {
-	width: 60%;
+	width: 40%;
 }
 
 fieldset > p {
@@ -29,7 +29,7 @@ h2 {
 	padding-left: 2px;
 	padding-top: 5px;
 	border-top: 2px dotted darkgrey;
-	width: 60%;
+	width: 40%;
 }
 
 #priceMain {
@@ -66,4 +66,12 @@ p {
 	right: 0px;
 	background-color: orange;
 	color: white;
+}
+
+#HTMLSelection {
+	position: fixed;
+	top: 20px;
+	left: 45%;
+	border: 2px dotted black;
+	padding: 0.3em;
 }

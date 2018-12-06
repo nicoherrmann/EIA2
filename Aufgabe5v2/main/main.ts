@@ -69,7 +69,7 @@ namespace A5v2 {
             let name: string = document.getElementsByTagName("p")[i].getAttribute("name");
             checkout += name + ":" + value + "&" ;
         }
-        alert(checkout);
+        showSelection(checkout);
         console.log(checkout);
 
         xhr.open("GET", address + "?" + checkout, true);
@@ -238,4 +238,41 @@ namespace A5v2 {
         }
 
     }
+    
+    
+    function showSelection(_string: string): void {
+        let HTMLArray: string[] = [];
+        console.log("works");
+        let div: HTMLElement = document.getElementById("HTMLSelection");
+        if (div != null) {
+            div.remove();
+            }
+        let HTML: string = "<br>";
+            for (let i: number = 0; i < _string.length; i++) {
+                if (_string[i] == "&") {
+                    HTMLArray.push(HTML);
+                    HTML = "<br>";
+                }
+                else {
+                    if (HTML == "<br>Text") {
+                        HTML = "<br>Adresse"
+                        }
+                    if (HTML == "<br>Pattern") {
+                        HTML = "<br>Hausnummer"
+                        }
+                    HTML += _string[i];
+                }
+                
+                
+            }
+        let create: HTMLElement = document.createElement("div");
+        let body: HTMLElement = document.getElementsByTagName("body")[0];
+        body.appendChild(create);
+        create.setAttribute("id", "HTMLSelection");
+        for (let i: number = 0 ; i < HTMLArray.length ; i++) {
+                create.innerHTML += HTMLArray[i];
+                }
+        
+        }
+    
 }

@@ -60,7 +60,7 @@ var A5v2;
             let name = document.getElementsByTagName("p")[i].getAttribute("name");
             checkout += name + ":" + value + "&";
         }
-        alert(checkout);
+        showSelection(checkout);
         console.log(checkout);
         xhr.open("GET", address + "?" + checkout, true);
         xhr.addEventListener("readystatechange", handleStateChange);
@@ -204,6 +204,37 @@ var A5v2;
         }
         else {
             alert("Alles in Ordnung!");
+        }
+    }
+    function showSelection(_string) {
+        let HTMLArray = [];
+        console.log("works");
+        let div = document.getElementById("HTMLSelection");
+        if (div != null) {
+            div.remove();
+        }
+        let HTML = "<br>";
+        for (let i = 0; i < _string.length; i++) {
+            if (_string[i] == "&") {
+                HTMLArray.push(HTML);
+                HTML = "<br>";
+            }
+            else {
+                if (HTML == "<br>Text") {
+                    HTML = "<br>Adresse";
+                }
+                if (HTML == "<br>Pattern") {
+                    HTML = "<br>Hausnummer";
+                }
+                HTML += _string[i];
+            }
+        }
+        let create = document.createElement("div");
+        let body = document.getElementsByTagName("body")[0];
+        body.appendChild(create);
+        create.setAttribute("id", "HTMLSelection");
+        for (let i = 0; i < HTMLArray.length; i++) {
+            create.innerHTML += HTMLArray[i];
         }
     }
 })(A5v2 || (A5v2 = {}));
