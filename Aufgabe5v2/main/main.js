@@ -98,6 +98,7 @@ var A5v2;
             input.setAttribute("value", "0");
             input.setAttribute("pattern", "[0-9]{1,}");
             input.setAttribute("name", _key + _heteroPredef.name);
+            input.setAttribute("hiddenName", _heteroPredef.name);
             input.setAttribute("category", _key);
             p.innerText = _heteroPredef.name;
         }
@@ -158,18 +159,20 @@ var A5v2;
                         articleCategory = "Hausnummer:";
                     }
                     let createArticle = document.createElement("p");
+                    console.log("zws:" + articleName);
                     createArticle.setAttribute("name", articleName);
                     createArticle.setAttribute("value", article.getAttribute("value"));
                     checkout.appendChild(createArticle);
-                    createArticle.innerText = articleCategory + article.getAttribute("hiddenName");
+                    createArticle.innerText = articleCategory + ": " + article.getAttribute("hiddenName");
                 }
                 else {
+                    articleName = articleCategory + article.getAttribute("hiddenName");
                     let createArticle = document.createElement("p");
                     checkout.appendChild(createArticle);
                     createArticle.setAttribute("price", price.toString());
                     createArticle.setAttribute("value", articleValue.toString());
                     createArticle.setAttribute("name", articleName);
-                    createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
+                    createArticle.innerText = articleCategory + ": " + article.getAttribute("hiddenName") + " x " + articleValue;
                 }
             }
         }
