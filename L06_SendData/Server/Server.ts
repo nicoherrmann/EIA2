@@ -30,14 +30,14 @@ namespace A6 {
             for (let i: number = 0; i < url.length; i++) {
                 if (url[i] == "&") {
                     HTMLArray.push(HTML);
-                    HTML = "<br>";
+                    HTML = "";
                 }
                 else {
-                    if (HTML == "<br>Text") {
-                        HTML = "<br>Adresse"
+                    if (HTML == "Text") {
+                        HTML = "Adresse"
                         }
-                    if (HTML == "<br>Pattern") {
-                        HTML = "<br>Hausnummer"
+                    if (HTML == "Pattern") {
+                        HTML = "Hausnummer"
                         }
                     HTML += url[i];
                     console.log(HTML);
@@ -46,7 +46,6 @@ namespace A6 {
                 
             }
             HTMLArray.push(HTML);
-            HTMLArray.push("<br>");
             HTMLArray.push("------------------");
             HTMLArray.push("<br>");
             for (let i: number = 0 ; i < HTMLArray.length ; i++) {
