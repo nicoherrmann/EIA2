@@ -21,8 +21,8 @@ var A5v2;
     }
     function displayFieldsets(_item) {
         let form = document.createElement("form");
-        form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
-        form.setAttribute("method", "get");
+        //form.setAttribute("action", "https://nodeservereia.herokuapp.com/");
+        //form.setAttribute("method", "get");
         document.getElementsByTagName("body")[0].appendChild(form);
         for (let key in _item) {
             console.log(key);
@@ -46,19 +46,21 @@ var A5v2;
         HTML += "<input class=adress type=text name=Pattern pattern={1,} placeholder=Hausnummer required />";
         form.appendChild(div);
         div.innerHTML = HTML;
-        form.innerHTML += "<button type=submit>Submit</button>";
+        //form.innerHTML += "<button type=submit>Submit</button>";
         form.innerHTML += "<button id=async>Async</button>";
         document.getElementById("async").addEventListener("click", sendRequestWithCustomData);
     }
     function sendRequestWithCustomData() {
+        console.log("requestcustom");
         let xhr = new XMLHttpRequest();
         let co = document.getElementById("checkout");
         let checkout = "";
         for (let i = 0; i < co.childNodes.length; i++) {
-            let value = Number(document.getElementsByTagName("p")[i].getAttribute("value"));
-            let name = Number(document.getElementsByTagName("p")[i].getAttribute("name"));
-            checkout += name + "x" + value;
+            let value = document.getElementsByTagName("p")[i].getAttribute("value");
+            let name = document.getElementsByTagName("p")[i].getAttribute("name");
+            checkout += name + ":" + value + "<br/>";
         }
+        alert(checkout);
         console.log(checkout);
         xhr.open("GET", address + "?" + checkout, true);
         xhr.addEventListener("readystatechange", handleStateChange);
@@ -156,6 +158,8 @@ var A5v2;
                         articleCategory = "Hausnummer:";
                     }
                     let createArticle = document.createElement("p");
+                    createArticle.setAttribute("name", articleName);
+                    createArticle.setAttribute("value", article.getAttribute("value"));
                     checkout.appendChild(createArticle);
                     createArticle.innerText = articleCategory + article.getAttribute("hiddenName");
                 }
