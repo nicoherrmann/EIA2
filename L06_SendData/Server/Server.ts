@@ -39,12 +39,11 @@ namespace A6 {
                     if (HTML == "Pattern") {
                         HTML = "Hausnummer"
                         }
-                    console.log(HTML);
+                    HTML += url[i];
                 }
                 
                 
             }
-            HTMLArray.push(HTML);
             HTMLArray.push("------------------");
             HTMLArray.push("<br>");
             for (let i: number = 0 ; i < HTMLArray.length ; i++) {
