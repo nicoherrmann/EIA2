@@ -13,6 +13,7 @@ namespace A5v2 {
     let treeboolean: boolean = false;
     let holderboolean: boolean = false;
     let shipmentboolean: boolean = false;
+    let address: string = "https://nodeservereia.herokuapp.com/";
 
     function init(): void {
         console.log("start");
@@ -52,7 +53,34 @@ namespace A5v2 {
         form.appendChild(div);
         div.innerHTML = HTML;
         form.innerHTML += "<button type=submit>Submit</button>";
+        form.innerHTML += "<button id=async>Async</button>";
+        document.getElementById("async").addEventListener("click", sendRequestWithCustomData);
     }
+    
+    function sendRequestWithCustomData(): void {
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        let co: HTMLElement = document.getElementById("checkout");
+        let checkout: string = "";
+        for (let i: number = 0; i < co.childNodes.length; i++) {
+            let value: number = Number(document.getElementsByTagName("p")[i].getAttribute("value"));
+            let name: number = Number(document.getElementsByTagName("p")[i].getAttribute("name"));
+            checkout += name + "x" + value;
+        }
+        console.log(checkout);
+        
+        xhr.open("GET", address + "?" + checkout, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+
+    function handleStateChange(_event: ProgressEvent): void {
+        var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+        }
+    }
+    
 
     function createInnerFieldset(_heteroPredef: Product, _fieldset: Element, _key: string): void {
 
@@ -158,6 +186,8 @@ namespace A5v2 {
                     let createArticle: HTMLElement = document.createElement("p");
                     checkout.appendChild(createArticle);
                     createArticle.setAttribute("price", price.toString());
+                    createArticle.setAttribute("value", articleValue.toString());
+                    createArticle.setAttribute("name", articleName);
                     createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
                 }
             }

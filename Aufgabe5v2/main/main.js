@@ -12,6 +12,7 @@ var A5v2;
     let treeboolean = false;
     let holderboolean = false;
     let shipmentboolean = false;
+    let address = "https://nodeservereia.herokuapp.com/";
     function init() {
         console.log("start");
         displayFieldsets(A5v2.data);
@@ -46,6 +47,29 @@ var A5v2;
         form.appendChild(div);
         div.innerHTML = HTML;
         form.innerHTML += "<button type=submit>Submit</button>";
+        form.innerHTML += "<button id=async>Async</button>";
+        document.getElementById("async").addEventListener("click", sendRequestWithCustomData);
+    }
+    function sendRequestWithCustomData() {
+        let xhr = new XMLHttpRequest();
+        let co = document.getElementById("checkout");
+        let checkout = "";
+        for (let i = 0; i < co.childNodes.length; i++) {
+            let value = Number(document.getElementsByTagName("p")[i].getAttribute("value"));
+            let name = Number(document.getElementsByTagName("p")[i].getAttribute("name"));
+            checkout += name + "x" + value;
+        }
+        console.log(checkout);
+        xhr.open("GET", address + "?" + checkout, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+    function handleStateChange(_event) {
+        var xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+        }
     }
     function createInnerFieldset(_heteroPredef, _fieldset, _key) {
         if (_key == "tree" || _key == "holder" || _key == "shipment") {
@@ -139,6 +163,8 @@ var A5v2;
                     let createArticle = document.createElement("p");
                     checkout.appendChild(createArticle);
                     createArticle.setAttribute("price", price.toString());
+                    createArticle.setAttribute("value", articleValue.toString());
+                    createArticle.setAttribute("name", articleName);
                     createArticle.innerText = articleCategory + ": " + articleName + " x " + articleValue;
                 }
             }
