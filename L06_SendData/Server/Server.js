@@ -36,7 +36,6 @@ var A6;
                     if (HTML == "Pattern") {
                         HTML = "Hausnummer";
                     }
-                    HTML += url[i];
                     console.log(HTML);
                 }
             }
