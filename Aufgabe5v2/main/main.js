@@ -166,7 +166,7 @@ var A5v2;
                     createArticle.innerText = articleCategory + ": " + article.getAttribute("hiddenName");
                 }
                 else {
-                    articleName = articleCategory + article.getAttribute("hiddenName");
+                    articleName = articleCategory + ":" + article.getAttribute("hiddenName");
                     let createArticle = document.createElement("p");
                     checkout.appendChild(createArticle);
                     createArticle.setAttribute("price", price.toString());

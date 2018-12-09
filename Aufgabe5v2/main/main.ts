@@ -192,7 +192,7 @@ namespace A5v2 {
 
                 else {
 
-                    articleName = articleCategory + article.getAttribute("hiddenName");
+                    articleName = articleCategory + ":" + article.getAttribute("hiddenName");
                     let createArticle: HTMLElement = document.createElement("p");
                     checkout.appendChild(createArticle);
                     createArticle.setAttribute("price", price.toString());
