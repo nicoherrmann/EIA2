@@ -3,8 +3,6 @@ var DatabaseClient;
 (function (DatabaseClient) {
     window.addEventListener("load", init);
     let serverAddress = "https://nodeservereia.herokuapp.com/";
-    let db;
-    let students;
     //let serverAddress: string = "https://<your>.herokuapp.com/";    
     function init(_event) {
         console.log("Init");
@@ -12,7 +10,7 @@ var DatabaseClient;
         let refreshButton = document.getElementById("refresh");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        document.getElementById("matrikelsearch").addEventListener("input", search);
+        //document.getElementById("matrikelsearch").addEventListener("input", search);
     }
     function insert(_event) {
         let inputs = document.getElementsByTagName("input");

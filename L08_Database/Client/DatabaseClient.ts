@@ -4,8 +4,6 @@ namespace DatabaseClient {
 
     window.addEventListener("load", init);
     let serverAddress: string = "https://nodeservereia.herokuapp.com/";
-    let db: Mongo.Db;
-    let students: Mongo.Collection;
     //let serverAddress: string = "https://<your>.herokuapp.com/";    
 
     function init(_event: Event): void {
@@ -14,7 +12,7 @@ namespace DatabaseClient {
         let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        document.getElementById("matrikelsearch").addEventListener("input", search);
+        //document.getElementById("matrikelsearch").addEventListener("input", search);
     }
 
     function insert(_event: Event): void {
@@ -37,7 +35,6 @@ namespace DatabaseClient {
     function search(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
         let matrikel: number = parseInt(target.value);
-
         if (matrikel.toString().length == 6) {
             console.log("test");
             let xhr: XMLHttpRequest = new XMLHttpRequest();
