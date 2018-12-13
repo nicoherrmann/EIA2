@@ -14,7 +14,7 @@ let students: Mongo.Collection;
 if (process.env.NODE_ENV == "production") {
     //    databaseURL = "mongodb://username:password@hostname:port/database";
     databaseURL = "mongodb://testuser:testpw1@ds129156.mlab.com:29156/eia2";
-    databaseName = "eia2";
+     databaseName = "eia2";
 }
 
 // try to connect to database, then activate callback "handleConnect" 
@@ -40,6 +40,11 @@ export function insert(_doc: StudentData): void {
 function handleInsert(_e: Mongo.MongoError): void {
     console.log("Database insertion returned -> " + _e);
 }
+export function search(_string: string): any {
+    var student: any = students.findOne(_string);
+    return student;
+    }
+
 
 // try to fetch all documents from database, then activate callback
 export function findAll(_callback: Function): void {

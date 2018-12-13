@@ -36,6 +36,11 @@ exports.insert = insert;
 function handleInsert(_e) {
     console.log("Database insertion returned -> " + _e);
 }
+function search(_string) {
+    var student = students.findOne(_string);
+    return student;
+}
+exports.search = search;
 // try to fetch all documents from database, then activate callback
 function findAll(_callback) {
     // cursor points to the retreived set of documents in memory
