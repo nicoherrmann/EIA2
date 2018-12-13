@@ -21,31 +21,9 @@ var A6;
         //console.log("URLSearch:" + url);
         _response.setHeader("content-type", "text/html; charset=utf-8"); //Ver�ndert die Werte des Serverheaders: name="content-type" und value="text/html; charset=utf-8"
         _response.setHeader("Access-Control-Allow-Origin", "*"); //Ver�ndert die Werte des Serverheaders: name="Access-Control-Allow-Origin" und value="*"
-        if (_request.url != "/favicon.ico") {
-            let url = Url.parse(_request.url).search.substr(1);
-            let HTML = "<br>";
-            for (let i = 0; i < url.length; i++) {
-                if (url[i] == "&") {
-                    HTMLArray.push(HTML);
-                    HTML = "<br>";
-                }
-                else {
-                    if (HTML == "<br>Text") {
-                        HTML = "<br>Adresse";
-                    }
-                    if (HTML == "<br>Pattern") {
-                        HTML = "<br>Hausnummer";
-                    }
-                    HTML += url[i];
-                }
-            }
-            HTMLArray.push("------------------");
-            HTMLArray.push("<br>");
-            for (let i = 0; i < HTMLArray.length; i++) {
-                _response.write(HTMLArray[i]);
-            }
-            console.log(HTMLArray);
-        }
+        let url = Url.parse(_request.url, true);
+        for (let key in url.query)
+            _response.write(key + ":" + url.query[key] + "<br/>");
         _response.end(); //response wird beendet. Dieser Aufruf muss immer bei einem response get�tigt werden
     } //Strg + C zum beenden
 })(A6 || (A6 = {}));
