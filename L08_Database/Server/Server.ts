@@ -46,6 +46,7 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
             Database.findAll(findCallback);
             break;
         case "search":
+            console.log(query["matrikel"]);
             Database.search(findCallback, query["matrikel"]);
             break;
         default:
