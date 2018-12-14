@@ -37,14 +37,14 @@ function handleInsert(_e) {
     console.log("Database insertion returned -> " + _e);
 }
 function search(_callback, _matrikel) {
-    var cursor = students.find(_matrikel);
+    var cursor = students.find({ "matrikel": _matrikel });
     cursor.toArray(prepareAnswer);
     function prepareAnswer(_e, studentArray) {
         if (_e)
             _callback("Error" + _e);
         else
             _callback(JSON.stringify(studentArray));
-        console.log(cursor.filter(_matrikel));
+        console.log(cursor);
     }
 }
 exports.search = search;
