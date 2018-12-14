@@ -44,7 +44,7 @@ function search(_callback, _matrikel) {
             _callback("Error" + _e);
         else
             _callback(JSON.stringify(studentArray));
-        console.log(students.findOne({ "matrikel": _matrikel }));
+        console.log(students.findOne);
     }
 }
 exports.search = search;
