@@ -48,7 +48,7 @@ export function search(_callback: Function, _matrikel: string): void {
             _callback("Error" + _e);
         else
             _callback(JSON.stringify(studentArray));
-        console.log(students.findOne);
+        console.log(students.find({matrikel: _matrikel}));
     }
 }
 
