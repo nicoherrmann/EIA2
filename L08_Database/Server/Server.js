@@ -35,7 +35,7 @@ function handleRequest(_request, _response) {
             Database.findAll(findCallback);
             break;
         case "search":
-            _response.write(Database.search(query["matrikel"]));
+            Database.search(findCallback, query["matrikel"]);
             break;
         default:
             respond(_response, "unknown command: " + command);

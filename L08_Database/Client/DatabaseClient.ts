@@ -12,7 +12,7 @@ namespace DatabaseClient {
         let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        //document.getElementById("matrikelsearch").addEventListener("input", search);
+        document.getElementById("matrikelsearch").addEventListener("input", search);
     }
 
     function insert(_event: Event): void {
