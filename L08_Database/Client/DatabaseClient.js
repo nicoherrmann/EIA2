@@ -10,7 +10,8 @@ var DatabaseClient;
         let refreshButton = document.getElementById("refresh");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        document.getElementById("matrikelsearch").addEventListener("input", search);
+        document.getElementById("matrikelsearch").addEventListener("input", change);
+        document.getElementById("buttonsearch").addEventListener("click", search);
     }
     function insert(_event) {
         let inputs = document.getElementsByTagName("input");
@@ -25,10 +26,13 @@ var DatabaseClient;
         let query = "command=refresh";
         sendRequest(query, handleFindResponse);
     }
-    function search(_event) {
+    function change(_event) {
         let target = _event.target;
-        let matrikel = parseInt(target.value);
-        if (matrikel.toString().length == 6) {
+        target.setAttribute("value", target.value);
+    }
+    function search(_event) {
+        let matrikel = parseInt(document.getElementById("matrikelsearch").getAttribute("value"));
+        if (matrikel.toString().length > 0) {
             console.log("test");
             let xhr = new XMLHttpRequest();
             xhr.open("GET", serverAddress + "?command=search&matrikel=" + matrikel, true);
