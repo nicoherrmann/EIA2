@@ -41,14 +41,18 @@ function handleInsert(_e: Mongo.MongoError): void {
     console.log("Database insertion returned -> " + _e);
 }
 export function search(_callback: Function, _matrikel: string): void {
-    var cursor: Mongo.Cursor = students.find({ "matrikel": _matrikel });
+    var cursor: Mongo.Cursor = students.find();
     cursor.toArray(prepareAnswer);
     function prepareAnswer(_e: Mongo.MongoError, studentArray: StudentData[]): void {
         if (_e)
             _callback("Error" + _e);
         else
-            _callback(JSON.stringify(studentArray));
-        console.log(students.find({matrikel: _matrikel}));
+
+            for (let i: number = 0; i < studentArray.length; i++) {
+                if (studentArray[i].matrikel == Number(_matrikel)) {
+                    _callback(JSON.stringify(studentArray[i]));
+                }
+            }
     }
 }
 

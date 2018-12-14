@@ -37,14 +37,17 @@ function handleInsert(_e) {
     console.log("Database insertion returned -> " + _e);
 }
 function search(_callback, _matrikel) {
-    var cursor = students.find({ "matrikel": _matrikel });
+    var cursor = students.find();
     cursor.toArray(prepareAnswer);
     function prepareAnswer(_e, studentArray) {
         if (_e)
             _callback("Error" + _e);
         else
-            _callback(JSON.stringify(studentArray));
-        console.log(students.find({ matrikel: _matrikel }));
+            for (let i = 0; i < studentArray.length; i++) {
+                if (studentArray[i].matrikel == Number(_matrikel)) {
+                    _callback(JSON.stringify(studentArray[i]));
+                }
+            }
     }
 }
 exports.search = search;
