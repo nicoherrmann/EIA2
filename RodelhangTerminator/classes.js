@@ -136,7 +136,7 @@ var RHT;
         }
         draw() {
             if (this.timer >= 0) {
-                console.log(">15");
+                console.log(">=0");
                 RHT.crc2.fillStyle = "#ffffff";
                 RHT.crc2.strokeStyle = "#ffffff";
                 RHT.crc2.lineWidth = 1;
@@ -171,9 +171,8 @@ var RHT;
             RHT.crc2.lineTo(_x - 8, _y + 14);
             RHT.crc2.moveTo(_x + 8, _y + 12);
             RHT.crc2.lineTo(_x - 10, _y + 15);
-            RHT.crc2.closePath();
             console.log("bum");
-            if (RHT.crc2.isPointInPath(this.x, this.y)) {
+            if (RHT.crc2.isPointInStroke(this.x, this.y)) {
                 return true;
             }
             else {
@@ -221,7 +220,7 @@ var RHT;
             this.y += this.dy;
         }
         getSpeed() {
-            return this.dx += this.dy;
+            return Math.floor(this.dx * this.dy * -12);
         }
         drawPath(_x, _y) {
             RHT.crc2.beginPath();

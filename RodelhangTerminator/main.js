@@ -12,13 +12,15 @@ var RHT;
         allObjects = [];
         childrenArray = [];
         snowballs = [];
-        score = 0;
         document.getElementsByTagName("canvas")[0].style.display = "none";
+        document.getElementById("score").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
     }
     function startGame(_event) {
+        score = 0;
         document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("score").style.display = "initial";
         document.getElementsByTagName("canvas")[0].style.display = "initial";
         let canvas = document.getElementsByTagName("canvas")[0];
         canvas.addEventListener("click", throwSnowball);
@@ -114,22 +116,25 @@ var RHT;
             if (snowballs[i].timer > 0) {
                 snowballs[i].draw();
             }
-            if (snowballs[i].timer == 0) {
-                snowballs[i].draw();
-                console.log(snowballs[i].timer);
-                for (let i2 = 0; i2 < RHT.children.length; i2++) {
-                    console.log("TASDGFSDF:" + RHT.children.length);
-                    if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true) {
-                        childrenArray[i2].state = "dead";
-                        score += childrenArray[i2].getSpeed() * 10;
-                        console.log(score);
-                    }
-                    else {
-                        console.log("else");
+            else {
+                if (snowballs[i].timer == 0) {
+                    snowballs[i].draw();
+                    console.log("timer:" + snowballs[i].timer);
+                    for (let i2 = 0; i2 < childrenArray.length; i2++) {
+                        console.log("TASDGFSDF:" + RHT.children.length);
+                        if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
+                            childrenArray[i2].state = "dead";
+                            score += childrenArray[i2].getSpeed() * 10;
+                            console.log("score:" + score);
+                        }
+                        else {
+                            console.log("else");
+                        }
                     }
                 }
             }
         }
+        document.getElementById("score").innerText = score.toString();
     }
 })(RHT || (RHT = {}));
 //# sourceMappingURL=main.js.map

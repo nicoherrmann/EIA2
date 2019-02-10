@@ -25,3 +25,14 @@ p {
 #start {
 	
 }
+
+#score {
+	padding: 0.25em 0.5em;
+	border: solid 3px darkred;
+	margin-top: 0px;
+	margin-left: 0px;
+	width: 200px;
+	text-align: center;
+	width: 200px;
+	background-color: #e6e6e6;
+}
