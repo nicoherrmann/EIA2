@@ -1,0 +1,27 @@
+/* Die Schriftart "IBM Plex Sans" wird aus google importiert */
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+html {
+	font-family: 'IBM Plex Sans', sans-serif;
+	font-weight: bold;
+}
+
+div {
+	width: 100%;
+	height: 100%;
+}
+
+p {
+	padding: 1em 3em;
+	border: solid 3px darkred;
+	margin: auto;
+	margin-bottom: 50px;
+	width: 200px;
+	text-align: center;
+	width: 200px;
+	background-color: #e6e6e6;
+}
+
+#start {
+	
+}
