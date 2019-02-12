@@ -8,18 +8,31 @@ var RHT;
     let childrenArray = [];
     let snowballs = [];
     let score = 0;
+    let timer = 60;
+    let helpTimer = 25;
+    let snowballReadyCheck;
     function showMainScreen() {
         allObjects = [];
         childrenArray = [];
         snowballs = [];
         document.getElementsByTagName("canvas")[0].style.display = "none";
         document.getElementById("score").style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("retry").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
     }
     function startGame(_event) {
+        snowballReadyCheck = true;
         score = 0;
+        allObjects = [];
+        childrenArray = [];
+        snowballs = [];
+        timer = 60;
+        helpTimer = 25;
         document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("retry").style.display = "none";
         document.getElementById("score").style.display = "initial";
         document.getElementsByTagName("canvas")[0].style.display = "initial";
         let canvas = document.getElementsByTagName("canvas")[0];
@@ -28,7 +41,7 @@ var RHT;
         bg = new RHT.Background();
         bg.draw();
         bgImg = RHT.crc2.getImageData(0, 0, RHT.crc2.canvas.width, RHT.crc2.canvas.height);
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 4; i++) {
             createChild();
         }
         for (let i = 0; i < 6; i++) {
@@ -86,55 +99,105 @@ var RHT;
         childrenArray.push(child);
     }
     function throwSnowball(_event) {
-        let x = _event.clientX;
-        let y = _event.clientY;
-        let ball = new RHT.snowball();
-        ball.x = x;
-        ball.y = y;
-        ball.timer = 25;
-        snowballs.push(ball);
+        if (snowballReadyCheck == true) {
+            snowballReadyCheck = false;
+            let x = _event.clientX;
+            let y = _event.clientY;
+            let ball = new RHT.snowball();
+            ball.x = x;
+            ball.y = y;
+            ball.timer = 25;
+            snowballs.push(ball);
+        }
+    }
+    let address = "https://nodeservereia.herokuapp.com/";
+    function sendRequestWithCustomData() {
+        console.log("requestcustom");
+        let xhr = new XMLHttpRequest();
+        let co = document.getElementById("checkout");
+        let checkout = "";
+        for (let i = 0; i < co.childNodes.length; i++) {
+            let value = document.getElementsByTagName("p")[i].getAttribute("value");
+            let name = document.getElementsByTagName("p")[i].getAttribute("name");
+            checkout += name + ":" + value + "&";
+        }
+        console.log(checkout);
+        xhr.open("GET", address + "?" + checkout, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+    function handleStateChange(_event) {
+        var xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+        }
+    }
+    function endscreen() {
+        document.getElementById("endscore").innerText = score.toString();
+        document.getElementById("endscore").setAttribute("value", score.toString());
+        document.getElementsByTagName("canvas")[0].style.display = "none";
+        document.getElementById("score").style.display = "none";
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "initial";
+        document.getElementById("retry").style.display = "initial";
+        document.getElementById("retry").addEventListener("click", startGame);
+        document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
     }
     function update() {
-        window.setTimeout(update, 1000 / 25);
-        RHT.crc2.clearRect(0, 0, RHT.crc2.canvas.width, RHT.crc2.canvas.height);
-        RHT.crc2.putImageData(bgImg, 0, 0);
-        sun.draw();
-        for (let i = 0; i < allObjects.length; i++) {
-            allObjects[i].move();
-            allObjects[i].draw();
-        }
-        for (let i = 0; i < childrenArray.length; i++) {
-            childrenArray[i].move();
-            childrenArray[i].draw();
-            if (childrenArray[i].x < -10 || childrenArray[i].y > (RHT.crc2.canvas.height + 10)) {
-                childrenArray.splice(i, 1);
-                createChild();
-                console.log("length:" + childrenArray.length);
+        if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
+            window.setTimeout(update, 1000 / 25);
+            if (helpTimer == 0) {
+                timer--;
+                helpTimer = 26;
+                snowballReadyCheck = true;
             }
-        }
-        for (let i = 0; i < snowballs.length; i++) {
-            if (snowballs[i].timer > 0) {
-                snowballs[i].draw();
+            helpTimer--;
+            RHT.crc2.clearRect(0, 0, RHT.crc2.canvas.width, RHT.crc2.canvas.height);
+            RHT.crc2.putImageData(bgImg, 0, 0);
+            sun.draw();
+            for (let i = 0; i < allObjects.length; i++) {
+                allObjects[i].move();
+                allObjects[i].draw();
             }
-            else {
-                if (snowballs[i].timer == 0) {
+            for (let i = 0; i < childrenArray.length; i++) {
+                childrenArray[i].move();
+                childrenArray[i].draw();
+                if (childrenArray[i].x < -10 || childrenArray[i].y > (RHT.crc2.canvas.height + 10)) {
+                    childrenArray.splice(i, 1);
+                    createChild();
+                    console.log("length:" + childrenArray.length);
+                }
+            }
+            for (let i = 0; i < snowballs.length; i++) {
+                if (snowballs[i].timer > 0) {
                     snowballs[i].draw();
-                    console.log("timer:" + snowballs[i].timer);
-                    for (let i2 = 0; i2 < childrenArray.length; i2++) {
-                        console.log("TASDGFSDF:" + RHT.children.length);
-                        if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
-                            childrenArray[i2].state = "dead";
-                            score += childrenArray[i2].getSpeed() * 10;
-                            console.log("score:" + score);
-                        }
-                        else {
-                            console.log("else");
+                }
+                else {
+                    if (snowballs[i].timer == 0) {
+                        snowballs[i].draw();
+                        console.log("timer:" + snowballs[i].timer);
+                        for (let i2 = 0; i2 < childrenArray.length; i2++) {
+                            console.log("TASDGFSDF:" + RHT.children.length);
+                            if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
+                                childrenArray[i2].state = "dead";
+                                score += childrenArray[i2].getSpeed() * 10;
+                                console.log("score:" + score);
+                            }
+                            else {
+                                console.log("else");
+                            }
                         }
                     }
                 }
             }
+            document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
+            if (snowballs.length > 19) {
+                if (snowballs[19].timer == 0) {
+                    endscreen();
+                }
+            }
         }
-        document.getElementById("score").innerText = score.toString();
     }
 })(RHT || (RHT = {}));
 //# sourceMappingURL=main.js.map

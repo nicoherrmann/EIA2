@@ -175,7 +175,7 @@ namespace RHT {
         }
 
         checkIfHit(_x: number, _y: number): boolean {
-            crc2.lineWidth = 15;
+            crc2.lineWidth = 50;
             crc2.beginPath();
             crc2.moveTo(_x, _y);
             crc2.lineTo(_x - 7, _y + 2);
@@ -196,6 +196,7 @@ namespace RHT {
             crc2.lineTo(_x - 8, _y + 14);
             crc2.moveTo(_x + 8, _y + 12);
             crc2.lineTo(_x - 10, _y + 15);
+            crc2.closePath();
             console.log("bum");
             if (crc2.isPointInStroke(this.x, this.y)) {
                 return true;
@@ -254,7 +255,7 @@ namespace RHT {
         }
 
         getSpeed(): number {
-            return Math.floor(this.dx * this.dy * -12);
+            return Math.floor(this.dx * this.dy * -1 * 200);
         }
 
         drawPath(_x: number, _y: number): void {

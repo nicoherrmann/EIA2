@@ -5,7 +5,7 @@
 	"author": "Nico",
 	"main": "Server.js",
 	"scripts": {
-		"start": "node L08_Database/Server/Server.js"
+		"start": "node RodelhangTerminator/Server/Server.js"
 	},
 	"engines": {
 		"node": "8.10.0"

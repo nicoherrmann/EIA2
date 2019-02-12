@@ -17,8 +17,7 @@ var DatabaseClient;
         let inputs = document.getElementsByTagName("input");
         let query = "command=insert";
         query += "&name=" + inputs[0].value;
-        query += "&firstname=" + inputs[1].value;
-        query += "&matrikel=" + inputs[2].value;
+        query += "&score=" + document.getElementById("endscore").getAttribute("value");
         console.log(query);
         sendRequest(query, handleInsertResponse);
     }

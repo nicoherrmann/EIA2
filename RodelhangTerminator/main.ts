@@ -8,21 +8,36 @@ namespace RHT {
     let childrenArray: children[] = [];
     let snowballs: snowball[] = [];
     let score: number = 0;
+    let timer: number = 60;
+    let helpTimer: number = 25;
+    let snowballReadyCheck: boolean;
 
     function showMainScreen(): void {
         allObjects = [];
         childrenArray = [];
         snowballs = [];
-        
+
         document.getElementsByTagName("canvas")[0].style.display = "none";
         document.getElementById("score").style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("retry").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
+        
+        
     }
 
     function startGame(_event: Event): void {
+        snowballReadyCheck = true;
         score = 0;
+        allObjects = [];
+        childrenArray = [];
+        snowballs = [];
+        timer = 60;
+        helpTimer = 25;
         document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("retry").style.display = "none";
         document.getElementById("score").style.display = "initial";
         document.getElementsByTagName("canvas")[0].style.display = "initial";
         let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
@@ -35,7 +50,7 @@ namespace RHT {
         bgImg = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
 
-        for (let i: number = 0; i < 8; i++) {
+        for (let i: number = 0; i < 4; i++) {
             createChild();
         }
 
@@ -114,18 +129,73 @@ namespace RHT {
     }
 
     function throwSnowball(_event: MouseEvent): void {
-        let x: number = _event.clientX;
-        let y: number = _event.clientY;
-        let ball: snowball = new snowball();
-        ball.x = x;
-        ball.y = y;
-        ball.timer = 25;
-        snowballs.push(ball);
+        if (snowballReadyCheck == true) {
+            snowballReadyCheck = false;
+            let x: number = _event.clientX;
+            let y: number = _event.clientY;
+            let ball: snowball = new snowball();
+            ball.x = x;
+            ball.y = y;
+            ball.timer = 25;
+            snowballs.push(ball);
+        }
     }
 
-    function update(): void {
+    function handleChange(_event: Event): void {
+        let target: HTMLInputElement = <HTMLInputElement>_event.target;
+        target.setAttribute("value", target.value);
+    }
 
+    let address: string = "https://nodeservereia.herokuapp.com/";
+
+    function sendRequestWithCustomData(): void {
+        console.log("requestcustom");
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        let sendString: string = "";
+        sendString += name + ":" + value + "&";
+    }
+    console.log(checkout);
+
+    xhr.open("GET", address + "?" + checkout, true);
+    xhr.addEventListener("readystatechange", handleStateChange);
+    xhr.send();
+}
+
+
+function handleStateChange(_event: ProgressEvent): void {
+    var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+        console.log("response: " + xhr.response);
+    }
+}
+
+function endscreen(): void {
+    document.getElementById("endscore").innerText = score.toString();
+    document.getElementById("endscore").setAttribute("value", score.toString());
+    document.getElementsByTagName("canvas")[0].style.display = "none";
+    document.getElementById("score").style.display = "none";
+    document.getElementsByTagName("div")[0].style.display = "none";
+    document.getElementById("endscreen").style.display = "initial";
+    document.getElementById("retry").style.display = "initial";
+    document.getElementById("retry").addEventListener("click", startGame);
+    
+    document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
+    
+    document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
+
+}
+
+function update(): void {
+    if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
         window.setTimeout(update, 1000 / 25);
+
+        if (helpTimer == 0) {
+            timer--;
+            helpTimer = 26;
+            snowballReadyCheck = true;
+        }
+        helpTimer--;
         crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         crc2.putImageData(bgImg, 0, 0);
         sun.draw();
@@ -167,7 +237,13 @@ namespace RHT {
 
             }
         }
-        
-        document.getElementById("score").innerText = score.toString();
+
+        document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
+        if (snowballs.length > 19) {
+            if (snowballs[19].timer == 0) {
+                endscreen();
+            }
+        }
     }
+}
 }     
