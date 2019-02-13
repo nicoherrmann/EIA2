@@ -19,8 +19,10 @@ var RHT;
         document.getElementById("score").style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("retry").style.display = "none";
+        document.getElementById("highscore").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
+        document.getElementById("highscores").addEventListener("click", highscores);
     }
     function startGame(_event) {
         snowballReadyCheck = true;
@@ -33,6 +35,7 @@ var RHT;
         document.getElementsByTagName("div")[0].style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("retry").style.display = "none";
+        document.getElementById("highscore").style.display = "none";
         document.getElementById("score").style.display = "initial";
         document.getElementsByTagName("canvas")[0].style.display = "initial";
         let canvas = document.getElementsByTagName("canvas")[0];
@@ -143,6 +146,17 @@ var RHT;
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
         document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
     }
+    function highscores() {
+        document.getElementById("endscore").innerText = score.toString();
+        document.getElementById("endscore").setAttribute("value", score.toString());
+        document.getElementsByTagName("canvas")[0].style.display = "none";
+        document.getElementById("score").style.display = "none";
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("highscore").style.display = "initial";
+        document.getElementById("retry").style.display = "initial";
+        document.getElementById("retry").addEventListener("click", startGame);
+    }
     function update() {
         if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
             window.setTimeout(update, 1000 / 25);
@@ -188,9 +202,13 @@ var RHT;
             }
             document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
             if (snowballs.length > 19) {
+                console.log(timer);
                 if (snowballs[19].timer == 0) {
                     endscreen();
                 }
+            }
+            if (timer == 0) {
+                endscreen();
             }
         }
     }

@@ -21,8 +21,10 @@ namespace RHT {
         document.getElementById("score").style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("retry").style.display = "none";
+        document.getElementById("highscore").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
+        document.getElementById("highscores").addEventListener("click", highscores);
 
 
     }
@@ -38,6 +40,7 @@ namespace RHT {
         document.getElementsByTagName("div")[0].style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("retry").style.display = "none";
+        document.getElementById("highscore").style.display = "none";
         document.getElementById("score").style.display = "initial";
         document.getElementsByTagName("canvas")[0].style.display = "initial";
         let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
@@ -184,6 +187,19 @@ namespace RHT {
         document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
 
     }
+    
+    function highscores(): void {
+        document.getElementById("endscore").innerText = score.toString();
+        document.getElementById("endscore").setAttribute("value", score.toString());
+        document.getElementsByTagName("canvas")[0].style.display = "none";
+        document.getElementById("score").style.display = "none";
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "none";
+        document.getElementById("highscore").style.display = "initial";
+        
+        document.getElementById("retry").style.display = "initial";
+        document.getElementById("retry").addEventListener("click", startGame);
+    }
 
     function update(): void {
         if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
@@ -235,10 +251,14 @@ namespace RHT {
 
             document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
             if (snowballs.length > 19) {
+                console.log(timer);
                 if (snowballs[19].timer == 0) {
                     endscreen();
                 }
             }
+            if (timer == 0) {
+                endscreen();
+                }
         }
     }
 }     

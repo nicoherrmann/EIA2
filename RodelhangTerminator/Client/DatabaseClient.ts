@@ -8,12 +8,10 @@ namespace DatabaseClient {
 
     function init(_event: Event): void {
         console.log("Init");
-        let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("insert");
-        let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
+        let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("button");
+        let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("highscores");
         insertButton.addEventListener("click", insert);
         refreshButton.addEventListener("click", refresh);
-        document.getElementById("matrikelsearch").addEventListener("input", change);
-        document.getElementById("buttonsearch").addEventListener("click", search);
     }
 
     function insert(_event: Event): void {
@@ -32,8 +30,8 @@ namespace DatabaseClient {
     function change(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
         target.setAttribute("value", target.value)
-        }
-    
+    }
+
 
     function search(_event: Event): void {
         let matrikel: number = parseInt(document.getElementById("matrikelsearch").getAttribute("value"));
@@ -68,13 +66,37 @@ namespace DatabaseClient {
         }
     }
 
+    function playerDataSort(_a: playerData, _b: playerData): number {
+        let returnNumber: number;
+        if (_a.score > _b.score) {
+            returnNumber = -1;
+        }
+        else if (_a.score < _b.score) {
+            returnNumber = 1;
+        }
+        else {
+            returnNumber = 0;
+        }
+        return returnNumber;
+
+    }
+
     function handleFindResponse(_event: ProgressEvent): void {
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            let output: HTMLTextAreaElement = document.getElementsByTagName("textarea")[0];
-            output.value = xhr.response;
-            let responseAsJson: JSON = JSON.parse(xhr.response);
-            console.log(responseAsJson);
+            let output: HTMLElement = document.getElementById("scores");
+            let scores: number[] = [];
+            let responseAsJson: playerData[] = JSON.parse(xhr.response);
+            responseAsJson.sort(playerDataSort);
+            for (let i: number = 0; i < responseAsJson.length; i++) {
+                output.innerHTML += "<h3>"+ responseAsJson[i].name + " | Score:" + responseAsJson[i].score + "<br>"; 
+                /* if (responseAsJson[i].score > maxNumber) {
+                     maxNumber = responseAsJson[i].score;
+                 } 
+                 scores.push(responseAsJson[i].score);*/
+            }
+            console.log(Math.max(...scores));
+
         }
     }
 }
