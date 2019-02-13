@@ -158,7 +158,7 @@ var RHT;
             RHT.crc2.lineTo(_x - 6, _y + 4);
             RHT.crc2.moveTo(_x, _y);
             RHT.crc2.lineTo(_x, _y - 15);
-            RHT.crc2.arc(_x, _y - 15, 2, 0, 2 * Math.PI);
+            RHT.crc2.arc(_x, _y - 15, 15, 0, 2 * Math.PI);
             RHT.crc2.moveTo(_x, _y - 10);
             RHT.crc2.lineTo(_x - 6, _y + 2);
             RHT.crc2.moveTo(_x, _y - 12);

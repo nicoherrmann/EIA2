@@ -183,7 +183,7 @@ namespace RHT {
             crc2.lineTo(_x - 6, _y + 4);
             crc2.moveTo(_x, _y);
             crc2.lineTo(_x, _y - 15);
-            crc2.arc(_x, _y - 15, 2, 0, 2 * Math.PI);
+            crc2.arc(_x, _y - 15, 15, 0, 2 * Math.PI);
             crc2.moveTo(_x, _y - 10);
             crc2.lineTo(_x - 6, _y + 2);
             crc2.moveTo(_x, _y - 12);
@@ -198,7 +198,7 @@ namespace RHT {
             crc2.lineTo(_x - 10, _y + 15);
             crc2.closePath();
             console.log("bum");
-            if (crc2.isPointInStroke(this.x, this.y)) {
+            if (crc2.isPointInPath(this.x, this.y)) {
                 return true;
             }
             else {

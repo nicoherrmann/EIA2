@@ -3,7 +3,7 @@ namespace RHT {
     export let crc2: CanvasRenderingContext2D;
     let sun: Sun;
     let bg: Background;
-    let bgImg: any;
+    let bgImg: ImageData;
     let allObjects: baseStats[] = [];
     let childrenArray: children[] = [];
     let snowballs: snowball[] = [];
@@ -23,8 +23,8 @@ namespace RHT {
         document.getElementById("retry").style.display = "none";
         document.getElementsByTagName("div")[0].style.display = "initial";
         document.getElementById("start").addEventListener("click", startGame);
-        
-        
+
+
     }
 
     function startGame(_event: Event): void {
@@ -47,6 +47,10 @@ namespace RHT {
 
         bg = new Background();
         bg.draw();
+        sun = new Sun();
+        sun.x = Math.random() * crc2.canvas.width;
+        sun.y = Math.random() * 50;
+        sun.color = "#fffa00";
         bgImg = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
 
@@ -107,10 +111,7 @@ namespace RHT {
 
 
 
-        sun = new Sun();
-        sun.x = Math.random() * crc2.canvas.width;
-        sun.y = Math.random() * 50;
-        sun.color = "#fffa00";
+
 
         update();
 
@@ -152,82 +153,76 @@ namespace RHT {
         console.log("requestcustom");
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         let sendString: string = "";
-        sendString += name + ":" + value + "&";
+        sendString += "name:" + document.getElementById("textInput").getAttribute("value") + "&" + "score:" + score;
+
+        xhr.open("GET", address + "?" + sendString, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
     }
-    console.log(checkout);
-
-    xhr.open("GET", address + "?" + checkout, true);
-    xhr.addEventListener("readystatechange", handleStateChange);
-    xhr.send();
-}
 
 
-function handleStateChange(_event: ProgressEvent): void {
-    var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-        console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
-        console.log("response: " + xhr.response);
+    function handleStateChange(_event: ProgressEvent): void {
+        var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+        }
     }
-}
 
-function endscreen(): void {
-    document.getElementById("endscore").innerText = score.toString();
-    document.getElementById("endscore").setAttribute("value", score.toString());
-    document.getElementsByTagName("canvas")[0].style.display = "none";
-    document.getElementById("score").style.display = "none";
-    document.getElementsByTagName("div")[0].style.display = "none";
-    document.getElementById("endscreen").style.display = "initial";
-    document.getElementById("retry").style.display = "initial";
-    document.getElementById("retry").addEventListener("click", startGame);
-    
-    document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
-    
-    document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
+    function endscreen(): void {
+        document.getElementById("endscore").innerText = score.toString();
+        document.getElementById("endscore").setAttribute("value", score.toString());
+        document.getElementsByTagName("canvas")[0].style.display = "none";
+        document.getElementById("score").style.display = "none";
+        document.getElementsByTagName("div")[0].style.display = "none";
+        document.getElementById("endscreen").style.display = "initial";
+        document.getElementById("retry").style.display = "initial";
+        document.getElementById("retry").addEventListener("click", startGame);
 
-}
+        document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
 
-function update(): void {
-    if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
-        window.setTimeout(update, 1000 / 25);
+        document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
 
-        if (helpTimer == 0) {
-            timer--;
-            helpTimer = 26;
-            snowballReadyCheck = true;
-        }
-        helpTimer--;
-        crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-        crc2.putImageData(bgImg, 0, 0);
-        sun.draw();
-        for (let i: number = 0; i < allObjects.length; i++) {
-            allObjects[i].move();
-            allObjects[i].draw();
-        }
-        for (let i: number = 0; i < childrenArray.length; i++) {
-            childrenArray[i].move();
-            childrenArray[i].draw();
-            if (childrenArray[i].x < -10 || childrenArray[i].y > (crc2.canvas.height + 10)) {
-                childrenArray.splice(i, 1);
-                createChild();
-                console.log("length:" + childrenArray.length);
+    }
+
+    function update(): void {
+        if (document.getElementsByTagName("canvas")[0].getAttribute("style") == "display: initial;") {
+            window.setTimeout(update, 1000 / 25);
+
+            if (helpTimer == 0) {
+                timer--;
+                helpTimer = 26;
+                snowballReadyCheck = true;
             }
-        }
-
-        for (let i: number = 0; i < snowballs.length; i++) {
-            if (snowballs[i].timer > 0) {
-                snowballs[i].draw();
-                //snowballs[i].checkIfHit(childrenArray[i].x, childrenArray[i].y);
+            helpTimer--;
+            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            crc2.putImageData(bgImg, 0, 0);
+            sun.draw();
+            for (let i: number = 0; i < allObjects.length; i++) {
+                allObjects[i].move();
+                allObjects[i].draw();
             }
-            else {
-                if (snowballs[i].timer == 0) {
+            for (let i: number = 0; i < childrenArray.length; i++) {
+                childrenArray[i].move();
+                childrenArray[i].draw();
+                if (childrenArray[i].x < -10 || childrenArray[i].y > (crc2.canvas.height + 10)) {
+                    childrenArray.splice(i, 1);
+                    createChild();
+                    console.log("length:" + childrenArray.length);
+                }
+            }
+            for (let i: number = 0; i < snowballs.length; i++) {
+                if (snowballs[i].timer > 0) {
                     snowballs[i].draw();
-                    console.log("timer:" + snowballs[i].timer);
+                    //snowballs[i].checkIfHit(childrenArray[i].x, childrenArray[i].y);
+                }
+                else if (snowballs[i].timer == 0) {
+                    snowballs[i].draw();
                     for (let i2: number = 0; i2 < childrenArray.length; i2++) {
-                        console.log("TASDGFSDF:" + children.length);
                         if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
                             childrenArray[i2].state = "dead";
                             score += childrenArray[i2].getSpeed() * 10;
-                            console.log("score:" + score);
+                            console.log("hit");
                         }
                         else {
                             console.log("else");
@@ -236,14 +231,14 @@ function update(): void {
                 }
 
             }
-        }
 
-        document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
-        if (snowballs.length > 19) {
-            if (snowballs[19].timer == 0) {
-                endscreen();
+
+            document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
+            if (snowballs.length > 19) {
+                if (snowballs[19].timer == 0) {
+                    endscreen();
+                }
             }
         }
     }
-}
 }     

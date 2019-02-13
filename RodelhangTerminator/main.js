@@ -40,6 +40,10 @@ var RHT;
         RHT.crc2 = canvas.getContext("2d");
         bg = new RHT.Background();
         bg.draw();
+        sun = new RHT.Sun();
+        sun.x = Math.random() * RHT.crc2.canvas.width;
+        sun.y = Math.random() * 50;
+        sun.color = "#fffa00";
         bgImg = RHT.crc2.getImageData(0, 0, RHT.crc2.canvas.width, RHT.crc2.canvas.height);
         for (let i = 0; i < 4; i++) {
             createChild();
@@ -83,10 +87,6 @@ var RHT;
             snowflake.color = "#ffffff";
             allObjects.push(snowflake);
         }
-        sun = new RHT.Sun();
-        sun.x = Math.random() * RHT.crc2.canvas.width;
-        sun.y = Math.random() * 50;
-        sun.color = "#fffa00";
         update();
     }
     function createChild() {
@@ -110,19 +110,17 @@ var RHT;
             snowballs.push(ball);
         }
     }
+    function handleChange(_event) {
+        let target = _event.target;
+        target.setAttribute("value", target.value);
+    }
     let address = "https://nodeservereia.herokuapp.com/";
     function sendRequestWithCustomData() {
         console.log("requestcustom");
         let xhr = new XMLHttpRequest();
-        let co = document.getElementById("checkout");
-        let checkout = "";
-        for (let i = 0; i < co.childNodes.length; i++) {
-            let value = document.getElementsByTagName("p")[i].getAttribute("value");
-            let name = document.getElementsByTagName("p")[i].getAttribute("name");
-            checkout += name + ":" + value + "&";
-        }
-        console.log(checkout);
-        xhr.open("GET", address + "?" + checkout, true);
+        let sendString = "";
+        sendString += "name:" + document.getElementById("textInput").getAttribute("value") + "&" + "score:" + score;
+        xhr.open("GET", address + "?" + sendString, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
     }
@@ -142,6 +140,7 @@ var RHT;
         document.getElementById("endscreen").style.display = "initial";
         document.getElementById("retry").style.display = "initial";
         document.getElementById("retry").addEventListener("click", startGame);
+        document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
         document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
     }
     function update() {
@@ -173,20 +172,16 @@ var RHT;
                 if (snowballs[i].timer > 0) {
                     snowballs[i].draw();
                 }
-                else {
-                    if (snowballs[i].timer == 0) {
-                        snowballs[i].draw();
-                        console.log("timer:" + snowballs[i].timer);
-                        for (let i2 = 0; i2 < childrenArray.length; i2++) {
-                            console.log("TASDGFSDF:" + RHT.children.length);
-                            if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
-                                childrenArray[i2].state = "dead";
-                                score += childrenArray[i2].getSpeed() * 10;
-                                console.log("score:" + score);
-                            }
-                            else {
-                                console.log("else");
-                            }
+                else if (snowballs[i].timer == 0) {
+                    snowballs[i].draw();
+                    for (let i2 = 0; i2 < childrenArray.length; i2++) {
+                        if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
+                            childrenArray[i2].state = "dead";
+                            score += childrenArray[i2].getSpeed() * 10;
+                            console.log("hit");
+                        }
+                        else {
+                            console.log("else");
                         }
                     }
                 }
