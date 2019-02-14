@@ -127,17 +127,13 @@ namespace RHT {
     export class Snowflakes extends movement {
         draw(): void {
             crc2.strokeStyle = "#ffffff";
+            crc2.fillStyle = "#ffffff";
             crc2.lineWidth = 2;
             crc2.beginPath();
-            crc2.moveTo(this.x, this.y - 4);
-            crc2.lineTo(this.x, this.y + 4);
+            crc2.arc(this.x, this.y, 2, 0, 2 * Math.PI);
             crc2.closePath
             crc2.stroke();
-            crc2.beginPath();
-            crc2.moveTo(this.x - 4, this.y);
-            crc2.lineTo(this.x + 4, this.y);
-            crc2.closePath
-            crc2.stroke();
+            crc2.fill();
         }
         move(): void {
             if (this.y >= crc2.canvas.height) {

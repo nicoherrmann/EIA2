@@ -110,17 +110,13 @@ var RHT;
     class Snowflakes extends movement {
         draw() {
             RHT.crc2.strokeStyle = "#ffffff";
+            RHT.crc2.fillStyle = "#ffffff";
             RHT.crc2.lineWidth = 2;
             RHT.crc2.beginPath();
-            RHT.crc2.moveTo(this.x, this.y - 4);
-            RHT.crc2.lineTo(this.x, this.y + 4);
+            RHT.crc2.arc(this.x, this.y, 2, 0, 2 * Math.PI);
             RHT.crc2.closePath;
             RHT.crc2.stroke();
-            RHT.crc2.beginPath();
-            RHT.crc2.moveTo(this.x - 4, this.y);
-            RHT.crc2.lineTo(this.x + 4, this.y);
-            RHT.crc2.closePath;
-            RHT.crc2.stroke();
+            RHT.crc2.fill();
         }
         move() {
             if (this.y >= RHT.crc2.canvas.height) {
