@@ -215,7 +215,7 @@ namespace RHT {
             helpTimer--;
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             crc2.putImageData(bgImg, 0, 0);
-
+            
             for (let i: number = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
                 childrenArray[i].draw();
