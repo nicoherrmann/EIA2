@@ -47,6 +47,7 @@ var RHT;
         sun.x = Math.random() * RHT.crc2.canvas.width;
         sun.y = Math.random() * 50;
         sun.color = "#fffa00";
+        sun.draw();
         for (let i = 0; i < 6; i++) {
             RHT.crc2.beginPath();
             RHT.crc2.moveTo(0, RHT.crc2.canvas.height - 100);
@@ -169,7 +170,6 @@ var RHT;
             helpTimer--;
             RHT.crc2.clearRect(0, 0, RHT.crc2.canvas.width, RHT.crc2.canvas.height);
             RHT.crc2.putImageData(bgImg, 0, 0);
-            sun.draw();
             for (let i = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
                 childrenArray[i].draw();

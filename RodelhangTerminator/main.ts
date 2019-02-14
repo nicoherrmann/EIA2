@@ -54,7 +54,7 @@ namespace RHT {
         sun.x = Math.random() * crc2.canvas.width;
         sun.y = Math.random() * 50;
         sun.color = "#fffa00";
-
+        sun.draw();
         for (let i: number = 0; i < 6; i++) {
             crc2.beginPath();
             crc2.moveTo(0, crc2.canvas.height - 100);
@@ -131,7 +131,6 @@ namespace RHT {
         child.dx = Math.random() * (- 3);
         child.dy = child.dx * -0.25;
         child.state = "ridedown";
-
         childrenArray.push(child);
     }
 
@@ -216,7 +215,6 @@ namespace RHT {
             helpTimer--;
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             crc2.putImageData(bgImg, 0, 0);
-            sun.draw();
 
             for (let i: number = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
