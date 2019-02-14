@@ -65,8 +65,8 @@ namespace RHT {
             crc2.beginPath();
             crc2.moveTo(0, crc2.canvas.height - 100);
             crc2.lineTo(crc2.canvas.width, 150);
-            crc2.lineTo(crc2.canvas.width, crc2.canvas.height);
-            crc2.lineTo(0, crc2.canvas.height);
+            crc2.lineTo(crc2.canvas.width, 180);
+            crc2.lineTo(0, crc2.canvas.height - 70);
             crc2.closePath();
             let x: number = Math.random() * crc2.canvas.width;
             let y: number = Math.random() * crc2.canvas.height;
@@ -124,7 +124,7 @@ namespace RHT {
     function createChild(): void {
         let child: children = new children();
         child.x = crc2.canvas.width;
-        child.y = Math.random() * crc2.canvas.height + 150;
+        child.y = (Math.random() * 50) + 150;
         child.dx = (Math.random() - 10) / 7;
         child.dy = (Math.random() + 2) / 5;
         child.state = "ridedown";
@@ -187,7 +187,7 @@ namespace RHT {
 
         document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
     }
-    
+
     function highscores(): void {
         document.getElementById("endscore").innerText = score.toString();
         document.getElementById("endscore").setAttribute("value", score.toString());
@@ -196,7 +196,7 @@ namespace RHT {
         document.getElementsByTagName("div")[0].style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("highscore").style.display = "initial";
-            
+
         document.getElementById("retry").style.display = "initial";
         document.getElementById("retry").addEventListener("click", startGame);
     }
@@ -221,7 +221,7 @@ namespace RHT {
             for (let i: number = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
                 childrenArray[i].draw();
-                if (childrenArray[i].x < -10 || childrenArray[i].y > (crc2.canvas.height + 10)) {
+                if (childrenArray[i].state == "dead" && childrenArray[i].x < -10 || childrenArray[i].y > (crc2.canvas.height + 10)) {
                     childrenArray.splice(i, 1);
                     createChild();
                     console.log("length:" + childrenArray.length);
@@ -236,13 +236,15 @@ namespace RHT {
                     snowballs[i].draw();
                     for (let i2: number = 0; i2 < childrenArray.length; i2++) {
                         if (snowballs[i].checkIfHitDown(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
-                            childrenArray[i2].state = "dead";
+
                             score += childrenArray[i2].getSpeed() * 10;
+                            childrenArray[i2].state = "dead";
                             console.log("hit");
                         }
                         if (snowballs[i].checkIfHitUp(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "pullup") {
-                            childrenArray[i2].state = "dead";
+
                             score += childrenArray[i2].getSpeed() * 10;
+                            childrenArray[i2].state = "dead";
                             console.log("hit");
                         }
                         else {
@@ -263,7 +265,7 @@ namespace RHT {
             }
             if (timer == 0) {
                 endscreen();
-                }
+            }
         }
     }
 }     

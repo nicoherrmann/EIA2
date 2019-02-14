@@ -55,8 +55,8 @@ var RHT;
             RHT.crc2.beginPath();
             RHT.crc2.moveTo(0, RHT.crc2.canvas.height - 100);
             RHT.crc2.lineTo(RHT.crc2.canvas.width, 150);
-            RHT.crc2.lineTo(RHT.crc2.canvas.width, RHT.crc2.canvas.height);
-            RHT.crc2.lineTo(0, RHT.crc2.canvas.height);
+            RHT.crc2.lineTo(RHT.crc2.canvas.width, 180);
+            RHT.crc2.lineTo(0, RHT.crc2.canvas.height - 70);
             RHT.crc2.closePath();
             let x = Math.random() * RHT.crc2.canvas.width;
             let y = Math.random() * RHT.crc2.canvas.height;
@@ -95,7 +95,7 @@ var RHT;
     function createChild() {
         let child = new RHT.children();
         child.x = RHT.crc2.canvas.width;
-        child.y = Math.random() * RHT.crc2.canvas.height + 150;
+        child.y = (Math.random() * 50) + 150;
         child.dx = (Math.random() - 10) / 7;
         child.dy = (Math.random() + 2) / 5;
         child.state = "ridedown";
@@ -177,7 +177,7 @@ var RHT;
             for (let i = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
                 childrenArray[i].draw();
-                if (childrenArray[i].x < -10 || childrenArray[i].y > (RHT.crc2.canvas.height + 10)) {
+                if (childrenArray[i].state == "dead" && childrenArray[i].x < -10 || childrenArray[i].y > (RHT.crc2.canvas.height + 10)) {
                     childrenArray.splice(i, 1);
                     createChild();
                     console.log("length:" + childrenArray.length);
@@ -191,13 +191,13 @@ var RHT;
                     snowballs[i].draw();
                     for (let i2 = 0; i2 < childrenArray.length; i2++) {
                         if (snowballs[i].checkIfHitDown(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
-                            childrenArray[i2].state = "dead";
                             score += childrenArray[i2].getSpeed() * 10;
+                            childrenArray[i2].state = "dead";
                             console.log("hit");
                         }
                         if (snowballs[i].checkIfHitUp(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "pullup") {
-                            childrenArray[i2].state = "dead";
                             score += childrenArray[i2].getSpeed() * 10;
+                            childrenArray[i2].state = "dead";
                             console.log("hit");
                         }
                         else {

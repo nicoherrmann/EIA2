@@ -151,7 +151,7 @@ var RHT;
             }
         }
         checkIfHitDown(_x, _y) {
-            RHT.crc2.lineWidth = 50;
+            RHT.crc2.lineWidth = 5;
             RHT.crc2.beginPath();
             RHT.crc2.moveTo(_x, _y);
             RHT.crc2.lineTo(_x - 7, _y + 2);
@@ -184,25 +184,25 @@ var RHT;
         checkIfHitUp(_x, _y) {
             RHT.crc2.lineWidth = 50;
             RHT.crc2.beginPath();
-            RHT.crc2.moveTo(this.x, this.y);
-            RHT.crc2.lineTo(this.x - 2, this.y + 7);
-            RHT.crc2.moveTo(this.x, this.y);
-            RHT.crc2.lineTo(this.x + 1, this.y + 8);
-            RHT.crc2.moveTo(this.x, this.y);
-            RHT.crc2.lineTo(this.x, this.y - 15);
-            RHT.crc2.arc(this.x, this.y - 15, 2, 0, 2 * Math.PI);
-            RHT.crc2.moveTo(this.x, this.y - 10);
-            RHT.crc2.lineTo(this.x - 6, this.y + 2);
-            RHT.crc2.moveTo(this.x, this.y - 12);
-            RHT.crc2.lineTo(this.x - 7, this.y - 2);
-            RHT.crc2.moveTo(this.x - 8, this.y + 5);
-            RHT.crc2.lineTo(this.x - 28, this.y + 7);
-            RHT.crc2.moveTo(this.x - 12, this.y + 6);
-            RHT.crc2.lineTo(this.x - 15, this.y + 12);
-            RHT.crc2.moveTo(this.x - 22, this.y + 7);
-            RHT.crc2.lineTo(this.x - 25, this.y + 14);
-            RHT.crc2.moveTo(this.x - 8, this.y + 12);
-            RHT.crc2.lineTo(this.x - 30, this.y + 15);
+            RHT.crc2.moveTo(_x, _y);
+            RHT.crc2.lineTo(_x - 2, _y + 7);
+            RHT.crc2.moveTo(_x, _y);
+            RHT.crc2.lineTo(_x + 1, _y + 8);
+            RHT.crc2.moveTo(_x, _y);
+            RHT.crc2.lineTo(_x, _y - 15);
+            RHT.crc2.arc(_x, _y - 15, 15, 0, 2 * Math.PI);
+            RHT.crc2.moveTo(_x, _y - 10);
+            RHT.crc2.lineTo(_x - 6, _y + 2);
+            RHT.crc2.moveTo(_x, _y - 12);
+            RHT.crc2.lineTo(_x - 7, _y - 2);
+            RHT.crc2.moveTo(_x - 8, _y + 5);
+            RHT.crc2.lineTo(_x - 28, _y + 7);
+            RHT.crc2.moveTo(_x - 12, _y + 6);
+            RHT.crc2.lineTo(_x - 15, _y + 12);
+            RHT.crc2.moveTo(_x - 22, _y + 7);
+            RHT.crc2.lineTo(_x - 25, _y + 14);
+            RHT.crc2.moveTo(_x - 8, _y + 12);
+            RHT.crc2.lineTo(_x - 30, _y + 15);
             RHT.crc2.closePath();
             console.log("bum");
             if (RHT.crc2.isPointInPath(this.x, this.y)) {
@@ -217,16 +217,16 @@ var RHT;
     class children extends movement {
         draw() {
             if (this.state == "ridedown") {
-                this.drawChildDOWN();
+                this.drawChildDown();
             }
             if (this.state == "dead") {
-                this.drawChildDEAD();
+                this.drawChildDead();
             }
             if (this.state == "pullup") {
-                this.drawChildUP();
+                this.drawChildUp();
             }
         }
-        drawChildDOWN() {
+        drawChildDead() {
             RHT.crc2.fillStyle = "#000000";
             RHT.crc2.strokeStyle = "#000000";
             RHT.crc2.lineWidth = 1;
@@ -243,7 +243,7 @@ var RHT;
             RHT.crc2.fill();
             RHT.crc2.stroke();
         }
-        drawChildDEAD() {
+        drawChildDown() {
             RHT.crc2.fillStyle = "#000000";
             RHT.crc2.strokeStyle = "#000000";
             RHT.crc2.lineWidth = 1;
@@ -251,7 +251,7 @@ var RHT;
             RHT.crc2.fill();
             RHT.crc2.stroke();
         }
-        drawChildUP() {
+        drawChildUp() {
             RHT.crc2.fillStyle = "#000000";
             RHT.crc2.strokeStyle = "#000000";
             RHT.crc2.lineWidth = 1;
@@ -280,11 +280,30 @@ var RHT;
             RHT.crc2.stroke();
         }
         move() {
-            this.x += this.dx;
-            this.y += this.dy;
+            if (this.state == "ridedown") {
+                if (this.x < 0 || this.y > RHT.crc2.canvas.height) {
+                    this.state = "pullup";
+                }
+            }
+            if (this.state == "pullup" && this.x > RHT.crc2.canvas.width) {
+                this.state = "ridedown";
+            }
+            if (this.state == "pullup") {
+                this.x -= this.dx;
+                this.y -= this.dy;
+            }
+            if (this.state == "ridedown" || this.state == "dead") {
+                this.x += this.dx;
+                this.y += this.dy;
+            }
         }
         getSpeed() {
-            return Math.floor(this.dx * this.dy * -1 * 200);
+            if (this.state == "ridedown") {
+                return Math.floor(this.dx * this.dy * -1 * 200);
+            }
+            if (this.state == "pullup") {
+                return Math.floor(this.dx * this.dy * -1 * 100);
+            }
         }
         drawPath(_x, _y) {
             RHT.crc2.beginPath();

@@ -30,7 +30,9 @@ p {
 }
 
 #start {
-	
+	border: solid 3px darkgrey;
+	border-left: solid 5px darkred;
+	border-right: solid 5px darkred;
 }
 
 #button {
@@ -51,6 +53,9 @@ p {
 }
 
 #retry {
+	border: solid 3px darkgrey;
+	border-left: solid 5px darkred;
+	border-right: solid 5px darkred;
 	position: absolute;
 	left: 50px;
 	top: 50px;

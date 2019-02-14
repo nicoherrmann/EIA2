@@ -176,7 +176,7 @@ namespace RHT {
         }
 
         checkIfHitDown(_x: number, _y: number): boolean {
-            crc2.lineWidth = 50;
+            crc2.lineWidth = 5;
             crc2.beginPath();
             crc2.moveTo(_x, _y);
             crc2.lineTo(_x - 7, _y + 2);
@@ -206,31 +206,31 @@ namespace RHT {
                 return false;
             }
         }
-        
+
         checkIfHitUp(_x: number, _y: number): boolean {
             crc2.lineWidth = 50;
             crc2.beginPath();
-            crc2.moveTo(this.x, this.y);
-            crc2.lineTo(this.x - 2, this.y + 7);
-            crc2.moveTo(this.x, this.y);
-            crc2.lineTo(this.x + 1, this.y + 8);
-            crc2.moveTo(this.x, this.y);
-            crc2.lineTo(this.x, this.y - 15);
-            crc2.arc(this.x, this.y - 15, 2, 0, 2 * Math.PI);
-            crc2.moveTo(this.x, this.y - 10);
-            crc2.lineTo(this.x - 6, this.y + 2);
-            crc2.moveTo(this.x, this.y - 12);
-            crc2.lineTo(this.x - 7, this.y - 2);
+            crc2.moveTo(_x, _y);
+            crc2.lineTo(_x - 2, _y + 7);
+            crc2.moveTo(_x, _y);
+            crc2.lineTo(_x + 1, _y + 8);
+            crc2.moveTo(_x, _y);
+            crc2.lineTo(_x, _y - 15);
+            crc2.arc(_x, _y - 15, 15, 0, 2 * Math.PI);
+            crc2.moveTo(_x, _y - 10);
+            crc2.lineTo(_x - 6, _y + 2);
+            crc2.moveTo(_x, _y - 12);
+            crc2.lineTo(_x - 7, _y - 2);
 
 
-            crc2.moveTo(this.x - 8, this.y + 5);
-            crc2.lineTo(this.x - 28, this.y + 7);
-            crc2.moveTo(this.x - 12, this.y + 6);
-            crc2.lineTo(this.x - 15, this.y + 12);
-            crc2.moveTo(this.x - 22, this.y + 7);
-            crc2.lineTo(this.x - 25, this.y + 14);
-            crc2.moveTo(this.x - 8, this.y + 12);
-            crc2.lineTo(this.x - 30, this.y + 15);
+            crc2.moveTo(_x - 8, _y + 5);
+            crc2.lineTo(_x - 28, _y + 7);
+            crc2.moveTo(_x - 12, _y + 6);
+            crc2.lineTo(_x - 15, _y + 12);
+            crc2.moveTo(_x - 22, _y + 7);
+            crc2.lineTo(_x - 25, _y + 14);
+            crc2.moveTo(_x - 8, _y + 12);
+            crc2.lineTo(_x - 30, _y + 15);
             crc2.closePath();
             console.log("bum");
             if (crc2.isPointInPath(this.x, this.y)) {
@@ -240,28 +240,28 @@ namespace RHT {
                 return false;
             }
         }
-        
-        
-        
-        
-        
+
+
+
+
+
     }
 
     export class children extends movement {
         state: string;
         draw(): void {
             if (this.state == "ridedown") {
-                this.drawChildDOWN();
+                this.drawChildDown();
             }
             if (this.state == "dead") {
-                this.drawChildDEAD();
+                this.drawChildDead();
             }
             if (this.state == "pullup") {
-                this.drawChildUP();
+                this.drawChildUp();
             }
 
         }
-        drawChildDOWN(): void {
+        drawChildDead(): void {
             crc2.fillStyle = "#000000";
             crc2.strokeStyle = "#000000";
             crc2.lineWidth = 1;
@@ -281,7 +281,7 @@ namespace RHT {
             crc2.stroke();
         }
 
-        drawChildDEAD(): void {
+        drawChildDown(): void {
             crc2.fillStyle = "#000000";
             crc2.strokeStyle = "#000000";
             crc2.lineWidth = 1;
@@ -289,8 +289,8 @@ namespace RHT {
             crc2.fill();
             crc2.stroke();
         }
-        
-        drawChildUP(): void {
+
+        drawChildUp(): void {
             crc2.fillStyle = "#000000";
             crc2.strokeStyle = "#000000";
             crc2.lineWidth = 1;
@@ -325,13 +325,33 @@ namespace RHT {
 
 
         move(): void {
-            this.x += this.dx;
-            this.y += this.dy;
+            if (this.state == "ridedown") {
+                if (this.x < 0 || this.y > crc2.canvas.height) {
+                    this.state = "pullup";
+                }
+            }
+            if (this.state == "pullup" && this.x > crc2.canvas.width) {
+                this.state = "ridedown";
+            }
+
+            if (this.state == "pullup") {
+                this.x -= this.dx;
+                this.y -= this.dy;
+            }
+            if (this.state == "ridedown" || this.state == "dead") {
+                this.x += this.dx;
+                this.y += this.dy;
+            }
 
         }
 
         getSpeed(): number {
-            return Math.floor(this.dx * this.dy * -1 * 200);
+            if (this.state == "ridedown") {
+                return Math.floor(this.dx * this.dy * -1 * 200);
+            }
+            if (this.state == "pullup") {
+                return Math.floor(this.dx * this.dy * -1 * 100);
+            }
         }
 
         drawPath(_x: number, _y: number): void {
