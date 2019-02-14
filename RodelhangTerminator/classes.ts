@@ -335,8 +335,8 @@ namespace RHT {
             }
 
             if (this.state == "pullup") {
-                this.x -= this.dx;
-                this.y -= this.dy;
+                this.x -= (this.dx / 2);
+                this.y -= (this.dy / 2);
             }
             if (this.state == "ridedown" || this.state == "dead") {
                 this.x += this.dx;

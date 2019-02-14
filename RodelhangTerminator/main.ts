@@ -54,13 +54,7 @@ namespace RHT {
         sun.x = Math.random() * crc2.canvas.width;
         sun.y = Math.random() * 50;
         sun.color = "#fffa00";
-        bgImg = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
-
-
-        for (let i: number = 0; i < 4; i++) {
-            createChild();
-        }
-
+        
         for (let i: number = 0; i < 6; i++) {
             crc2.beginPath();
             crc2.moveTo(0, crc2.canvas.height - 100);
@@ -79,7 +73,7 @@ namespace RHT {
                 tree.color = "#9c6012";
                 tree.color2 = "#1bb00f";
 
-                allObjects.push(tree);
+                tree.draw();
 
 
             }
@@ -88,6 +82,15 @@ namespace RHT {
                 i--;
             }
         }
+        
+        bgImg = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+
+        for (let i: number = 0; i < 4; i++) {
+            createChild();
+        }
+
+        
         for (let i: number = 0; i < 6; i++) {
             let cloud: Cloud = new Cloud();
             cloud.x = Math.random() * crc2.canvas.width;
@@ -214,10 +217,7 @@ namespace RHT {
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             crc2.putImageData(bgImg, 0, 0);
             sun.draw();
-            for (let i: number = 0; i < allObjects.length; i++) {
-                allObjects[i].move();
-                allObjects[i].draw();
-            }
+
             for (let i: number = 0; i < childrenArray.length; i++) {
                 childrenArray[i].move();
                 childrenArray[i].draw();
@@ -227,10 +227,13 @@ namespace RHT {
                     console.log("length:" + childrenArray.length);
                 }
             }
+            for (let i: number = 0; i < allObjects.length; i++) {
+                allObjects[i].move();
+                allObjects[i].draw();
+            }
             for (let i: number = 0; i < snowballs.length; i++) {
                 if (snowballs[i].timer > 0) {
                     snowballs[i].draw();
-                    //snowballs[i].checkIfHit(childrenArray[i].x, childrenArray[i].y);
                 }
                 else if (snowballs[i].timer == 0) {
                     snowballs[i].draw();
