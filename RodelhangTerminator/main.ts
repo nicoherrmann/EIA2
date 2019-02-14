@@ -161,6 +161,7 @@ namespace RHT {
         xhr.open("GET", address + "?" + sendString, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
+        highscores();
     }
 
 
@@ -185,7 +186,6 @@ namespace RHT {
         document.getElementsByTagName("body")[0].addEventListener("change", handleChange);
 
         document.getElementById("button").addEventListener("click", sendRequestWithCustomData);
-
     }
     
     function highscores(): void {
@@ -196,7 +196,7 @@ namespace RHT {
         document.getElementsByTagName("div")[0].style.display = "none";
         document.getElementById("endscreen").style.display = "none";
         document.getElementById("highscore").style.display = "initial";
-        
+            
         document.getElementById("retry").style.display = "initial";
         document.getElementById("retry").addEventListener("click", startGame);
     }
@@ -235,7 +235,12 @@ namespace RHT {
                 else if (snowballs[i].timer == 0) {
                     snowballs[i].draw();
                     for (let i2: number = 0; i2 < childrenArray.length; i2++) {
-                        if (snowballs[i].checkIfHit(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
+                        if (snowballs[i].checkIfHitDown(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "ridedown") {
+                            childrenArray[i2].state = "dead";
+                            score += childrenArray[i2].getSpeed() * 10;
+                            console.log("hit");
+                        }
+                        if (snowballs[i].checkIfHitUp(childrenArray[i2].x, childrenArray[i2].y) == true && childrenArray[i2].state == "pullup") {
                             childrenArray[i2].state = "dead";
                             score += childrenArray[i2].getSpeed() * 10;
                             console.log("hit");

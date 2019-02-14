@@ -19,17 +19,22 @@ canvas {
 
 p {
 	padding: 1em 3em;
-	border: solid 3px darkred;
+	border: solid 3px darkgrey;
+	border-left: solid 3px orange;
 	margin: auto;
 	margin-bottom: 50px;
 	width: 200px;
 	text-align: center;
 	width: 200px;
-	background-color: #e6e6e6;
+	
 }
 
 #start {
 	
+}
+
+#button {
+	margin-top: 10px;
 }
 
 #score {
@@ -37,15 +42,16 @@ p {
 	top: 300px;
 	left: 0px;
 	padding: 0.25em 0.5em;
-	border: solid 3px darkred;
+	border: solid 3px darkgrey;
+	border-left: solid 3px orange;
 	margin-top: 0px;
 	margin-left: 0px;
 	width: 350px;
 	text-align: center;
-	background-color: #e6e6e6;
 }
 
 #retry {
 	position: absolute;
 	left: 50px;
+	top: 50px;
 }

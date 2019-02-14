@@ -42,6 +42,7 @@ var RHT;
     RHT.Cloud = Cloud;
     class Sun extends baseStats {
         draw() {
+            RHT.crc2.lineWidth = 3;
             RHT.crc2.fillStyle = this.color;
             RHT.crc2.strokeStyle = this.color;
             RHT.crc2.beginPath();
@@ -149,7 +150,7 @@ var RHT;
                 this.timer--;
             }
         }
-        checkIfHit(_x, _y) {
+        checkIfHitDown(_x, _y) {
             RHT.crc2.lineWidth = 50;
             RHT.crc2.beginPath();
             RHT.crc2.moveTo(_x, _y);
@@ -180,18 +181,52 @@ var RHT;
                 return false;
             }
         }
+        checkIfHitUp(_x, _y) {
+            RHT.crc2.lineWidth = 50;
+            RHT.crc2.beginPath();
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x - 2, this.y + 7);
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x + 1, this.y + 8);
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x, this.y - 15);
+            RHT.crc2.arc(this.x, this.y - 15, 2, 0, 2 * Math.PI);
+            RHT.crc2.moveTo(this.x, this.y - 10);
+            RHT.crc2.lineTo(this.x - 6, this.y + 2);
+            RHT.crc2.moveTo(this.x, this.y - 12);
+            RHT.crc2.lineTo(this.x - 7, this.y - 2);
+            RHT.crc2.moveTo(this.x - 8, this.y + 5);
+            RHT.crc2.lineTo(this.x - 28, this.y + 7);
+            RHT.crc2.moveTo(this.x - 12, this.y + 6);
+            RHT.crc2.lineTo(this.x - 15, this.y + 12);
+            RHT.crc2.moveTo(this.x - 22, this.y + 7);
+            RHT.crc2.lineTo(this.x - 25, this.y + 14);
+            RHT.crc2.moveTo(this.x - 8, this.y + 12);
+            RHT.crc2.lineTo(this.x - 30, this.y + 15);
+            RHT.crc2.closePath();
+            console.log("bum");
+            if (RHT.crc2.isPointInPath(this.x, this.y)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
     RHT.snowball = snowball;
     class children extends movement {
         draw() {
             if (this.state == "ridedown") {
-                this.drawChild1();
+                this.drawChildDOWN();
             }
             if (this.state == "dead") {
-                this.drawChild2();
+                this.drawChildDEAD();
+            }
+            if (this.state == "pullup") {
+                this.drawChildUP();
             }
         }
-        drawChild2() {
+        drawChildDOWN() {
             RHT.crc2.fillStyle = "#000000";
             RHT.crc2.strokeStyle = "#000000";
             RHT.crc2.lineWidth = 1;
@@ -208,11 +243,39 @@ var RHT;
             RHT.crc2.fill();
             RHT.crc2.stroke();
         }
-        drawChild1() {
+        drawChildDEAD() {
             RHT.crc2.fillStyle = "#000000";
             RHT.crc2.strokeStyle = "#000000";
             RHT.crc2.lineWidth = 1;
             this.drawPath(this.x, this.y);
+            RHT.crc2.fill();
+            RHT.crc2.stroke();
+        }
+        drawChildUP() {
+            RHT.crc2.fillStyle = "#000000";
+            RHT.crc2.strokeStyle = "#000000";
+            RHT.crc2.lineWidth = 1;
+            RHT.crc2.beginPath();
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x - 2, this.y + 7);
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x + 1, this.y + 8);
+            RHT.crc2.moveTo(this.x, this.y);
+            RHT.crc2.lineTo(this.x, this.y - 15);
+            RHT.crc2.arc(this.x, this.y - 15, 2, 0, 2 * Math.PI);
+            RHT.crc2.moveTo(this.x, this.y - 10);
+            RHT.crc2.lineTo(this.x - 6, this.y + 2);
+            RHT.crc2.moveTo(this.x, this.y - 12);
+            RHT.crc2.lineTo(this.x - 7, this.y - 2);
+            RHT.crc2.moveTo(this.x - 8, this.y + 5);
+            RHT.crc2.lineTo(this.x - 28, this.y + 7);
+            RHT.crc2.moveTo(this.x - 12, this.y + 6);
+            RHT.crc2.lineTo(this.x - 15, this.y + 12);
+            RHT.crc2.moveTo(this.x - 22, this.y + 7);
+            RHT.crc2.lineTo(this.x - 25, this.y + 14);
+            RHT.crc2.moveTo(this.x - 8, this.y + 12);
+            RHT.crc2.lineTo(this.x - 30, this.y + 15);
+            RHT.crc2.closePath();
             RHT.crc2.fill();
             RHT.crc2.stroke();
         }

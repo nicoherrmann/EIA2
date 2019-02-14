@@ -16,8 +16,8 @@ var DatabaseClient;
         let query = "command=insert";
         query += "&name=" + inputs[0].value;
         query += "&score=" + document.getElementById("endscore").getAttribute("value");
-        console.log(query);
         sendRequest(query, handleInsertResponse);
+        refresh(_event);
     }
     function refresh(_event) {
         let query = "command=refresh";
@@ -26,23 +26,6 @@ var DatabaseClient;
     function change(_event) {
         let target = _event.target;
         target.setAttribute("value", target.value);
-    }
-    function search(_event) {
-        let matrikel = parseInt(document.getElementById("matrikelsearch").getAttribute("value"));
-        if (matrikel.toString().length > 0) {
-            console.log("test");
-            let xhr = new XMLHttpRequest();
-            xhr.open("GET", serverAddress + "?command=search&matrikel=" + matrikel, true);
-            xhr.addEventListener("readystatechange", searchMatrikel);
-            xhr.send();
-        }
-    }
-    function searchMatrikel(_event) {
-        let output = document.getElementById("outputSearch");
-        var xhr = _event.target;
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            output.innerHTML = xhr.response;
-        }
     }
     function sendRequest(_query, _callback) {
         let xhr = new XMLHttpRequest();
@@ -53,7 +36,6 @@ var DatabaseClient;
     function handleInsertResponse(_event) {
         let xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert(xhr.response);
         }
     }
     function playerDataSort(_a, _b) {
@@ -74,12 +56,14 @@ var DatabaseClient;
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output = document.getElementById("scores");
             let scores = [];
-            let responseAsJson = JSON.parse(xhr.response);
-            responseAsJson.sort(playerDataSort);
-            for (let i = 0; i < responseAsJson.length; i++) {
-                output.innerHTML += "<h3>" + responseAsJson[i].name + " | Score:" + responseAsJson[i].score + "<br>";
+            let dataArray = JSON.parse(xhr.response);
+            dataArray.sort(playerDataSort);
+            let helpString = "";
+            for (let i = 0; i < 10; i++) {
+                let place = 1 + i;
+                helpString += "<h3>" + place + ". " + dataArray[i].name + " | Score:" + dataArray[i].score + "<br>";
             }
-            console.log(Math.max(...scores));
+            output.innerHTML = helpString;
         }
     }
 })(DatabaseClient || (DatabaseClient = {}));
