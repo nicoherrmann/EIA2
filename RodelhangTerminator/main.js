@@ -95,9 +95,9 @@ var RHT;
     function createChild() {
         let child = new RHT.children();
         child.x = RHT.crc2.canvas.width;
-        child.y = (Math.random() * 50) + 150;
-        child.dx = (Math.random() - 10) / 7;
-        child.dy = (Math.random() + 2) / 5;
+        child.y = (Math.random() * 100) + 150;
+        child.dx = Math.random() * (-3);
+        child.dy = child.dx * -0.25;
         child.state = "ridedown";
         childrenArray.push(child);
     }

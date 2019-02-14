@@ -54,7 +54,7 @@ namespace RHT {
         sun.x = Math.random() * crc2.canvas.width;
         sun.y = Math.random() * 50;
         sun.color = "#fffa00";
-        
+
         for (let i: number = 0; i < 6; i++) {
             crc2.beginPath();
             crc2.moveTo(0, crc2.canvas.height - 100);
@@ -82,7 +82,7 @@ namespace RHT {
                 i--;
             }
         }
-        
+
         bgImg = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
 
 
@@ -90,7 +90,7 @@ namespace RHT {
             createChild();
         }
 
-        
+
         for (let i: number = 0; i < 6; i++) {
             let cloud: Cloud = new Cloud();
             cloud.x = Math.random() * crc2.canvas.width;
@@ -127,9 +127,9 @@ namespace RHT {
     function createChild(): void {
         let child: children = new children();
         child.x = crc2.canvas.width;
-        child.y = (Math.random() * 50) + 150;
-        child.dx = (Math.random() - 10) / 7;
-        child.dy = (Math.random() + 2) / 5;
+        child.y = (Math.random() * 100) + 150;
+        child.dx = Math.random() * (- 3);
+        child.dy = child.dx * -0.25;
         child.state = "ridedown";
 
         childrenArray.push(child);
