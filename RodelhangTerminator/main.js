@@ -206,7 +206,7 @@ var RHT;
                     }
                 }
             }
-            document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " Snowballs:" + (20 - snowballs.length).toString() + " Snowball Ready:" + snowballReadyCheck.toString() + " Score:" + score.toString();
+            document.getElementById("score").innerText = "Time:" + timer.toString() + "s" + " | Snowballs:" + (20 - snowballs.length).toString() + " | Snowball Ready: " + snowballReadyCheck.toString() + " | Score:" + score.toString();
             if (snowballs.length > 19) {
                 console.log(timer);
                 if (snowballs[19].timer == 0) {
