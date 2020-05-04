@@ -86,18 +86,20 @@ function update() {
     frames1--;
 }
 function endscreen() {
-    score: Number;
-    givenr = document.getElementById("neededcolor").getAttribute("red");
-    givenb = document.getElementById("neededcolor").getAttribute("blue");
-    giveng = document.getElementById("neededcolor").getAttribute("green");
-    chosenr = document.getElementById("slider1").getAttribute("value");
-    chosenb = document.getElementById("slider2").getAttribute("value");
-    choseng = document.getElementById("slider3").getAttribute("value");
-    score1 = givenr - chosenr;
-    score2 = givenb - chosenb;
-    score3 = giveng - choseng;
-    score = "DifR:" + score1 + "DifB:" + score2 + "DifG:" + score3;
+    let score;
+    console.log("endscreen");
     document.getElementById("checker").style.display = "none";
     document.getElementById("score").innerText = score + "%";
+    let colorTakenr = document.getElementById("slider1").getAttribute("value");
+    let colorTakeng = document.getElementById("slider2").getAttribute("value");
+    let colorTakenb = document.getElementById("slider3").getAttribute("value");
+    let colorGivenr = document.getElementById("neededcolor").getAttribute("red");
+    let colorGiveng = document.getElementById("neededcolor").getAttribute("green");
+    let colorGivenb = document.getElementById("neededcolor").getAttribute("blue");
+    let score1 = Math.abs(colorGivenr - colorTakenr);
+    let score2 = Math.abs(colorGivenb - colorTakenb);
+    let score3 = Math.abs(colorGiveng - colorTakeng);
+    score = "DifR:" + score1 + "DifB:" + score2 + "DifG:" + score3;
+    document.getElementById("score").innerText = score;
 }
 //# sourceMappingURL=script.js.map
