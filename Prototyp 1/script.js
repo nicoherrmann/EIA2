@@ -53,9 +53,10 @@ function colorges() {
 }
 function neededColor() {
     let colorr = Math.floor(Math.random() * 255);
-    let colorb = Math.floor(Math.random() * 255);
     let colorg = Math.floor(Math.random() * 255);
-    var string = "background-color:rgb(" + colorr + " ," + colorb + " ," + colorg + ");";
+    let colorb = Math.floor(Math.random() * 255);
+    
+    var string = "background-color:rgb(" + colorr + " ," + colorg + " ," + colorb + ");";
     document.getElementById("neededcolor").setAttribute("style", string);
     document.getElementById("neededcolor").setAttribute("red", colorr);
     document.getElementById("neededcolor").setAttribute("blue", colorb);
@@ -96,10 +97,26 @@ function endscreen() {
     let colorGivenr = document.getElementById("neededcolor").getAttribute("red");
     let colorGiveng = document.getElementById("neededcolor").getAttribute("green");
     let colorGivenb = document.getElementById("neededcolor").getAttribute("blue");
-    let score1 = Math.abs(colorGivenr - colorTakenr);
-    let score2 = Math.abs(colorGivenb - colorTakenb);
-    let score3 = Math.abs(colorGiveng - colorTakeng);
-    score = "DifR:" + score1 + "DifB:" + score2 + "DifG:" + score3;
+    console.log(colorTakenr, colorTakeng, colorTakenb, colorGivenr, colorGiveng, colorGivenb)
+    let score1 = colorGivenr - colorTakenr;
+    let score2 = colorGiveng - colorTakeng;
+    let score3 = colorGivenb - colorTakenb;
+    let score1win = 0;
+    let score2win = 0;
+    let score3win = 0;
+    if(score1 < 25 && score1 > -25){
+        score1win = 1;
+    }
+    if(score2 < 25 && score2 > -25){
+        score2win = 1;
+    }
+    if(score3 < 25 && score3 > -25){
+        score3win = 1;
+    }
+    score = "DifR:" + score1 + "DifG:" + score2 + "DifB:" + score3;
+    if(score1win == 1 && score2win == 1 && score3win == 1){
+        score += "WIN"
+    }
     document.getElementById("score").innerText = score;
 }
 //# sourceMappingURL=script.js.map
