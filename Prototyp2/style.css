@@ -1,0 +1,34 @@
+canvas {
+position: absolute;
+}
+
+#canvas2 {
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+#karocanvas {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+#selected_color {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-color: none;
+    border: none;
+    opacity: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#selected_color2 {
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 60px;
+    width: 80px;
+    height: 80px;
+    border-color: #ffff00;
+    border: none;   
+    opacity: 0;
+}

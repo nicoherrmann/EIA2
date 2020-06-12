@@ -53,10 +53,9 @@ function colorges() {
 }
 function neededColor() {
     let colorr = Math.floor(Math.random() * 255);
-    let colorg = Math.floor(Math.random() * 255);
     let colorb = Math.floor(Math.random() * 255);
-    
-    var string = "background-color:rgb(" + colorr + " ," + colorg + " ," + colorb + ");";
+    let colorg = Math.floor(Math.random() * 255);
+    var string = "background-color:rgb(" + colorr + " ," + colorb + " ," + colorg + ");";
     document.getElementById("neededcolor").setAttribute("style", string);
     document.getElementById("neededcolor").setAttribute("red", colorr);
     document.getElementById("neededcolor").setAttribute("blue", colorb);
@@ -87,36 +86,18 @@ function update() {
     frames1--;
 }
 function endscreen() {
-    let score;
-    console.log("endscreen");
+    score: Number;
+    givenr = document.getElementById("neededcolor").getAttribute("red");
+    givenb = document.getElementById("neededcolor").getAttribute("blue");
+    giveng = document.getElementById("neededcolor").getAttribute("green");
+    chosenr = document.getElementById("slider1").getAttribute("value");
+    chosenb = document.getElementById("slider2").getAttribute("value");
+    choseng = document.getElementById("slider3").getAttribute("value");
+    score1 = givenr - chosenr;
+    score2 = givenb - chosenb;
+    score3 = giveng - choseng;
+    score = "DifR:" + score1 + "DifB:" + score2 + "DifG:" + score3;
     document.getElementById("checker").style.display = "none";
     document.getElementById("score").innerText = score + "%";
-    let colorTakenr = document.getElementById("slider1").getAttribute("value");
-    let colorTakeng = document.getElementById("slider2").getAttribute("value");
-    let colorTakenb = document.getElementById("slider3").getAttribute("value");
-    let colorGivenr = document.getElementById("neededcolor").getAttribute("red");
-    let colorGiveng = document.getElementById("neededcolor").getAttribute("green");
-    let colorGivenb = document.getElementById("neededcolor").getAttribute("blue");
-    console.log(colorTakenr, colorTakeng, colorTakenb, colorGivenr, colorGiveng, colorGivenb)
-    let score1 = colorGivenr - colorTakenr;
-    let score2 = colorGiveng - colorTakeng;
-    let score3 = colorGivenb - colorTakenb;
-    let score1win = 0;
-    let score2win = 0;
-    let score3win = 0;
-    if(score1 < 25 && score1 > -25){
-        score1win = 1;
-    }
-    if(score2 < 25 && score2 > -25){
-        score2win = 1;
-    }
-    if(score3 < 25 && score3 > -25){
-        score3win = 1;
-    }
-    score = "DifR:" + score1 + "DifG:" + score2 + "DifB:" + score3;
-    if(score1win == 1 && score2win == 1 && score3win == 1){
-        score += "WIN"
-    }
-    document.getElementById("score").innerText = score;
 }
 //# sourceMappingURL=script.js.map
