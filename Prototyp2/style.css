@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+html {
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
 canvas {
 position: absolute;
 }
@@ -24,11 +29,50 @@ position: absolute;
 }
 #selected_color2 {
     position: absolute;
-    margin-top: 60px;
-    margin-left: 60px;
-    width: 80px;
-    height: 80px;
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 100px;
+    height: 100px;
     border-color: #ffff00;
     border: none;   
     opacity: 0;
+}
+
+#extraKaros {
+    position: absolute;
+    margin-left: 210px;
+}
+
+#extraKaro1 {
+    position: absolute;
+}
+
+
+
+ul {
+    list-style-type: none;
+  }
+
+li {
+    background-color: #F1970F;
+    color: white;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 135px;
+}
+
+ul>li {
+    position: relative;
+    bottom: -500px;
+    margin-top: 5px;
+}
+
+li:hover {
+    background-color: #535353;
+    color: white;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 135px;
 }
