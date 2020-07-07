@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
 html {
-	font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
 }
 
 canvas {
@@ -59,7 +61,7 @@ li {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 135px;
+    width: 165px;
 }
 
 ul>li {
@@ -74,5 +76,5 @@ li:hover {
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 135px;
+    width: 165px;
 }

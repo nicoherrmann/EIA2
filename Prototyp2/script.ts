@@ -7,6 +7,9 @@ let canvas: HTMLCanvasElement;
 let canvas2: HTMLCanvasElement;
 let canvas3: HTMLCanvasElement;
 
+var komplementar: number = 0;
+var monochrom: number = 0;
+
 function init(): void {
     canvas = document.getElementsByTagName("canvas")[0];
     crc2 = canvas.getContext("2d");
@@ -29,10 +32,12 @@ function init(): void {
     eK1.fillRect(0, 165, 40, 40);
 
 
-
+    document.getElementById("extraKaro1").style.display = "none";
 
     document.getElementById("selected_color").addEventListener("input", FarbeAussen);
     document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
+    document.getElementById("komplementaer").addEventListener("click", switchkomp);
+    document.getElementById("monochrom").addEventListener("click", switchmono);
 }
 
 function FarbeAussen(): void {
@@ -57,6 +62,12 @@ function FarbeInnen(): void {
     ctx.fillRect(0, 0, 100, 100);
 }
 
+function padZero(str: any, len: any = 2): string {
+    len = len || 2;
+    var zeros = new Array(len).join("0");
+    return (zeros + str).slice(-len);
+}
+
 function invertColor(hex: string): string {
     if (hex.indexOf("#") === 0) {
         hex = hex.slice(1);
@@ -65,19 +76,95 @@ function invertColor(hex: string): string {
     if (hex.length === 3) {
         hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
-    if (hex.length !== 6) {
-        throw new Error("Invalid HEX color.");
-    }
     // invert color components
     var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
         g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
         b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
     // pad each with zeros and return
-    return "#" + padZero(r) + g + b;
+    return "#" + padZero(r) + padZero(g) + padZero(b);
 }
 
-function padZero(str: any, len: any): string {
-    len = len || 2;
-    var zeros: string = new Array(len).join("0");
-    return (zeros + str).slice(-len);
+
+
+function komplementaraussen(): void {
+    console.log("klappt");
+    var x: any = document.getElementById("selected_color");
+    console.log(x.value);
+    var color: string = invertColor(x.value);
+    console.log(color);
+    crc2.clearRect(0, 0, 200, 200);
+    crc2.fillStyle = x.value;
+    crc2.fillRect(0, 0, 200, 200);
+
+    ctx.clearRect(0, 0, 100, 100);
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, 100, 100);
+
+}
+
+function komplementarinnen(): void {
+    console.log("klappt");
+    var x: any = document.getElementById("selected_color2");
+    console.log(x.value);
+    var color: string = invertColor(x.value);
+    console.log(color);
+    crc2.clearRect(0, 0, 200, 200);
+    crc2.fillStyle = color;
+    crc2.fillRect(0, 0, 200, 200);
+
+    ctx.clearRect(0, 0, 100, 100);
+    ctx.fillStyle = x.value;
+    ctx.fillRect(0, 0, 100, 100);
+
+}
+
+function switchkomp(): void {
+    document.getElementById("extraKaro1").style.display = "none";
+    if (komplementar == 0) {
+        
+        
+        document.getElementById("selected_color").removeEventListener("input", FarbeAussen);
+        document.getElementById("selected_color2").removeEventListener("input", FarbeInnen);
+        document.getElementById("selected_color").addEventListener("input", komplementaraussen);
+        document.getElementById("selected_color2").addEventListener("input", komplementarinnen);
+        komplementar = 1;
+        console.log("komp1");
+        document.getElementById("komplementaer").style.backgroundColor = "#1b1b1b";
+    }
+    else if (komplementar == 1) {
+        document.getElementById("selected_color").addEventListener("input", FarbeAussen);
+        document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
+        document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
+        document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        komplementar = 0;
+        console.log("komp0");
+        document.getElementById("komplementaer").style.backgroundColor = "#F1970F";
+    }
+    console.log("komp");
+}
+
+function switchmono(): void {
+    
+    if (monochrom == 0) {
+        document.getElementById("extraKaro1").style.display = "initial";
+        
+        document.getElementById("selected_color").removeEventListener("input", FarbeAussen);
+        document.getElementById("selected_color2").removeEventListener("input", FarbeInnen);
+        document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
+        document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        monochrom = 1;
+        console.log("mono1");
+        document.getElementById("monochrom").style.backgroundColor = "#1b1b1b";
+    }
+    else if (monochrom == 1) {
+        document.getElementById("extraKaro1").style.display = "none";
+        document.getElementById("selected_color").addEventListener("input", FarbeAussen);
+        document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
+        document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
+        document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        monochrom = 0;
+        console.log("mono0");
+        document.getElementById("monochrom").style.backgroundColor = "#F1970F";
+    }
+    console.log("mono");
 }
