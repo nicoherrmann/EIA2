@@ -121,12 +121,15 @@ function komplementarinnen(): void {
 function switchkomp(): void {
     document.getElementById("extraKaro1").style.display = "none";
     if (komplementar == 0) {
-        
+        document.getElementById("extraKaro1").style.display = "none";
+        document.getElementById("canvas2").style.display = "initial";
+        document.getElementById("selected_color2").style.display = "initial";
         
         document.getElementById("selected_color").removeEventListener("input", FarbeAussen);
         document.getElementById("selected_color2").removeEventListener("input", FarbeInnen);
         document.getElementById("selected_color").addEventListener("input", komplementaraussen);
         document.getElementById("selected_color2").addEventListener("input", komplementarinnen);
+        document.getElementById("selected_color").removeEventListener("input", monochromaussen);
         komplementar = 1;
         monochrom = 0;
         console.log("komp1");
@@ -134,10 +137,14 @@ function switchkomp(): void {
         document.getElementById("monochrom").style.backgroundColor = "#F1970F";
     }
     else if (komplementar == 1) {
+        document.getElementById("extraKaro1").style.display = "none";
+        document.getElementById("canvas2").style.display = "initial";
+        document.getElementById("selected_color2").style.display = "initial";
         document.getElementById("selected_color").addEventListener("input", FarbeAussen);
         document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
         document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
         document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        document.getElementById("selected_color").removeEventListener("input", monochromaussen);
         komplementar = 0;
         monochrom = 0;
         console.log("komp0");
@@ -151,11 +158,14 @@ function switchmono(): void {
     
     if (monochrom == 0) {
         document.getElementById("extraKaro1").style.display = "initial";
+        document.getElementById("canvas2").style.display = "none";
+        document.getElementById("selected_color2").style.display = "none";
         
         document.getElementById("selected_color").removeEventListener("input", FarbeAussen);
         document.getElementById("selected_color2").removeEventListener("input", FarbeInnen);
         document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
         document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        document.getElementById("selected_color").addEventListener("input", monochromaussen);
         monochrom = 1;
         komplementar = 0;
         console.log("mono1");
@@ -164,10 +174,13 @@ function switchmono(): void {
     }
     else if (monochrom == 1) {
         document.getElementById("extraKaro1").style.display = "none";
+        document.getElementById("canvas2").style.display = "initial";
+        document.getElementById("selected_color2").style.display = "initial";
         document.getElementById("selected_color").addEventListener("input", FarbeAussen);
         document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
         document.getElementById("selected_color").removeEventListener("input", komplementaraussen);
         document.getElementById("selected_color2").removeEventListener("input", komplementarinnen);
+        document.getElementById("selected_color").removeEventListener("input", monochromaussen);
         monochrom = 0;
         komplementar = 0;
         console.log("mono0");
@@ -176,3 +189,49 @@ function switchmono(): void {
     }
     console.log("mono");
 }
+
+function monochromaussen(): void {
+    var x: any = document.getElementById("selected_color");
+    console.log(x.value);
+    
+    crc2.clearRect(0, 0, 200, 200);
+    crc2.fillStyle = x.value;
+    crc2.fillRect(0, 0, 200, 200);
+    console.log("hue:" + rgb2hue(12, 52, 245));
+    console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
+}
+
+function rgb2hue(r: number, g: number, b: number): number {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    var max: number = Math.max(r, g, b);
+    var min: number = Math.min(r, g, b);
+    var c: number   = max - min;
+    var hue: number;
+    if (c == 0) {
+      hue = 0;
+    } else {
+      switch(max) {
+        case r:
+          var segment: number = (g - b) / c;
+          var shift: number   = 0 / 60;       // R° / (360° / hex sides)
+          if (segment < 0) {          // hue > 180, full rotation
+            shift = 360 / 60;         // R° / (360° / hex sides)
+          }
+          hue = segment + shift;
+          break;
+        case g:
+          var segment: number = (b - r) / c;
+          var shift: number   = 120 / 60;     // G° / (360° / hex sides)
+          hue = segment + shift;
+          break;
+        case b:
+          var segment: number = (r - g) / c;
+          var shift: number   = 240 / 60;     // B° / (360° / hex sides)
+          hue = segment + shift;
+          break;
+      }
+    }
+    return hue * 60; // hue is in [0,6], scale it up
+  }
