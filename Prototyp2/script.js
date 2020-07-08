@@ -110,7 +110,7 @@ function switchkomp() {
         monochrom = 0;
         console.log("komp1");
         document.getElementById("komplementaer").style.backgroundColor = "#1b1b1b";
-        document.getElementById("monochrom").style.backgroundColor = "#F1970F";
+        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
     }
     else if (komplementar == 1) {
         document.getElementById("extraKaro1").style.display = "none";
@@ -124,8 +124,8 @@ function switchkomp() {
         komplementar = 0;
         monochrom = 0;
         console.log("komp0");
-        document.getElementById("komplementaer").style.backgroundColor = "#F1970F";
-        document.getElementById("monochrom").style.backgroundColor = "#F1970F";
+        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
+        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
     }
     console.log("komp");
 }
@@ -143,7 +143,7 @@ function switchmono() {
         komplementar = 0;
         console.log("mono1");
         document.getElementById("monochrom").style.backgroundColor = "#1b1b1b";
-        document.getElementById("komplementaer").style.backgroundColor = "#F1970F";
+        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
     }
     else if (monochrom == 1) {
         document.getElementById("extraKaro1").style.display = "none";
@@ -157,8 +157,8 @@ function switchmono() {
         monochrom = 0;
         komplementar = 0;
         console.log("mono0");
-        document.getElementById("monochrom").style.backgroundColor = "#F1970F";
-        document.getElementById("komplementaer").style.backgroundColor = "#F1970F";
+        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
+        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
     }
     console.log("mono");
 }
