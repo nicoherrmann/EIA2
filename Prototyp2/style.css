@@ -55,32 +55,57 @@ ul {
     list-style-type: none;
   }
 
-li {
-    background-color: #F1970F;
-    color: white;
+
+.buttons {
+    background-color: #dfdfdf;
+    color: rgb(150, 150, 150);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
+    margin-top: 250px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     width: 165px;
 }
 
-ul>li {
-    position: relative;
-    bottom: -500px;
-    margin-top: 5px;
-}
 
-li:hover {
-    background-color: #535353;
-    color: white;
+@keyframes mymove {
+    from {width:0px; background-color: #1b1b1b; z-index: 5;}
+    to {width:165px; background-color: #1b1b1b; z-index: 5;}
+  }
+
+
+.buttons:hover {
+    background-color: #1b1b1b;
+    color: rgb(255, 255, 255);
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     width: 165px;
+    animation-name: mymove;
+    animation-duration: 0.7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+    animation-direction: normal;
+    animation-iteration-count: 1;
 }
+
+
+
 
 #center {
     margin-left: -250px;
   display: flex;
   justify-content: center
+}
+
+#buttons {
+    margin-left: -77px;
+  display: flex;
+  justify-content: center
+}
+
+#monochrom {
+    text-align: center;
 }
