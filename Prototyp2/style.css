@@ -179,6 +179,30 @@ position: absolute;
   100% {width: 100px; height: 100px; transform: translateY(0); opacity: 100%; border-radius: 0%;}
 }
 
+@keyframes init1 {
+  0% {transform: translateY(-200px); border-radius: 50%;}
+  75% {transform: translateY(100px); border-radius: 50%;}
+  100% {transform: translateY(0); border-radius: 0%;}
+}
+
+@keyframes init2 {
+  0% {transform: translateY(-400px); border-radius: 50%;}
+  55% {transform: translateY(120px); border-radius: 50%;}
+  100% {transform: translateY(0); border-radius: 0%;}
+}
+
+@keyframes init3 {
+  0% {transform: translateX(-50px); opacity: 0%;}
+  55% {transform: translateX(0px); opacity: 100%;}
+  100% {transform: translateX(0); opacity: 100%;}
+}
+
+@keyframes init4 {
+  0% {transform: translateX(-50px); opacity: 0%;}
+  45% {transform: translateX(-50px); opacity: 0%;}
+  100% {transform: translateX(0); opacity: 100%;}
+}
+
 
 #karocanvas {
     position: absolute;

@@ -39,6 +39,11 @@ function init(): void {
   document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
   document.getElementById("komplementaer").addEventListener("click", switchkomp);
   document.getElementById("monochrom").addEventListener("click", switchmono);
+
+  document.getElementById("canvas").style.animation = "init1 3s 1 ease";
+  document.getElementById("canvas2").style.animation = "init2 4s 1";
+  document.getElementById("komplementaer").style.animation = "init3 4s 1";
+  document.getElementById("monochrom").style.animation = "init4 4s 1";
 }
 
 function FarbeAussen(): void {
