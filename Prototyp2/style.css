@@ -95,6 +95,7 @@ ul {
 
 #buttons {
     margin-left: 0px;
+    margin-top: 100px;
   display: flex;
   justify-content: center;
   position: absolute;
@@ -147,3 +148,10 @@ ul {
     5% {top:100px; background-color: #1b1b1b; z-index: 5;}
     100% {top:100px; background-color: #1b1b1b; z-index: 5;}
   }
+
+
+
+
+
+
+
