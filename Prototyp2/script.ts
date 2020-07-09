@@ -44,13 +44,14 @@ function init(): void {
   document.getElementById("canvas2").style.animation = "init2 4s 1";
   document.getElementById("komplementaer").style.animation = "init3 4s 1";
   document.getElementById("monochrom").style.animation = "init4 4s 1";
-  setTimeout(function () { document.getElementById("komplementaer").style.animation = ""; }, 4000);
-  setTimeout(function () { document.getElementById("monochrom").style.animation = ""; }, 4000);
+  setTimeout(function (): void { document.getElementById("komplementaer").style.animation = ""; }, 4000);
+  setTimeout(function (): void { document.getElementById("monochrom").style.animation = ""; }, 4000);
 
-  
+
 }
 
 function FarbeAussen(): void {
+  monochromaussen();
   console.log("klappt");
   var x: any = document.getElementById("selected_color");
   console.log(x.value);
@@ -61,10 +62,13 @@ function FarbeAussen(): void {
 
   console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
   console.log("HSL:" + hexToHSL(x.value));
-  monochromaussen();
+
+  document.getElementById("selected_color").removeAttribute("value");
+  document.getElementById("selected_color").setAttribute("value", x.value);
 }
 
 function FarbeInnen(): void {
+  monochromaussen();
   console.log("klappt");
   var x: any = document.getElementById("selected_color2");
   console.log(x.value);
@@ -72,7 +76,7 @@ function FarbeInnen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = x.value;
   ctx.fillRect(0, 0, 100, 100);
-  monochromaussen();
+
 }
 
 function padZero(str: any, len: any = 2): string {
@@ -89,17 +93,22 @@ function invertColor(hex: string): string {
   if (hex.length === 3) {
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
   }
+  if (hex.length !== 6) {
+    throw new Error("Invalid HEX color.");
+  }
   // invert color components
   var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
     g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
     b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
   // pad each with zeros and return
   return "#" + padZero(r) + padZero(g) + padZero(b);
+
 }
 
 
 
 function komplementaraussen(): void {
+  monochromaussen(); 
   console.log("klappt");
   var x: any = document.getElementById("selected_color");
   console.log(x.value);
@@ -112,16 +121,23 @@ function komplementaraussen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, 100, 100);
-  monochromaussen();
 
+  document.getElementById("selected_color").removeAttribute("value");
+  document.getElementById("selected_color").setAttribute("value", x.value);
+  document.getElementById("selected_color2").setAttribute("value", color);
+  document.getElementById("canvas2").setAttribute("color", color);
+  
 }
 
 function komplementarinnen(): void {
+  monochromaussen(); 
   console.log("klappt");
   var x: any = document.getElementById("selected_color2");
   console.log(x.value);
   var color: string = invertColor(x.value);
   console.log(color);
+  
+  
   crc2.clearRect(0, 0, 200, 200);
   crc2.fillStyle = color;
   crc2.fillRect(0, 0, 200, 200);
@@ -129,7 +145,11 @@ function komplementarinnen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = x.value;
   ctx.fillRect(0, 0, 100, 100);
-  monochromaussen();
+
+  document.getElementById("selected_color").removeAttribute("value");
+  document.getElementById("selected_color").setAttribute("value", color);
+  document.getElementById("canvas").setAttribute("color", color);
+  monochromaussen(); 
 }
 
 function switchkomp(): void {
@@ -138,11 +158,11 @@ function switchkomp(): void {
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
     document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
-    setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
-    setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
+    setTimeout(function (): void { document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function (): void { document.getElementById("canvas2").style.animation = ""; }, 2000);
     document.getElementById("extraKaro1").style.display = "none";
-    document.getElementById("canvas2").style.display = "initial";
-    document.getElementById("selected_color2").style.display = "initial";
+    document.getElementById("canvas2").style.display = "block";
+    document.getElementById("selected_color2").style.display = "block";
 
     document.getElementById("selected_color").removeEventListener("input", FarbeAussen);
     document.getElementById("selected_color2").removeEventListener("input", FarbeInnen);
