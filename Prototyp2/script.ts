@@ -122,6 +122,7 @@ function komplementarinnen(): void {
 function switchkomp(): void {
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    setTimeout(function(){ document.getElementById("canvas").style.animation = ""; }, 2000);
     if (komplementar == 0) {
         document.getElementById("extraKaro1").style.display = "none";
         document.getElementById("canvas2").style.display = "initial";
@@ -159,7 +160,7 @@ function switchkomp(): void {
 }
 
 function switchmono(): void {
-    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    document.getElementById("canvas").style.animation = "eckeAbrunden2 2s 1";
     if (monochrom == 0) {
         document.getElementById("extraKaro1").style.display = "initial";
         document.getElementById("canvas2").style.display = "none";

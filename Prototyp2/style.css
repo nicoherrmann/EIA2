@@ -141,10 +141,11 @@ position: absolute;
 }
 
 
-@keyframes eckeAbrunden {
-  0% {border-radius: 0%; opacity: 100%;}
-  50% { border-radius: 50%; opacity: 0%;}
-  100% {border-radius: 0%; opacity: 100%;}
+@keyframes eckeAbrunden2 {
+  0% {border-radius: 0%;}
+  50% { border-radius: 90%;}
+  50% { border-radius: 50%;}
+  100% {border-radius: 0%;}
 }
 
 #karocanvas {
