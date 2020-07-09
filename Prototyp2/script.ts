@@ -50,6 +50,7 @@ function FarbeAussen(): void {
     crc2.fillRect(0, 0, 200, 200);
 
     console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
+    console.log("HSL:" + hexToHSL(x.value));
 }
 
 function FarbeInnen(): void {
@@ -198,5 +199,122 @@ function monochromaussen(): void {
     crc2.fillStyle = x.value;
     crc2.fillRect(0, 0, 200, 200);
     console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
+
+    let random1 = random20(25, 0);
+    let random2 = random20(25, 20);
+    let random3 = random20(25, 40);
+    let random4 = random20(25, 60);
+    console.log(random4);
+
+    canvas3 = document.getElementsByTagName("canvas")[2];
+    eK1 = canvas3.getContext("2d");
+    eK1.fillStyle = hexToHSL2(x.value, random1);
+    eK1.fillRect(0, 0, 40, 40);
+    eK1.fillStyle = hexToHSL2(x.value, random2);
+    eK1.fillRect(0, 55, 40, 40);
+    eK1.fillStyle = hexToHSL2(x.value, random3);
+    eK1.fillRect(0, 110, 40, 40);
+    eK1.fillStyle = hexToHSL2(x.value, random4);
+    eK1.fillRect(0, 165, 40, 40);
+
+    console.log(hexToHSL(x.value));
+    console.log("random:" + random1 + " " + random2 + " " + random3 + " " + random4);
+
 }
 
+function random20(multi: number, min: number): number {
+    let random: number;
+    random = Math.floor(Math.random() * multi) + min; 
+    return random;
+}
+
+
+function hexToHSL(H: string): string {
+    // Convert hex to RGB first
+    let r = 0, g = 0, b = 0;
+    if (H.length == 4) {
+      r = "0x" + H[1] + H[1];
+      g = "0x" + H[2] + H[2];
+      b = "0x" + H[3] + H[3];
+    } else if (H.length == 7) {
+      r = "0x" + H[1] + H[2];
+      g = "0x" + H[3] + H[4];
+      b = "0x" + H[5] + H[6];
+    }
+    // Then to HSL
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r,g,b),
+        cmax = Math.max(r,g,b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+  
+    if (delta == 0)
+      h = 0;
+    else if (cmax == r)
+      h = ((g - b) / delta) % 6;
+    else if (cmax == g)
+      h = (b - r) / delta + 2;
+    else
+      h = (r - g) / delta + 4;
+  
+    h = Math.round(h * 60);
+  
+    if (h < 0)
+      h += 360;
+  
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+  
+    return "hsl(" + h + "," + s + "%," + l + "%)";
+  }
+
+  function hexToHSL2(H: string, l2: number): string {
+    // Convert hex to RGB first
+    let r = 0, g = 0, b = 0;
+    if (H.length == 4) {
+      r = "0x" + H[1] + H[1];
+      g = "0x" + H[2] + H[2];
+      b = "0x" + H[3] + H[3];
+    } else if (H.length == 7) {
+      r = "0x" + H[1] + H[2];
+      g = "0x" + H[3] + H[4];
+      b = "0x" + H[5] + H[6];
+    }
+    // Then to HSL
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r,g,b),
+        cmax = Math.max(r,g,b),
+        delta = cmax - cmin,
+        h = 0,
+        s = 0,
+        l = 0;
+  
+    if (delta == 0)
+      h = 0;
+    else if (cmax == r)
+      h = ((g - b) / delta) % 6;
+    else if (cmax == g)
+      h = (b - r) / delta + 2;
+    else
+      h = (r - g) / delta + 4;
+  
+    h = Math.round(h * 60);
+  
+    if (h < 0)
+      h += 360;
+  
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+  
+    return "hsl(" + h + "," + s + "%," + l2 + "%)";
+  }
