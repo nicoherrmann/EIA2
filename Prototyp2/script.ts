@@ -72,6 +72,7 @@ function FarbeInnen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = x.value;
   ctx.fillRect(0, 0, 100, 100);
+  monochromaussen();
 }
 
 function padZero(str: any, len: any = 2): string {
@@ -128,7 +129,7 @@ function komplementarinnen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = x.value;
   ctx.fillRect(0, 0, 100, 100);
-
+  monochromaussen();
 }
 
 function switchkomp(): void {
