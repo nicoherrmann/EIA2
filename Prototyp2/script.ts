@@ -122,7 +122,9 @@ function komplementarinnen(): void {
 function switchkomp(): void {
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
     setTimeout(function(){ document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function(){ document.getElementById("canvas2").style.animation = ""; }, 2000);
     if (komplementar == 0) {
         document.getElementById("extraKaro1").style.display = "none";
         document.getElementById("canvas2").style.display = "initial";
@@ -160,7 +162,12 @@ function switchkomp(): void {
 }
 
 function switchmono(): void {
-    document.getElementById("canvas").style.animation = "eckeAbrunden2 2s 1";
+    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    document.getElementById("extraKaro1").style.animation = "eckeAbrunden3 2s 1";
+    document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
+    setTimeout(function(){ document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function(){ document.getElementById("extraKaro1").style.animation = ""; }, 2000);
+    setTimeout(function(){ document.getElementById("canvas2").style.animation = ""; }, 2000);
     if (monochrom == 0) {
         document.getElementById("extraKaro1").style.display = "initial";
         document.getElementById("canvas2").style.display = "none";
@@ -179,7 +186,8 @@ function switchmono(): void {
         document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
     }
     else if (monochrom == 1) {
-        document.getElementById("extraKaro1").style.display = "none";
+       document.getElementById("extraKaro1").style.animation = "eckeAbrunden4 2s 1";
+       setTimeout(function(){ document.getElementById("extraKaro1").style.animation = ""; }, 2000);
         document.getElementById("canvas2").style.display = "initial";
         document.getElementById("selected_color2").style.display = "initial";
         document.getElementById("selected_color").addEventListener("input", FarbeAussen);
