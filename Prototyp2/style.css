@@ -216,8 +216,8 @@ position: absolute;
     border-color: none;
     border: none;
     opacity: 0;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
     z-index: 10;
 }
 #selected_color2 {
@@ -317,9 +317,16 @@ ul {
     background-color: #1b1b1b;
     color: white;
     animation: mymove1 15s ease;
+
 }
 
+li:hover {
+  cursor: pointer;
+}
 
+input:hover {
+  cursor: pointer;
+}
 
   @keyframes mymove1 {
     0% {width:200px; background-color: #535353; z-index: 5; transform: translateX(0px); color: #ffffff;}

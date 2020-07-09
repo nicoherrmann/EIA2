@@ -44,6 +44,10 @@ function init(): void {
   document.getElementById("canvas2").style.animation = "init2 4s 1";
   document.getElementById("komplementaer").style.animation = "init3 4s 1";
   document.getElementById("monochrom").style.animation = "init4 4s 1";
+  setTimeout(function () { document.getElementById("komplementaer").style.animation = ""; }, 4000);
+  setTimeout(function () { document.getElementById("monochrom").style.animation = ""; }, 4000);
+
+  
 }
 
 function FarbeAussen(): void {
