@@ -120,12 +120,13 @@ function komplementarinnen(): void {
 }
 
 function switchkomp(): void {
-  document.getElementById("extraKaro1").style.display = "none";
-  document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
-  document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
-  setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
-  setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
+
   if (komplementar == 0) {
+    document.getElementById("extraKaro1").style.display = "none";
+    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
+    setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("canvas2").style.display = "initial";
     document.getElementById("selected_color2").style.display = "initial";
@@ -141,8 +142,17 @@ function switchkomp(): void {
     document.getElementById("komplementaer").style.backgroundColor = "#4D4D4D";
     document.getElementById("komplementaer").style.color = "#ffffff";
     document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
+    document.getElementById("komplementaer").classList.remove("hover");
+    document.getElementById("monochrom").classList.remove("hover");
+    document.getElementById("monochrom").addEventListener("mouseout", function (): void { document.getElementById("monochrom").classList.add("hover"); });
+    document.getElementById("komplementaer").addEventListener("mouseout", function (): void { document.getElementById("komplementaer").classList.add("hover"); });
   }
   else if (komplementar == 1) {
+    document.getElementById("extraKaro1").style.display = "none";
+    document.getElementById("canvas").style.animation = "home1 2s 1";
+    document.getElementById("canvas2").style.animation = "home2 2s 1";
+    setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("canvas2").style.display = "initial";
     document.getElementById("selected_color2").style.display = "initial";
@@ -157,6 +167,10 @@ function switchkomp(): void {
     document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
     document.getElementById("komplementaer").style.color = "#383838";
     document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
+    document.getElementById("komplementaer").classList.remove("hover");
+    document.getElementById("monochrom").classList.remove("hover");
+    document.getElementById("monochrom").addEventListener("mouseout", function (): void { document.getElementById("monochrom").classList.add("hover"); });
+    document.getElementById("komplementaer").addEventListener("mouseout", function (): void { document.getElementById("komplementaer").classList.add("hover"); });
   }
   console.log("komp");
 }
@@ -185,14 +199,19 @@ function switchmono(): void {
     document.getElementById("monochrom").style.backgroundColor = "#4D4D4D";
     document.getElementById("monochrom").style.color = "#ffffff";
     document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
+
+    document.getElementById("komplementaer").classList.remove("hover");
+    document.getElementById("monochrom").classList.remove("hover");
+    document.getElementById("monochrom").addEventListener("mouseout", function (): void { document.getElementById("monochrom").classList.add("hover"); });
+    document.getElementById("komplementaer").addEventListener("mouseout", function (): void { document.getElementById("komplementaer").classList.add("hover"); });
   }
   else if (monochrom == 1) {
     document.getElementById("extraKaro1").style.animation = "eckeAbrunden4 2s 1";
-    document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
-    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+    document.getElementById("canvas").style.animation = "home1 2s 1";
+    document.getElementById("canvas2").style.animation = "home2 2s 1";
+    setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
+    setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
     setTimeout(function (): void { document.getElementById("extraKaro1").style.animation = ""; document.getElementById("extraKaro1").style.display = "none"; }, 2000);
-    setTimeout(function (): void { document.getElementById("canvas2").style.animation = ""; }, 2000);
-    setTimeout(function (): void { document.getElementById("canvas").style.animation = ""; }, 2000);
     document.getElementById("canvas2").style.display = "initial";
     document.getElementById("selected_color2").style.display = "initial";
     document.getElementById("selected_color").addEventListener("input", FarbeAussen);
@@ -207,6 +226,10 @@ function switchmono(): void {
     document.getElementById("monochrom").style.color = "#383838";
 
     document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
+    document.getElementById("komplementaer").classList.remove("hover");
+    document.getElementById("monochrom").classList.remove("hover");
+    document.getElementById("monochrom").addEventListener("mouseout", function (): void { document.getElementById("monochrom").classList.add("hover"); });
+    document.getElementById("komplementaer").addEventListener("mouseout", function (): void { document.getElementById("komplementaer").classList.add("hover"); });
   }
   console.log("mono");
 }

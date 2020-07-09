@@ -92,10 +92,10 @@ html {
     -webkit-animation-delay: 2s;
             animation-delay: 2s;
   }
-  .lines .line:nth-child(3) {
+  .lines .line:nth-child(2) {
     margin-left: 25%;
   }
-  .lines .line:nth-child(3)::after {
+  .lines .line:nth-child(2)::after {
     -webkit-animation-delay: 2.5s;
             animation-delay: 2.5s;
   }
@@ -164,6 +164,19 @@ position: absolute;
   0% {width: 40px; height: 200px; transform: translateY(0); opacity: 100%;}
   50% { width: 40px; height: 40px; transform: translateY(80px); opacity: 100%;}
   100% {width: 40px; height: 40px; transform: translateY(0); opacity: 0%;}
+}
+
+
+@keyframes home1 {
+  0% {width: 200px; height: 200px; transform: translateY(0); opacity: 100%; border-radius: 0%;}
+  50% { width: 200px; height: 100px; transform: translateY(50px); opacity: 100%; border-radius: 0%;}
+  100% {width: 200px; height: 200px; transform: translateY(0); opacity: 100%; border-radius: 0%;}
+}
+
+@keyframes home2 {
+  0% {width: 100px; height: 100px; transform: translateY(0); opacity: 100%; border-radius: 0%;}
+  50% { width: 100px; height: 50px; transform: translateY(25px); opacity: 100%; border-radius: 0%;}
+  100% {width: 100px; height: 100px; transform: translateY(0); opacity: 100%; border-radius: 0%;}
 }
 
 
@@ -276,17 +289,12 @@ ul {
     text-align: center;
 }
 
-.hover #komplementaer:hover {
+.hover:hover {
     background-color: #1b1b1b;
     color: white;
     animation: mymove1 15s ease;
 }
 
-#monochrom:hover {
-    background-color: #1b1b1b;
-    color: white;
-    animation: mymove1 15s ease;
-}
 
 
   @keyframes mymove1 {
