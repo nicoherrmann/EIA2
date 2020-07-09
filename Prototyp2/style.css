@@ -1,9 +1,50 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
+
 html {
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 15pt;
     font-weight: bold;
 }
+/*
+#
+#
+#
+#
+#
+#
+#
+#
+#
+*/
+body {
+	background: linear-gradient(-45deg, #dadada, #b8b8b8, #d3d3d3, #aaaaaa);
+	background-size: 400% 400%;
+	animation: gradient 35s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+/*
+#
+#
+#
+#
+#
+#
+#
+#
+#
+*/
 
 canvas {
 position: absolute;
@@ -90,7 +131,7 @@ ul {
 #center {
     margin-left: -250px;
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 #buttons {
@@ -107,19 +148,21 @@ ul {
 #monochrom {
     text-align: center;
     margin-top: 15px;
-    background-color: #cccccc;
+    background-color: #b1b1b1;
     color: white;
     padding-top: 2px;
     padding-bottom: 2px;
     transition: background-color 1s ease 0s;
+    box-shadow: 4px 4px grey;
 }
 
 #komplementaer {
-    background-color: rgb(204, 204, 204);
+    background-color: #b1b1b1;
     color: white;
     padding-top: 2px;
     padding-bottom: 2px;
-    text-align: center; 
+    text-align: center;
+    box-shadow: 4px 4px grey;
 }
 
 #komplementaer:hover {
@@ -138,18 +181,16 @@ ul {
   }
 
   @keyframes mymove1 {
-    0% {width:200px; background-color: #535353; z-index: 5;}
-    5% {width:220px; background-color: #535353; z-index: 5;}
-    100% {width:220px; background-color: #535353; z-index: 5;}
+    0% {width:200px; background-color: #535353; z-index: 5; transform: translateX(0px);}
+    5% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px);}
+    100% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px);}
   }
 
   @keyframes mymove2 {
-    0% {top:0px; background-color: #1b1b1b; z-index: 5;}
-    5% {top:100px; background-color: #1b1b1b; z-index: 5;}
-    100% {top:100px; background-color: #1b1b1b; z-index: 5;}
+    0% {top:0px; background-color: #1b1b1b; z-index: 5; transform: translateX(0px);}
+    5% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
+    100% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
   }
-
-
 
 
 
