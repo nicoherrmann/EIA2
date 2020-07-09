@@ -155,7 +155,7 @@ position: absolute;
 }
 
 @keyframes eckeAbrunden3 {
-  0% {width: 40px; height: 40px; transform: translateY(0); opacity: 100%;}
+  0% {width: 40px; height: 40px; transform: translateY(0); opacity: 0%;}
   50% { width: 40px; height: 40px; transform: translateY(80px); opacity: 100%;}
   100% {width: 40px; height: 200px; transform: translateY(0); opacity: 100%;}
 }
@@ -163,7 +163,6 @@ position: absolute;
 @keyframes eckeAbrunden4 {
   0% {width: 40px; height: 200px; transform: translateY(0); opacity: 100%;}
   50% { width: 40px; height: 40px; transform: translateY(80px); opacity: 100%;}
-  99% {width: 40px; height: 40px; transform: translateY(0); opacity: 100%;}
   100% {width: 40px; height: 40px; transform: translateY(0); opacity: 0%;}
 }
 
@@ -277,7 +276,7 @@ ul {
     text-align: center;
 }
 
-#komplementaer:hover {
+.hover #komplementaer:hover {
     background-color: #1b1b1b;
     color: white;
     animation: mymove1 15s ease;
@@ -289,22 +288,11 @@ ul {
     animation: mymove1 15s ease;
 }
 
-@keyframes mymove {
-    from {width:0px; background-color: #ff0000; z-index: 5;}
-    to {width:200px; background-color: #ff0000; z-index: 5;}
-  }
 
   @keyframes mymove1 {
     0% {width:200px; background-color: #535353; z-index: 5; transform: translateX(0px); color: #ffffff;}
     5% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px); color: #ffffff;}
     100% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px); color: #ffffff;}
   }
-
-  @keyframes mymove2 {
-    0% {top:0px; background-color: #1b1b1b; z-index: 5; transform: translateX(0px);}
-    5% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
-    100% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
-  }
-
 
 

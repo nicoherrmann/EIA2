@@ -137,13 +137,13 @@ function switchkomp() {
     console.log("komp");
 }
 function switchmono() {
-    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
-    document.getElementById("extraKaro1").style.animation = "eckeAbrunden3 2s 1";
-    document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
-    setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
-    setTimeout(function () { document.getElementById("extraKaro1").style.animation = ""; }, 2000);
-    setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
     if (monochrom == 0) {
+        document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+        document.getElementById("extraKaro1").style.animation = "eckeAbrunden3 2s 1";
+        document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
+        setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
+        setTimeout(function () { document.getElementById("extraKaro1").style.animation = ""; }, 2000);
+        setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
         document.getElementById("extraKaro1").style.display = "initial";
         document.getElementById("canvas2").style.display = "none";
         document.getElementById("selected_color2").style.display = "none";
@@ -161,7 +161,11 @@ function switchmono() {
     }
     else if (monochrom == 1) {
         document.getElementById("extraKaro1").style.animation = "eckeAbrunden4 2s 1";
-        setTimeout(function () { document.getElementById("extraKaro1").style.animation = ""; }, 2000);
+        document.getElementById("canvas2").style.animation = "eckeAbrunden2 2s 1";
+        document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
+        setTimeout(function () { document.getElementById("extraKaro1").style.animation = ""; document.getElementById("extraKaro1").style.display = "none"; }, 2000);
+        setTimeout(function () { document.getElementById("canvas2").style.animation = ""; }, 2000);
+        setTimeout(function () { document.getElementById("canvas").style.animation = ""; }, 2000);
         document.getElementById("canvas2").style.display = "initial";
         document.getElementById("selected_color2").style.display = "initial";
         document.getElementById("selected_color").addEventListener("input", FarbeAussen);
@@ -194,38 +198,38 @@ function monochromaussen() {
     let random3 = 0;
     let random4 = 0;
     if (l <= 20) {
-        let random1 = random20(20, 20);
-        let random2 = random20(20, 40);
-        let random3 = random20(20, 60);
-        let random4 = random20(20, 80);
+        random1 = random20(20, 20);
+        random2 = random20(20, 40);
+        random3 = random20(20, 60);
+        random4 = random20(20, 80);
         console.log("1.");
     }
     else if (l > 20 && l <= 40) {
-        let random1 = random20(20, 0);
-        let random2 = random20(20, 40);
-        let random3 = random20(20, 60);
-        let random4 = random20(20, 80);
+        random1 = random20(20, 0);
+        random2 = random20(20, 40);
+        random3 = random20(20, 60);
+        random4 = random20(20, 80);
         console.log("2.");
     }
     else if (l > 40 && l <= 60) {
-        let random1 = random20(20, 0);
-        let random2 = random20(20, 20);
-        let random3 = random20(20, 60);
-        let random4 = random20(20, 80);
+        random1 = random20(20, 0);
+        random2 = random20(20, 20);
+        random3 = random20(20, 60);
+        random4 = random20(20, 80);
         console.log("3.");
     }
     else if (l > 60 && l <= 80) {
-        let random1 = random20(20, 0);
-        let random2 = random20(20, 20);
-        let random3 = random20(20, 40);
-        let random4 = random20(20, 80);
+        random1 = random20(20, 0);
+        random2 = random20(20, 20);
+        random3 = random20(20, 40);
+        random4 = random20(20, 80);
         console.log("4.");
     }
     else if (l > 80 && l <= 100) {
-        let random1 = random20(20, 0);
-        let random2 = random20(20, 20);
-        let random3 = random20(20, 40);
-        let random4 = random20(20, 60);
+        random1 = random20(20, 0);
+        random2 = random20(20, 20);
+        random3 = random20(20, 40);
+        random4 = random20(20, 60);
         console.log("5.");
     }
     else {
@@ -242,6 +246,7 @@ function monochromaussen() {
     eK1.fillRect(0, 110, 40, 40);
     eK1.fillStyle = hexToHSL2(x.value, random4);
     eK1.fillRect(0, 165, 40, 40);
+    console.log(hexToHSL2(x.value, random1));
     console.log("Test" + hexToHSL(x.value));
     console.log("random:" + random1 + " " + random2 + " " + random3 + " " + random4);
 }
