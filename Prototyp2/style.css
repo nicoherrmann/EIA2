@@ -17,23 +17,108 @@ html {
 #
 #
 */
-body {
-	background: linear-gradient(-45deg, #dadada, #b8b8b8, #d3d3d3, #aaaaaa);
-	background-size: 400% 400%;
-	animation: gradient 35s ease infinite;
-}
+/*
+#
+#
+#
+#
+#
+#
+#
+#
+#
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-color: #171717;
+    color: #000;
+    line-height: 1.6;
+    position: relative;
+    font-family: sans-serif;
+    overflow: hidden;
+  }
+  
+  .lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+  }
+  .lines .line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .lines .line::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(75%, #ffffff), to(#ffffff));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    -webkit-animation: run 7s 0s infinite;
+            animation: run 7s 0s infinite;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+    -webkit-animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+            animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+  }
+  .lines .line:nth-child(1) {
+    margin-left: -25%;
+  }
+  .lines .line:nth-child(1)::after {
+    -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+  }
+  .lines .line:nth-child(3) {
+    margin-left: 25%;
+  }
+  .lines .line:nth-child(3)::after {
+    -webkit-animation-delay: 2.5s;
+            animation-delay: 2.5s;
+  }
+  
+  @-webkit-keyframes run {
+    0% {
+      top: -50%;
+    }
+    100% {
+      top: 110%;
+    }
+  }
+  
+  @keyframes run {
+    0% {
+      top: -50%;
+    }
+    100% {
+      top: 110%;
+    }
+  }
+  
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
 /*
 #
 #
@@ -129,7 +214,8 @@ ul {
 
 
 #center {
-    margin-left: -250px;
+    margin-left: -238px;
+    margin-top: 50px;
   display: flex;
   justify-content: center;
 }
@@ -141,7 +227,7 @@ ul {
   justify-content: center;
   position: absolute;
   left: 50%;
-  transform: translateX(-54%); 
+  transform: translateX(-50%); 
 
 }
 
@@ -149,20 +235,18 @@ ul {
     text-align: center;
     margin-top: 15px;
     background-color: #b1b1b1;
-    color: white;
+    color: #383838;
     padding-top: 2px;
     padding-bottom: 2px;
     transition: background-color 1s ease 0s;
-    box-shadow: 4px 4px grey;
 }
 
 #komplementaer {
     background-color: #b1b1b1;
-    color: white;
+    color: #383838;
     padding-top: 2px;
     padding-bottom: 2px;
     text-align: center;
-    box-shadow: 4px 4px grey;
 }
 
 #komplementaer:hover {
@@ -181,9 +265,9 @@ ul {
   }
 
   @keyframes mymove1 {
-    0% {width:200px; background-color: #535353; z-index: 5; transform: translateX(0px);}
-    5% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px);}
-    100% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px);}
+    0% {width:200px; background-color: #535353; z-index: 5; transform: translateX(0px); color: #b9b9b9;}
+    5% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px); color: #b9b9b9;}
+    100% {width:220px; background-color: #535353; z-index: 5; transform: translateX(-10px); color: #b9b9b9;}
   }
 
   @keyframes mymove2 {
@@ -191,8 +275,6 @@ ul {
     5% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
     100% {top:100px; background-color: #1b1b1b; z-index: 5; transform: translateX(-10px);}
   }
-
-
 
 
 

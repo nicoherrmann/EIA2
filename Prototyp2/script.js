@@ -110,8 +110,9 @@ function switchkomp() {
         komplementar = 1;
         monochrom = 0;
         console.log("komp1");
-        document.getElementById("komplementaer").style.backgroundColor = "#1b1b1b";
-        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
+        document.getElementById("komplementaer").style.backgroundColor = "#4D4D4D";
+        document.getElementById("komplementaer").style.color = "#ffffff";
+        document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
     }
     else if (komplementar == 1) {
         document.getElementById("extraKaro1").style.display = "none";
@@ -125,8 +126,9 @@ function switchkomp() {
         komplementar = 0;
         monochrom = 0;
         console.log("komp0");
-        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
-        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
+        document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
+        document.getElementById("komplementaer").style.color = "#383838";
+        document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
     }
     console.log("komp");
 }
@@ -143,8 +145,9 @@ function switchmono() {
         monochrom = 1;
         komplementar = 0;
         console.log("mono1");
-        document.getElementById("monochrom").style.backgroundColor = "#1b1b1b";
-        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
+        document.getElementById("monochrom").style.backgroundColor = "#4D4D4D";
+        document.getElementById("monochrom").style.color = "#ffffff";
+        document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
     }
     else if (monochrom == 1) {
         document.getElementById("extraKaro1").style.display = "none";
@@ -158,8 +161,9 @@ function switchmono() {
         monochrom = 0;
         komplementar = 0;
         console.log("mono0");
-        document.getElementById("monochrom").style.backgroundColor = "#cccccc";
-        document.getElementById("komplementaer").style.backgroundColor = "#cccccc";
+        document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
+        document.getElementById("monochrom").style.color = "#383838";
+        document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
     }
     console.log("mono");
 }
