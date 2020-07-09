@@ -121,6 +121,7 @@ function komplementarinnen(): void {
 
 function switchkomp(): void {
     document.getElementById("extraKaro1").style.display = "none";
+    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
     if (komplementar == 0) {
         document.getElementById("extraKaro1").style.display = "none";
         document.getElementById("canvas2").style.display = "initial";
@@ -158,7 +159,7 @@ function switchkomp(): void {
 }
 
 function switchmono(): void {
-    
+    document.getElementById("canvas").style.animation = "eckeAbrunden 2s 1";
     if (monochrom == 0) {
         document.getElementById("extraKaro1").style.display = "initial";
         document.getElementById("canvas2").style.display = "none";
@@ -195,21 +196,62 @@ function switchmono(): void {
     }
     console.log("mono");
 }
+let l: number = 0;
 
 function monochromaussen(): void {
     var x: any = document.getElementById("selected_color");
     console.log(x.value);
-    
+    console.log("MONOAUSSEN");
     crc2.clearRect(0, 0, 200, 200);
     crc2.fillStyle = x.value;
     crc2.fillRect(0, 0, 200, 200);
     console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
-
-    let random1 = random20(25, 0);
-    let random2 = random20(25, 20);
-    let random3 = random20(25, 40);
-    let random4 = random20(25, 60);
-    console.log(random4);
+    let HSL: string = hexToHSL(x.value);
+    console.log("test:" + HSL);
+      let random1 = 0;
+      let random2 = 0;
+      let random3 = 0;
+      let random4 = 0;
+    if (l <= 20) {
+      let random1 = random20(20, 20);
+      let random2 = random20(20, 40);
+      let random3 = random20(20, 60);
+      let random4 = random20(20, 80);
+      console.log("1.");
+    }
+    else if (l > 20 && l <= 40) {
+      let random1 = random20(20, 0);
+      let random2 = random20(20, 40);
+      let random3 = random20(20, 60);
+      let random4 = random20(20, 80);
+      console.log("2.");
+    }
+    else if (l > 40 && l <= 60) {
+      let random1 = random20(20, 0);
+      let random2 = random20(20, 20);
+      let random3 = random20(20, 60);
+      let random4 = random20(20, 80);
+      console.log("3.");
+    }
+    else if (l > 60 && l <= 80) {
+      let random1 = random20(20, 0);
+      let random2 = random20(20, 20);
+      let random3 = random20(20, 40);
+      let random4 = random20(20, 80);
+      console.log("4.");
+    }
+    else if (l > 80 && l <= 100) {
+      let random1 = random20(20, 0);
+      let random2 = random20(20, 20);
+      let random3 = random20(20, 40);
+      let random4 = random20(20, 60);
+      console.log("5.");
+    }
+    else {
+      console.log("else???");
+    }
+    
+    console.log("LLLLLL:" + l);
 
     canvas3 = document.getElementsByTagName("canvas")[2];
     eK1 = canvas3.getContext("2d");
@@ -222,7 +264,7 @@ function monochromaussen(): void {
     eK1.fillStyle = hexToHSL2(x.value, random4);
     eK1.fillRect(0, 165, 40, 40);
 
-    console.log(hexToHSL(x.value));
+    console.log("Test" + hexToHSL(x.value));
     console.log("random:" + random1 + " " + random2 + " " + random3 + " " + random4);
 
 }
@@ -235,6 +277,7 @@ function random20(multi: number, min: number): number {
 
 
 function hexToHSL(H: string): string {
+    l = 0;
     // Convert hex to RGB first
     let r = 0, g = 0, b = 0;
     if (H.length == 4) {
@@ -254,8 +297,7 @@ function hexToHSL(H: string): string {
         cmax = Math.max(r,g,b),
         delta = cmax - cmin,
         h = 0,
-        s = 0,
-        l = 0;
+        s = 0;
   
     if (delta == 0)
       h = 0;
@@ -280,9 +322,9 @@ function hexToHSL(H: string): string {
   }
 
   function hexToHSL2(H: string, l2: number): string {
-    // Convert hex to RGB first
-    let r = 0, g = 0, b = 0;
-    if (H.length == 4) {
+     // Convert hex to RGB first
+     let r = 0, g = 0, b = 0;
+     if (H.length == 4) {
       r = "0x" + H[1] + H[1];
       g = "0x" + H[2] + H[2];
       b = "0x" + H[3] + H[3];
