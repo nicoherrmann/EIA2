@@ -31,6 +31,7 @@ function init(): void {
   eK1.fillStyle = "#0000FF";
   eK1.fillRect(0, 165, 40, 40);
 
+  monochromaussen();
 
   document.getElementById("extraKaro1").style.display = "none";
 
@@ -51,6 +52,7 @@ function FarbeAussen(): void {
 
   console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
   console.log("HSL:" + hexToHSL(x.value));
+  monochromaussen();
 }
 
 function FarbeInnen(): void {
@@ -100,6 +102,7 @@ function komplementaraussen(): void {
   ctx.clearRect(0, 0, 100, 100);
   ctx.fillStyle = color;
   ctx.fillRect(0, 0, 100, 100);
+  monochromaussen();
 
 }
 

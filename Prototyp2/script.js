@@ -28,6 +28,7 @@ function init() {
     eK1.fillRect(0, 110, 40, 40);
     eK1.fillStyle = "#0000FF";
     eK1.fillRect(0, 165, 40, 40);
+    monochromaussen();
     document.getElementById("extraKaro1").style.display = "none";
     document.getElementById("selected_color").addEventListener("input", FarbeAussen);
     document.getElementById("selected_color2").addEventListener("input", FarbeInnen);
@@ -43,6 +44,7 @@ function FarbeAussen() {
     crc2.fillRect(0, 0, 200, 200);
     console.log("Farbe:" + x.value + "Invert:" + invertColor(x.value));
     console.log("HSL:" + hexToHSL(x.value));
+    monochromaussen();
 }
 function FarbeInnen() {
     console.log("klappt");
@@ -82,6 +84,7 @@ function komplementaraussen() {
     ctx.clearRect(0, 0, 100, 100);
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, 100, 100);
+    monochromaussen();
 }
 function komplementarinnen() {
     console.log("klappt");
