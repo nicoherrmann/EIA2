@@ -133,8 +133,6 @@ function switchkomp() {
         document.getElementById("komplementaer").style.color = "#ffffff";
         document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
         document.getElementById("komplementaer").classList.remove("hover");
-        document.getElementById("monochrom").classList.remove("hover");
-        document.getElementById("monochrom").addEventListener("mouseout", function () { document.getElementById("monochrom").classList.add("hover"); });
         document.getElementById("komplementaer").addEventListener("mouseout", function () { document.getElementById("komplementaer").classList.add("hover"); });
     }
     else if (komplementar == 1) {
@@ -157,8 +155,6 @@ function switchkomp() {
         document.getElementById("komplementaer").style.color = "#383838";
         document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
         document.getElementById("komplementaer").classList.remove("hover");
-        document.getElementById("monochrom").classList.remove("hover");
-        document.getElementById("monochrom").addEventListener("mouseout", function () { document.getElementById("monochrom").classList.add("hover"); });
         document.getElementById("komplementaer").addEventListener("mouseout", function () { document.getElementById("komplementaer").classList.add("hover"); });
     }
 }
@@ -183,10 +179,8 @@ function switchmono() {
         document.getElementById("monochrom").style.backgroundColor = "#4D4D4D";
         document.getElementById("monochrom").style.color = "#ffffff";
         document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
-        document.getElementById("komplementaer").classList.remove("hover");
         document.getElementById("monochrom").classList.remove("hover");
         document.getElementById("monochrom").addEventListener("mouseout", function () { document.getElementById("monochrom").classList.add("hover"); });
-        document.getElementById("komplementaer").addEventListener("mouseout", function () { document.getElementById("komplementaer").classList.add("hover"); });
     }
     else if (monochrom == 1) {
         document.getElementById("extraKaro1").style.animation = "eckeAbrunden4 2s 1";
@@ -207,10 +201,8 @@ function switchmono() {
         document.getElementById("monochrom").style.backgroundColor = "#b1b1b1";
         document.getElementById("monochrom").style.color = "#383838";
         document.getElementById("komplementaer").style.backgroundColor = "#b1b1b1";
-        document.getElementById("komplementaer").classList.remove("hover");
         document.getElementById("monochrom").classList.remove("hover");
         document.getElementById("monochrom").addEventListener("mouseout", function () { document.getElementById("monochrom").classList.add("hover"); });
-        document.getElementById("komplementaer").addEventListener("mouseout", function () { document.getElementById("komplementaer").classList.add("hover"); });
     }
 }
 let l = 0;
